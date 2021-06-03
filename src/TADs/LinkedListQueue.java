@@ -7,8 +7,7 @@ public class LinkedListQueue<T> extends ListaEnlazada<T> implements MyQueue<T> {
     int tiempoDemora = 0;
 
     @Override
-    public void enqueue(T element) {
-        add((Comparable) element);
+    public void enqueue(T element) { add(element);
     }
 
     @Override

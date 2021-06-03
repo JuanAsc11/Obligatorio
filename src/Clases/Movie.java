@@ -1,5 +1,7 @@
 package Clases;
 
+import TADs.ListaEnlazada;
+
 import java.util.Date;
 
 public class Movie {

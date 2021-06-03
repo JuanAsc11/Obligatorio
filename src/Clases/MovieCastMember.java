@@ -1,5 +1,7 @@
 package Clases;
 
+import TADs.ListaEnlazada;
+
 public class MovieCastMember {
 
     //ATRIBUTOS

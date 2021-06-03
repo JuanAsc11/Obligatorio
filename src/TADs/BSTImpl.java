@@ -238,7 +238,7 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T>{
 
     }
 
-    public List<T> porNivel() {
+    public List<T> porNivel() throws EmptyQueueException {
         List<T> listToReturn = new ArrayList<>();
         MyQueue<TreeNode<T>> cola = new LinkedListQueue<>();
 
