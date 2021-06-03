@@ -1,2 +1,5 @@
-package TADs;public class EmptyQueueException {
+package TADs;
+
+public class EmptyQueueException extends Exception{
+    public EmptyQueueException() {}
 }

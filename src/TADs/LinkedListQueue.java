@@ -1,7 +1,5 @@
 package TADs;
 
-import Exceptions.EmptyQueueException;
-
 import java.util.ArrayList;
 
 public class LinkedListQueue<T> extends ListaEnlazada implements MyQueue<T> {
@@ -37,46 +35,5 @@ public class LinkedListQueue<T> extends ListaEnlazada implements MyQueue<T> {
         if (size() == 0){
             resultado = true;}
         return resultado;
-    }
-
-    public void addClient (Cliente client){
-        tiempoDemora += client.getSegundosAdemorar();
-        enqueue((T) client);
-    }
-
-    public int getTiempoDemora() {
-        return tiempoDemora;
-    }
-
-    public static void main(String[] args) {
-        ArrayList <Cliente>  Clientes = new ArrayList();
-        ArrayList <LinkedListQueue> Colas = new ArrayList();
-        LinkedListQueue cola1 = new LinkedListQueue();
-        Colas.add(cola1);
-        LinkedListQueue cola2 = new LinkedListQueue();
-        Colas.add(cola2);
-        LinkedListQueue cola3 = new LinkedListQueue();
-        Colas.add(cola3);
-        Cliente cliente1 = new Cliente(5);
-        Clientes.add(cliente1);
-        Cliente cliente2 = new Cliente(35);
-        Clientes.add(cliente2);
-        Cliente cliente3 = new Cliente(45);
-        Clientes.add(cliente3);
-        Cliente cliente4 = new Cliente(21);
-        Clientes.add(cliente4);
-        Cliente cliente5 = new Cliente(14);
-        Clientes.add(cliente5);
-        LinkedListQueue colaBuena;
-        for (int i = 0; i < Clientes.size(); i++){
-            colaBuena = cola1;
-            for (int j = 1; j < Colas.size(); j++){
-                if (Colas.get(j).getTiempoDemora() < colaBuena.getTiempoDemora()){
-                    colaBuena = Colas.get(j);
-                }
-            colaBuena.addClient(Clientes.get(j));
-            }
-        }
-
     }
 }
