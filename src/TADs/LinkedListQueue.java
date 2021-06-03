@@ -2,7 +2,7 @@ package TADs;
 
 import java.util.ArrayList;
 
-public class LinkedListQueue<T> extends ListaEnlazada implements MyQueue<T> {
+public class LinkedListQueue<T> extends ListaEnlazada<T> implements MyQueue<T> {
 
     int tiempoDemora = 0;
 
@@ -14,13 +14,13 @@ public class LinkedListQueue<T> extends ListaEnlazada implements MyQueue<T> {
     @Override
     public T dequeue() throws EmptyQueueException {
         T valorSacado = null;
-        Nodo newfirst = null;
-        newfirst.setValue(first.getNextValue().getValue());
-        newfirst.setNextValue(first.getNextValue().getNextValue());
-        first.getNextValue().setNextValue(null);
-        first.setNextValue(null);
-        valorSacado = (T) first.getValue();
-        first = newfirst;
+        Nodo<T> newfirst = null;
+        newfirst.setValue(primerNodo.getNextValue().getValue());
+        newfirst.setNextValue(primerNodo.getNextValue().getNextValue());
+        primerNodo.getNextValue().setNextValue(null);
+        primerNodo.setNextValue(null);
+        valorSacado = (T) primerNodo.getValue();
+        primerNodo = newfirst;
         return valorSacado;
     }
 
