@@ -1,3 +1,5 @@
+package TADs;
+
 public interface BST<T extends Comparable<T> >{
 
     void insert(T value);

@@ -1,8 +1,8 @@
+package TADs;
+
 import Exceptions.EmptyQueueException;
-import java.util.Timer;
-import java.util.TimerTask;
+
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class LinkedListQueue<T> extends ListaEnlazada implements MyQueue<T> {
 
