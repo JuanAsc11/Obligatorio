@@ -1,29 +1,38 @@
 package Clases;
 
 public class MovieRating {
+
+    //ATRIBUTOS
+
     private float weightedAverage;
+
     private int totalVotes;
+
     private float meanVote;
+
     private float medianVote;
+
     private MyLinkedList<int> votesRating;
 
-    public float getWeightedAverage() {
-        return weightedAverage;
+    //CONSTRUCTOR
+
+    public MovieRating(float weightedAverage, int totalVotes, float meanVote, float medianVote, MyLinkedList<int> votesRating) {
+        this.weightedAverage = weightedAverage;
+        this.totalVotes = totalVotes;
+        this.meanVote = meanVote;
+        this.medianVote = medianVote;
+        this.votesRating = votesRating;
     }
 
-    public int getTotalVotes() {
-        return totalVotes;
-    }
+    //GETTERS
 
-    public float getMeanVote() {
-        return meanVote;
-    }
+    public float getWeightedAverage() { return weightedAverage; }
 
-    public float getMedianVote() {
-        return medianVote;
-    }
+    public int getTotalVotes() { return totalVotes; }
 
-    public MyLinkedList<int> getVotesRating() {
-        return votesRating;
-    }
+    public float getMeanVote() { return meanVote; }
+
+    public float getMedianVote() { return medianVote; }
+
+    public MyLinkedList<int> getVotesRating() { return votesRating; }
 }

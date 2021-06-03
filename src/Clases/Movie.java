@@ -3,26 +3,75 @@ package Clases;
 import java.util.Date;
 
 public class Movie {
+
+    //ATRIBUTOS
+
     private String imdbTitled;
+
     private String title;
+
     private String originalTitle;
+
     private int year;
+
     private Date datePublished;
-    private MyLinkedList<String> country;
+
+    private ListaEnlazada<String> country;
+
     private String language;
-    private MyLinkedList<String> director;
-    private MyLinkedList<String> writer;
+
+    private ListaEnlazada<String> director;
+
+    private ListaEnlazada<String> writer;
+
     private String productionCompany;
-    private MyLinkedList<String> actors;
+
+    private ListaEnlazada<String> actors;
+
     private String description;
+
     private float avgVote;
+
     private int votes;
+
     private String budget;
+
     private String usaGrossIncome;
+
     private String worldwideGrossIncome;
+
     private float metaScore;
+
     private float reviewsFromUsers;
+
     private float reviewsFromCritics;
+
+    //CONSTRUCTOR
+
+    public Movie(String imdbTitled, String title, String originalTitle, int year, Date datePublished, ListaEnlazada<String> country, String language, ListaEnlazada<String> director, ListaEnlazada<String> writer, String productionCompany, ListaEnlazada<String> actors, String description, float avgVote, int votes, String budget, String usaGrossIncome, String worldwideGrossIncome, float metaScore, float reviewsFromUsers, float reviewsFromCritics) {
+        this.imdbTitled = imdbTitled;
+        this.title = title;
+        this.originalTitle = originalTitle;
+        this.year = year;
+        this.datePublished = datePublished;
+        this.country = country;
+        this.language = language;
+        this.director = director;
+        this.writer = writer;
+        this.productionCompany = productionCompany;
+        this.actors = actors;
+        this.description = description;
+        this.avgVote = avgVote;
+        this.votes = votes;
+        this.budget = budget;
+        this.usaGrossIncome = usaGrossIncome;
+        this.worldwideGrossIncome = worldwideGrossIncome;
+        this.metaScore = metaScore;
+        this.reviewsFromUsers = reviewsFromUsers;
+        this.reviewsFromCritics = reviewsFromCritics;
+    }
+
+    //GETTERS
 
     public String getImdbTitled() {
         return imdbTitled;
@@ -44,7 +93,7 @@ public class Movie {
         return datePublished;
     }
 
-    public MyLinkedList<String> getCountry() {
+    public ListaEnlazada<String> getCountry() {
         return country;
     }
 
@@ -52,11 +101,11 @@ public class Movie {
         return language;
     }
 
-    public MyLinkedList<String> getDirector() {
+    public ListaEnlazada<String> getDirector() {
         return director;
     }
 
-    public MyLinkedList<String> getWriter() {
+    public ListaEnlazada<String> getWriter() {
         return writer;
     }
 
@@ -64,7 +113,7 @@ public class Movie {
         return productionCompany;
     }
 
-    public MyLinkedList<String> getActors() {
+    public ListaEnlazada<String> getActors() {
         return actors;
     }
 
