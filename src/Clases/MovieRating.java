@@ -1,7 +1,6 @@
 package Clases;
 
-import TADs.Lista;
-import TADs.ListaEnlazada;
+import TADs.Implementaciones.ListaEnlazada;
 
 public class MovieRating {
 
@@ -15,11 +14,11 @@ public class MovieRating {
 
     private float medianVote;
 
-    private ListaEnlazada<int> votesRating;
+    private ListaEnlazada<Integer> votesRating;
 
     //CONSTRUCTOR
 
-    public MovieRating(float weightedAverage, int totalVotes, float meanVote, float medianVote, ListaEnlazada<int> votesRating) {
+    public MovieRating(float weightedAverage, int totalVotes, float meanVote, float medianVote, ListaEnlazada<Integer> votesRating) {
         this.weightedAverage = weightedAverage;
         this.totalVotes = totalVotes;
         this.meanVote = meanVote;
@@ -37,5 +36,5 @@ public class MovieRating {
 
     public float getMedianVote() { return medianVote; }
 
-    public ListaEnlazada<int> getVotesRating() { return votesRating; }
+    public ListaEnlazada<Integer> getVotesRating() { return votesRating; }
 }

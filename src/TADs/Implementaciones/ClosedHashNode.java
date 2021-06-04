@@ -1,4 +1,4 @@
-package TADs;
+package TADs.Implementaciones;
 
 public class ClosedHashNode<K, V> {
 

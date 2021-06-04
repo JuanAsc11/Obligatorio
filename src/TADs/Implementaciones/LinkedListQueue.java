@@ -1,6 +1,7 @@
-package TADs;
+package TADs.Implementaciones;
 
-import java.util.ArrayList;
+import TADs.Excepciones.EmptyQueueException;
+import TADs.Interfaces.MyQueue;
 
 public class LinkedListQueue<T> extends ListaEnlazada<T> implements MyQueue<T> {
 

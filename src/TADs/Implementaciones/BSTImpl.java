@@ -1,9 +1,13 @@
-package TADs;
+package TADs.Implementaciones;
+
+import TADs.Excepciones.EmptyQueueException;
+import TADs.Interfaces.BST;
+import TADs.Interfaces.MyQueue;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BSTImpl<T extends Comparable<T>> implements BST<T>{
+public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 
     private TreeNode<T> root;
 

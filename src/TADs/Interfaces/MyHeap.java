@@ -1,4 +1,6 @@
-package TADs;
+package TADs.Interfaces;
+
+import TADs.Excepciones.EmptyHeapException;
 
 public interface MyHeap <T extends Comparable<T>> {
 

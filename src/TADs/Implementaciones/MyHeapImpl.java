@@ -1,4 +1,7 @@
-package TADs;
+package TADs.Implementaciones;
+
+import TADs.Excepciones.EmptyHeapException;
+import TADs.Interfaces.MyHeap;
 
 public class MyHeapImpl<T extends Comparable<T>> implements MyHeap<T> {
 

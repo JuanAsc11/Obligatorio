@@ -1,4 +1,4 @@
-package TADs;
+package TADs.Interfaces;
 
 public interface MyHash<K, V> {
 

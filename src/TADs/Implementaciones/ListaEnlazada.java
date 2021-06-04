@@ -1,4 +1,6 @@
-package TADs;
+package TADs.Implementaciones;
+
+import TADs.Interfaces.Lista;
 
 public class ListaEnlazada<T> implements Lista<T> {
 

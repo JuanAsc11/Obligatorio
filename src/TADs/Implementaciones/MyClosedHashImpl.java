@@ -1,4 +1,7 @@
-package TADs;
+package TADs.Implementaciones;
+
+import TADs.Implementaciones.ClosedHashNode;
+import TADs.Interfaces.MyHash;
 
 public class MyClosedHashImpl<K, V> implements MyHash<K, V> {
 

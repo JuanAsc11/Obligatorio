@@ -1,6 +1,6 @@
 package Clases;
 
-import TADs.ListaEnlazada;
+import TADs.Implementaciones.ListaEnlazada;
 
 import java.util.Date;
 

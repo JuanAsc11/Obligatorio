@@ -1,4 +1,4 @@
-package TADs;
+package TADs.Interfaces;
 
 public interface BST<T extends Comparable<T> >{
 
