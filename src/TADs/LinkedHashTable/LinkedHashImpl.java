@@ -154,9 +154,11 @@ public class LinkedHashImpl<K extends Comparable<K>,V> implements HashTable<K,V>
 
         if(prevNode != null){
             prevNode.setNextNode(actualNode.getNextNode());
+            size--;
         }
         else {
             array[index] = actualNode.getNextNode();
+            size--;
         }
     }
 }
