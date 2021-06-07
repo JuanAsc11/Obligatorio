@@ -1,4 +1,6 @@
-package TADs.LinkedHashTable;
+package TADs.Interfaces;
+
+import TADs.Excepciones.KeyNotFound;
 
 public interface HashTable<K, V>{
 

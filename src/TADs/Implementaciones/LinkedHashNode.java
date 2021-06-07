@@ -1,4 +1,4 @@
-package TADs.LinkedHashTable;
+package TADs.Implementaciones;
 
 public class LinkedHashNode<K,V> {
 
