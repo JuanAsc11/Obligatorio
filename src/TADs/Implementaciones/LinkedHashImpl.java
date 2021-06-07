@@ -2,7 +2,7 @@ package TADs.Implementaciones;
 
 import TADs.Excepciones.KeyNotFound;
 import TADs.Interfaces.HashTable;
-import TADs.LinkedHashTable.LinkedHashNode;
+import TADs.Implementaciones.LinkedHashNode;
 
 public class LinkedHashImpl<K extends Comparable<K>,V> implements HashTable<K,V> {
 
