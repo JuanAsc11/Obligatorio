@@ -50,6 +50,14 @@ public class Movie {
 
     //CONSTRUCTOR
 
+    /*public Movie(String[] atributos){
+        this.imdbTitled = atributos[0];
+        this.title = atributos[1];
+        this.originalTitle = atributos[2];                      CAMBIOS CON CSV
+        this.year = Integer.parseInt(atributos[3]);
+        this.datePublished = null;
+    }*/
+
     public Movie(String imdbTitled, String title, String originalTitle, int year, Date datePublished, ListaEnlazada<String> country, String language, ListaEnlazada<String> director, ListaEnlazada<String> writer, String productionCompany, ListaEnlazada<String> actors, String description, float avgVote, int votes, String budget, String usaGrossIncome, String worldwideGrossIncome, float metaScore, float reviewsFromUsers, float reviewsFromCritics) {
         this.imdbTitled = imdbTitled;
         this.title = title;
