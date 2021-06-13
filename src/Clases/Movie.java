@@ -1,7 +1,9 @@
 package Clases;
 
 import TADs.Implementaciones.ListaEnlazada;
-
+import TADs.Interfaces.Lista;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Movie {
@@ -50,35 +52,77 @@ public class Movie {
 
     //CONSTRUCTOR
 
-    /*public Movie(String[] atributos){
+    public Movie(String[] atributos){
         this.imdbTitled = atributos[0];
         this.title = atributos[1];
-        this.originalTitle = atributos[2];                      CAMBIOS CON CSV
+        this.originalTitle = atributos[2];
         this.year = Integer.parseInt(atributos[3]);
-        this.datePublished = null;
-    }*/
+        this.datePublished = convertToDate(atributos[4]);
+        this.genre = convertToVarios(atributos[5]);             //Estos atributos no estaban en el diagrama
+        this.duration = Integer.parseInt(atributos[6]);
+        this.country = convertToVarios(atributos[7]);
+        this.language = convertToVarios(atributos[8]);          //Hay Movies con varios idiomas pero el type es String
+        this.director = convertToVarios(atributos[9]);
+        this.writer = convertToVarios(atributos[10]);
+        this.productionCompany = atributos[11];
+        this.actors = convertToVarios(atributos[12]);
+        this.description = atributos[13];
+        this.avgVote = Float.parseFloat(atributos[14]);
+        this.votes = Integer.parseInt(atributos[15]);
+        this.budget = atributos[16];
+        this.usaGrossIncome = atributos[17];
+        this.worldwideGrossIncome = atributos[18];
+        this.metaScore = Float.parseFloat(atributos[19]);
+        this.reviewsFromUsers = Float.parseFloat(atributos[20]);
+        this.reviewsFromCritics = Float.parseFloat(atributos[21]);
+    }
 
-    public Movie(String imdbTitled, String title, String originalTitle, int year, Date datePublished, ListaEnlazada<String> country, String language, ListaEnlazada<String> director, ListaEnlazada<String> writer, String productionCompany, ListaEnlazada<String> actors, String description, float avgVote, int votes, String budget, String usaGrossIncome, String worldwideGrossIncome, float metaScore, float reviewsFromUsers, float reviewsFromCritics) {
-        this.imdbTitled = imdbTitled;
-        this.title = title;
-        this.originalTitle = originalTitle;
-        this.year = year;
-        this.datePublished = datePublished;
-        this.country = country;
-        this.language = language;
-        this.director = director;
-        this.writer = writer;
-        this.productionCompany = productionCompany;
-        this.actors = actors;
-        this.description = description;
-        this.avgVote = avgVote;
-        this.votes = votes;
-        this.budget = budget;
-        this.usaGrossIncome = usaGrossIncome;
-        this.worldwideGrossIncome = worldwideGrossIncome;
-        this.metaScore = metaScore;
-        this.reviewsFromUsers = reviewsFromUsers;
-        this.reviewsFromCritics = reviewsFromCritics;
+    //CONVERSORES
+
+    public static ListaEnlazada<String> convertToVarios(String elementos) {
+        ListaEnlazada<String> List = new ListaEnlazada<>();
+        //Dividir elementos por "," y add a List
+        return List;
+    }
+
+    public static Date convertToDate(String dates){
+        Date date = null;
+        if(dates == null ) {
+            return null;
+        }
+        while (date ==null){
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                format.setLenient(false);
+                date = format.parse(dates);
+            } catch (ParseException e) {
+                // try other formats
+            }
+            if (date != null) {
+                break;
+            }
+            format = new SimpleDateFormat("dd/MM/yyyy");
+            try {
+                format.setLenient(false);
+                date = format.parse(dates);
+            } catch (ParseException e) {
+                // try other formats
+            }
+            if (date != null) {
+                break;
+            }
+            format = new SimpleDateFormat("yyyy");
+            try {
+                format.setLenient(false);
+                date = format.parse(dates);
+            } catch (ParseException e) {
+                // try other formats
+            }
+            if (date != null) {
+                break;
+            }
+        }
+        return date;
     }
 
     //GETTERS
