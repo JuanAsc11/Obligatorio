@@ -1,6 +1,7 @@
 package Clases;
 
 import TADs.Implementaciones.ListaEnlazada;
+import TADs.Implementaciones.Nodo;
 import TADs.Interfaces.Lista;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -86,6 +87,10 @@ public class Movie {
     public static ListaEnlazada<String> convertToVarios(String elementos) {
         ListaEnlazada<String> List = new ListaEnlazada<>();
         //Dividir elementos por "," y add a List
+        String[] varios = elementos.split(",");
+        for(String elemento: varios){
+            List.add(elemento);
+        }
         return List;
     }
 
