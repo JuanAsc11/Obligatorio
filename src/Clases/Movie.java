@@ -22,7 +22,7 @@ public class Movie {
 
     private ListaEnlazada<String> country;
 
-    private String language;
+    private ListaEnlazada<String> language;
 
     private ListaEnlazada<String> director;
 
@@ -49,6 +49,10 @@ public class Movie {
     private float reviewsFromUsers;
 
     private float reviewsFromCritics;
+
+    private int duration;
+
+    private ListaEnlazada<String> genre;
 
     //CONSTRUCTOR
 
@@ -151,7 +155,7 @@ public class Movie {
         return country;
     }
 
-    public String getLanguage() {
+    public ListaEnlazada<String> getLanguage() {
         return language;
     }
 
@@ -206,4 +210,8 @@ public class Movie {
     public float getReviewsFromCritics() {
         return reviewsFromCritics;
     }
+
+    public int getDuration() { return duration; }
+
+    public ListaEnlazada<String> getGenre() { return genre; }
 }
