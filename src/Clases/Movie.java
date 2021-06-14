@@ -23,7 +23,7 @@ public class Movie {
 
     private ListaEnlazada<String> country;
 
-    private ListaEnlazada<String> language;
+    private String language;
 
     private ListaEnlazada<String> director;
 
@@ -66,7 +66,7 @@ public class Movie {
         this.genre = convertToVarios(atributos[5]);             //Estos atributos no estaban en el diagrama
         this.duration = Integer.parseInt(atributos[6]);
         this.country = convertToVarios(atributos[7]);
-        this.language = convertToVarios(atributos[8]);          //Hay Movies con varios idiomas pero el type es String
+        this.language = atributos[8];          //Hay Movies con varios idiomas pero el type es String
         this.director = convertToVarios(atributos[9]);
         this.writer = convertToVarios(atributos[10]);
         this.productionCompany = atributos[11];
@@ -96,10 +96,10 @@ public class Movie {
 
     public static Date convertToDate(String dates){
         Date date = null;
-        if(dates == null ) {
+        if(dates == null) {
             return null;
         }
-        while (date ==null){
+        while (true){
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             try {
                 format.setLenient(false);
@@ -160,7 +160,7 @@ public class Movie {
         return country;
     }
 
-    public ListaEnlazada<String> getLanguage() {
+    public String getLanguage() {
         return language;
     }
 
