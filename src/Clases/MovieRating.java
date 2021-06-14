@@ -16,6 +16,8 @@ public class MovieRating {
 
     private ListaEnlazada<Integer> votesRating;
 
+    private String imbd_title_id;
+
     //CONSTRUCTOR
 
     public MovieRating(float weightedAverage, int totalVotes, float meanVote, float medianVote, ListaEnlazada<Integer> votesRating) {
@@ -24,6 +26,16 @@ public class MovieRating {
         this.meanVote = meanVote;
         this.medianVote = medianVote;
         this.votesRating = votesRating;
+    }
+
+    public MovieRating(String[] atributos){
+        this.imbd_title_id = atributos[0];
+        this.weightedAverage = Float.parseFloat(atributos[1]);
+        this.totalVotes = Integer.parseInt(atributos[2]);
+        this.meanVote = Float.parseFloat(atributos[3]);
+        this.medianVote = Float.parseFloat(atributos[4]);
+        this.votesRating = null;
+
     }
 
     //GETTERS
@@ -37,4 +49,8 @@ public class MovieRating {
     public float getMedianVote() { return medianVote; }
 
     public ListaEnlazada<Integer> getVotesRating() { return votesRating; }
+
+    public String getImbd_title_id() {
+        return imbd_title_id;
+    }
 }
