@@ -7,6 +7,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static Conversores.Conversores.convertToDate;
+import static Conversores.Conversores.convertToVarios;
+
 public class Movie {
 
     //ATRIBUTOS
@@ -80,58 +83,6 @@ public class Movie {
         this.metaScore = Float.parseFloat(atributos[19]);
         this.reviewsFromUsers = Float.parseFloat(atributos[20]);
         this.reviewsFromCritics = Float.parseFloat(atributos[21]);
-    }
-
-    //CONVERSORES
-
-    public static ListaEnlazada<String> convertToVarios(String elementos) {
-        ListaEnlazada<String> List = new ListaEnlazada<>();
-        //Dividir elementos por "," y add a List
-        String[] varios = elementos.split(",");
-        for(String elemento: varios){
-            List.add(elemento);
-        }
-        return List;
-    }
-
-    public static Date convertToDate(String dates){
-        Date date = null;
-        if(dates == null) {
-            return null;
-        }
-        while (true){
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            try {
-                format.setLenient(false);
-                date = format.parse(dates);
-            } catch (ParseException e) {
-                // try other formats
-            }
-            if (date != null) {
-                break;
-            }
-            format = new SimpleDateFormat("dd/MM/yyyy");
-            try {
-                format.setLenient(false);
-                date = format.parse(dates);
-            } catch (ParseException e) {
-                // try other formats
-            }
-            if (date != null) {
-                break;
-            }
-            format = new SimpleDateFormat("yyyy");
-            try {
-                format.setLenient(false);
-                date = format.parse(dates);
-            } catch (ParseException e) {
-                // try other formats
-            }
-            if (date != null) {
-                break;
-            }
-        }
-        return date;
     }
 
     //GETTERS

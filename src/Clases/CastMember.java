@@ -2,6 +2,8 @@ package Clases;
 
 import java.util.Date;
 
+import static Conversores.Conversores.*;
+
 public class CastMember {
 
     //ATRIBUTOS
@@ -16,6 +18,8 @@ public class CastMember {
 
     private String bio;
 
+    private String birthDetails;            //No esta en el diagrama
+
     private Date birthDate;
 
     private String birthState;
@@ -23,6 +27,8 @@ public class CastMember {
     private String birthCountry;
 
     private String birthCity;
+
+    private String deathDetails;            //No esta en el diagrama
 
     private Date deathDate;
 
@@ -44,29 +50,28 @@ public class CastMember {
 
     //CONSTRUCTOR
 
-    public CastMember(String imdbNameId, String name, String birthName, int height, String bio,
-                      Date birthDate, String birthState, String birthCountry, String birthCity, Date deathDate,
-                      String deathState, String deathCountry, String deathCity, String spousesString, int spouses,
-                      int divorces, int spousesWithChildren, int children) {
+    public CastMember(String[] atributosCastMember) {
 
-        this.imdbNameId = imdbNameId;
-        Name = name;
-        this.birthName = birthName;
-        this.height = height;
-        this.bio = bio;
-        this.birthDate = birthDate;
-        this.birthState = birthState;
-        this.birthCountry = birthCountry;
-        this.birthCity = birthCity;
-        this.deathDate = deathDate;
-        this.deathState = deathState;
-        this.deathCountry = deathCountry;
-        this.deathCity = deathCity;
-        this.spousesString = spousesString;
-        this.spouses = spouses;
-        this.divorces = divorces;
-        this.spousesWithChildren = spousesWithChildren;
-        this.children = children;
+        this.imdbNameId = atributosCastMember[0];
+        this.Name = atributosCastMember[1];
+        this.birthName = atributosCastMember[2];
+        this.height = Integer.parseInt(atributosCastMember[3]);
+        this.bio = atributosCastMember[4];
+        this.birthDetails = atributosCastMember[5];                     //NO esta en Diagrama
+        this.birthDate = convertToDate(atributosCastMember[6]);
+        this.birthState = convertState(atributosCastMember[7]);                       //Segundo elemento es el state
+        this.birthCountry = convertCountry(atributosCastMember[7]);                     //Ultimo elemento es el pais
+        this.birthCity = convertCity(atributosCastMember[7]);                        //Primer elemento es la ciudad
+        this.deathDetails = atributosCastMember[8];                    //NO esta en Diagrama
+        this.deathDate = convertToDate(atributosCastMember[9]);
+        this.deathState = convertState(atributosCastMember[10]);                      //Segundo elemento es el state
+        this.deathCountry = convertCountry(atributosCastMember[10]);                    //Ultimo elemento es el pais
+        this.deathCity = convertCity(atributosCastMember[10]);                       //Primer elemento es la ciudad
+        this.spousesString = atributosCastMember[12];
+        this.spouses = Integer.parseInt(atributosCastMember[13]);
+        this.divorces = Integer.parseInt(atributosCastMember[14]);
+        this.spousesWithChildren = Integer.parseInt(atributosCastMember[15]);
+        this.children = Integer.parseInt(atributosCastMember[16]);
     }
 
     //GETTERS
