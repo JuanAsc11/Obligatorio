@@ -13,6 +13,7 @@ public class Conversores {
     public static ListaEnlazada<String> convertToVarios(String elementos) {
         ListaEnlazada<String> List = new ListaEnlazada<>();
         //Dividir elementos por "," y add a List
+        elementos = elementos.substring(1,elementos.length()-1);
         String[] varios = elementos.split(",");
         for(String elemento: varios){
             List.add(elemento);
