@@ -1,5 +1,8 @@
 import Clases.Movie;
+import Clases.MovieCastMember;
+import TADs.Excepciones.EmptyHeapException;
 import TADs.Implementaciones.ListaEnlazada;
+import TADs.Implementaciones.MyHeapImpl;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,12 +16,37 @@ public class Menu{
 
     public ListaEnlazada<Movie> pelis;
 
+    public MyHeapImpl<MovieCastMember> query1;
+
     public Menu(){
         this.pelis = new ListaEnlazada<>();
+        this.query1 = new MyHeapImpl<>(835493,1);
     }
 
     public void cargarDatos(){
-        String fileName = "src/IMDb movies.csv";
+        String filename1 = "src/IMDb title_principals.csv";
+        Path pathToFile1 = Paths.get(filename1);
+        try(BufferedReader reader = Files.newBufferedReader(pathToFile1, StandardCharsets.UTF_8)) {
+            String line = reader.readLine();
+            line = reader.readLine();
+            while(line != null){
+
+                String[] atributos = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+
+                MovieCastMember nuevoMovieCastMember = new MovieCastMember(atributos);
+
+                query1.insert(nuevoMovieCastMember);
+
+                line = reader.readLine();
+
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //CARGAR PELICULAS PRUEBA
+       /* String fileName = "src/IMDb movies.csv";
         Path pathToFile = Paths.get(fileName);
         try(BufferedReader reader = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)){
             String line = reader.readLine();
@@ -35,9 +63,9 @@ public class Menu{
         }
         catch (IOException e){
             e.printStackTrace();
-        }
+        }*/
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws EmptyHeapException {
         Menu menuPrincipal = new Menu();
         boolean control = true;
         Scanner scanner = new Scanner(System.in);
@@ -46,6 +74,8 @@ public class Menu{
             int entrada = scanner.nextInt();
             if(entrada == 1){ //Opcion carga
                 menuPrincipal.cargarDatos();
+                MovieCastMember top1 = menuPrincipal.query1.get();
+                System.out.println("Nombre actor " + top1.getImdb_name_id() + "\r\n"+"Cantidad de Apariciones: " +  top1.getCharacters().getSize());
                 System.out.println("Proceso funciona");
             }
             else if(entrada == 2){  // Menu 2
