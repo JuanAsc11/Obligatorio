@@ -80,9 +80,27 @@ public class Movie {
         this.budget = atributos[16];
         this.usaGrossIncome = atributos[17];
         this.worldwideGrossIncome = atributos[18];
-        this.metaScore = Float.parseFloat(atributos[19]);
-        this.reviewsFromUsers = Float.parseFloat(atributos[20]);
-        this.reviewsFromCritics = Float.parseFloat(atributos[21]);
+
+        if (atributos[19].equals("")){
+            this.metaScore = 0;
+        }
+        else{
+            this.metaScore = Float.parseFloat(atributos[19]);
+        }
+
+        if(atributos[20].equals("")){
+            this.reviewsFromUsers = 0;
+        }
+        else{
+            this.reviewsFromUsers = Float.parseFloat(atributos[20]);
+        }
+
+        if(atributos[21].equals("")){
+            this.reviewsFromCritics = 0;
+        }
+        else{
+            this.reviewsFromCritics = Float.parseFloat(atributos[21]);
+        }
     }
 
     //GETTERS

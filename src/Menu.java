@@ -1,3 +1,6 @@
+import Clases.Movie;
+import TADs.Implementaciones.ListaEnlazada;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -6,26 +9,44 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-public class Menu<K extends Comparable<K>,V> {
-    public void cargarDatos(){
-        Path pathToFile = Paths.get("IMBd movies.csv");
-        try(BufferedReader reader = Files.newBufferedReader(pathToFile, StandardCharsets.US_ASCII)){
-            String linea = reader.readLine();
-            while(linea != null){
-                String[] atributos = linea.split(",");
+public class Menu{
 
+    public ListaEnlazada<Movie> pelis;
+
+    public Menu(){
+        this.pelis = new ListaEnlazada<>();
+    }
+
+    public void cargarDatos(){
+        String fileName = "src/IMDb movies.csv";
+        Path pathToFile = Paths.get(fileName);
+        try(BufferedReader reader = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)){
+            String line = reader.readLine();
+            line = reader.readLine();
+            while(line != null){
+                String[] atributos = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+
+                Movie peliculaNueva = new Movie(atributos);
+
+                pelis.add(peliculaNueva);
+
+                line = reader.readLine();
             }
         }
-        catch (IOException e){}
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
     public static void main(String[] args) {
+        Menu menuPrincipal = new Menu();
         boolean control = true;
         Scanner scanner = new Scanner(System.in);
         while(control){  // Menu 1
             System.out.println("1. Carga de Datos" + "\r\n" + "2. Ejecutar consultas" + "\r\n" + "3. Salir");
             int entrada = scanner.nextInt();
             if(entrada == 1){ //Opcion carga
-                //FUNCION DE CARGA
+                menuPrincipal.cargarDatos();
+                System.out.println("Proceso funciona");
             }
             else if(entrada == 2){  // Menu 2
                 boolean control2 = true;
