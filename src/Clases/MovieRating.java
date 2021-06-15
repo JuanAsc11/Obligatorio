@@ -35,7 +35,6 @@ public class MovieRating {
         this.meanVote = Float.parseFloat(atributos[3]);
         this.medianVote = Float.parseFloat(atributos[4]);
         this.votesRating = null;
-
     }
 
     //GETTERS
