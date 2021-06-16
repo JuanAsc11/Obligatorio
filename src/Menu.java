@@ -1,6 +1,7 @@
 import Clases.CastMember;
 import Clases.Movie;
 import Clases.MovieCastMember;
+import Clases.MovieRating;
 import TADs.Excepciones.EmptyHeapException;
 import TADs.Implementaciones.ListaEnlazada;
 import TADs.Implementaciones.MyHeapImpl;
@@ -21,14 +22,38 @@ public class Menu{
 
     public ListaEnlazada<CastMember> personas;
 
+    public ListaEnlazada<MovieRating> ratings;
+
     public Menu(){
         this.pelis = new ListaEnlazada<>();
         this.query1 = new MyHeapImpl<>(835493,1);
         this.personas = new ListaEnlazada<>();
+        this.ratings = new ListaEnlazada<>();
     }
 
     public void cargarDatos(){
-        String filename2 = "src/IMDb names.csv";
+        String filename3 = "src/IMDb ratings.csv";
+        Path pathToFile3 = Paths.get(filename3);
+        try(BufferedReader reader = Files.newBufferedReader(pathToFile3, StandardCharsets.UTF_8)) {
+            String line = reader.readLine();
+            line = reader.readLine();
+            while(line != null){
+
+                String[] atributos = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+
+                MovieRating nuevoMovieRating = new MovieRating(atributos);
+
+                ratings.add(nuevoMovieRating);
+
+                line = reader.readLine();
+
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        /*String filename2 = "src/IMDb names.csv";
         Path pathToFile2 = Paths.get(filename2);
         try(BufferedReader reader = Files.newBufferedReader(pathToFile2, StandardCharsets.UTF_8)) {
             String line = reader.readLine();
@@ -47,7 +72,7 @@ public class Menu{
         }
         catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
 
         /*String filename1 = "src/IMDb title_principals.csv";
         Path pathToFile1 = Paths.get(filename1);
