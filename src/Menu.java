@@ -1,3 +1,4 @@
+import Clases.CastMember;
 import Clases.Movie;
 import Clases.MovieCastMember;
 import TADs.Excepciones.EmptyHeapException;
@@ -18,13 +19,37 @@ public class Menu{
 
     public MyHeapImpl<MovieCastMember> query1;
 
+    public ListaEnlazada<CastMember> personas;
+
     public Menu(){
         this.pelis = new ListaEnlazada<>();
         this.query1 = new MyHeapImpl<>(835493,1);
+        this.personas = new ListaEnlazada<>();
     }
 
     public void cargarDatos(){
-        String filename1 = "src/IMDb title_principals.csv";
+        String filename2 = "src/IMDb names.csv";
+        Path pathToFile2 = Paths.get(filename2);
+        try(BufferedReader reader = Files.newBufferedReader(pathToFile2, StandardCharsets.UTF_8)) {
+            String line = reader.readLine();
+            line = reader.readLine();
+            while(line != null){
+
+                String[] atributos = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+
+                CastMember nuevoCastMember = new CastMember(atributos);
+
+                personas.add(nuevoCastMember);
+
+                line = reader.readLine();
+
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        /*String filename1 = "src/IMDb title_principals.csv";
         Path pathToFile1 = Paths.get(filename1);
         try(BufferedReader reader = Files.newBufferedReader(pathToFile1, StandardCharsets.UTF_8)) {
             String line = reader.readLine();
@@ -43,7 +68,7 @@ public class Menu{
         }
         catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
 
         //CARGAR PELICULAS PRUEBA
        /* String fileName = "src/IMDb movies.csv";
@@ -74,8 +99,8 @@ public class Menu{
             int entrada = scanner.nextInt();
             if(entrada == 1){ //Opcion carga
                 menuPrincipal.cargarDatos();
-                MovieCastMember top1 = menuPrincipal.query1.get();
-                System.out.println("Nombre actor " + top1.getImdb_name_id() + "\r\n"+"Cantidad de Apariciones: " +  top1.getCharacters().getSize());
+                //MovieCastMember top1 = menuPrincipal.query1.get();
+                //System.out.println("Nombre actor " + top1.getImdb_name_id() + "\r\n"+"Cantidad de Apariciones: " +  top1.getCharacters().getSize());
                 System.out.println("Proceso funciona");
             }
             else if(entrada == 2){  // Menu 2
