@@ -1,26 +1,28 @@
 package Clases;
 
+import static Conversores.Conversores.*;
+
 public class Rating {
 
     //ATRIBUTOS
 
-    private float NumberVotes;
-    private float AverageRating;
+    private float numberVotes;
+    private float averageRating;
 
     //CONSTRUCTOR
 
-    public Rating(float numberVotes, float averageRating) {
-        NumberVotes = numberVotes;
-        AverageRating = averageRating;
+    public Rating(String numberVotes, String averageRating) {
+        this.numberVotes = controlFloat(numberVotes);
+        this.averageRating = controlFloat(averageRating);
     }
 
     //GETTERS
 
     public float getNumberVotes() {
-        return NumberVotes;
+        return numberVotes;
     }
 
     public float getAverageRating() {
-        return AverageRating;
+        return averageRating;
     }
 }

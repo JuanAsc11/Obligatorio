@@ -112,4 +112,25 @@ public class Conversores {
         }
         return city;
     }
+
+    public static int controlParse(String string){
+        try{
+            int num = Integer.parseInt(string);
+            return num;
+        }
+        catch (NumberFormatException e){
+            return 0;
+        }
+    }
+
+    public static float controlFloat(String string){
+        try{
+            float num = Float.parseFloat(string);
+            return num;
+        }
+        catch (NumberFormatException e){
+            return 0;
+        }
+    }
+
 }

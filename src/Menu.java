@@ -96,7 +96,7 @@ public class Menu{
         }*/
 
         //CARGAR PELICULAS PRUEBA
-       /* String fileName = "src/IMDb movies.csv";
+        String fileName = "src/IMDb movies.csv";
         Path pathToFile = Paths.get(fileName);
         try(BufferedReader reader = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)){
             String line = reader.readLine();
@@ -106,15 +106,18 @@ public class Menu{
 
                 Movie peliculaNueva = new Movie(atributos);
 
-                pelis.add(peliculaNueva);
+                if(peliculaNueva.getYear() >= 1930 && peliculaNueva.getYear() <= 1950){
+                    pelis.add(peliculaNueva);
+                }
 
                 line = reader.readLine();
             }
         }
         catch (IOException e){
             e.printStackTrace();
-        }*/
+        }
     }
+
     public static void main(String[] args) throws EmptyHeapException {
         Menu menuPrincipal = new Menu();
         boolean control = true;
