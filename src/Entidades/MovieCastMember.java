@@ -1,8 +1,7 @@
-package Clases;
+package Entidades;
 
 import TADs.Implementaciones.ListaEnlazada;
-import static Conversores.Conversores.convertToVarios;
-import static Conversores.Conversores.convertToVariosMCM;
+import static Utilidades.Conversores.convertToVarios;
 
 public class MovieCastMember implements Comparable<MovieCastMember> {
 

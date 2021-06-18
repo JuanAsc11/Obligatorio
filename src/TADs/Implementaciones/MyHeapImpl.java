@@ -30,13 +30,13 @@ public class MyHeapImpl<T extends Comparable<T>> implements MyHeap<T> {
 
     @Override
     public void insert(T value) {
-        if (values[values.length-1] != null) {
+        if (values[values.length - 1] != null) {
             T[] temp = (T[]) new Comparable[values.length];
-            for (int i = 0; i<size-1;i++){
+            for (int i = 0; i < size - 1; i++) {
                 temp[i] = values[i];
             }
-            values = (T[]) new Comparable[(values.length)*2];
-            for (int i = 0; i<size-1;i++){
+            values = (T[]) new Comparable[(values.length) * 2];
+            for (int i = 0; i < size - 1; i++) {
                 values[i] = temp[i];
             }
         }
@@ -44,14 +44,14 @@ public class MyHeapImpl<T extends Comparable<T>> implements MyHeap<T> {
         size++;
         values[position] = value;
 
-        if(type == 1) {
+        if (type == 1) {
             while (position != 0 && values[position].compareTo(values[getFatherPosition(position)]) > 0) {
                 values[position] = values[getFatherPosition(position)];
                 values[getFatherPosition(position)] = value;
 
                 position = getFatherPosition(position);
             }
-        }else{
+        } else {
             while (position != 0 && values[position].compareTo(values[getFatherPosition(position)]) < 0) {
                 values[position] = values[getFatherPosition(position)];
                 values[getFatherPosition(position)] = value;
@@ -76,17 +76,17 @@ public class MyHeapImpl<T extends Comparable<T>> implements MyHeap<T> {
             int position = 0;
             values[position] = values[size - 1];
 
-            if(type == 1){
+            if (type == 1) {
 
                 int childMaxPosition = maxPosition(getLeftChildPosition(position),
                         getRightChildPosition(position));
-               while (childMaxPosition == -1  && values[childMaxPosition].compareTo(values[position]) > 0) {
-                   values[position] = values[childMaxPosition];
-                   values[childMaxPosition] = values[size - 1];
-                   position = childMaxPosition;
-                   childMaxPosition = maxPosition(getLeftChildPosition(position), getRightChildPosition(position));
+                while (childMaxPosition == -1 && values[childMaxPosition].compareTo(values[position]) > 0) {
+                    values[position] = values[childMaxPosition];
+                    values[childMaxPosition] = values[size - 1];
+                    position = childMaxPosition;
+                    childMaxPosition = maxPosition(getLeftChildPosition(position), getRightChildPosition(position));
                 }
-            }else{
+            } else {
                 int childMinPosition = minPosition(getLeftChildPosition(position),
                         getRightChildPosition(position));
                 while (childMinPosition == -1 && values[childMinPosition].compareTo(values[position]) > 0) {
@@ -96,7 +96,7 @@ public class MyHeapImpl<T extends Comparable<T>> implements MyHeap<T> {
                     childMinPosition = minPosition(getLeftChildPosition(position), getRightChildPosition(position));
                 }
             }
-            values[size-1] = null;
+            values[size - 1] = null;
         }
 
 
@@ -107,12 +107,12 @@ public class MyHeapImpl<T extends Comparable<T>> implements MyHeap<T> {
 
     private int maxPosition(int position1, int position2) {
         int valueToReturn = position1;
-        if (values[position1]!=null && values[position2]!=null){
-            if(values[position2].compareTo(values[position1])>0){
+        if (values[position1] != null && values[position2] != null) {
+            if (values[position2].compareTo(values[position1]) > 0) {
                 valueToReturn = position2;
             }
         }
-        if (values[position1]==null && values[position2]==null){
+        if (values[position1] == null && values[position2] == null) {
             valueToReturn = -1;
         }
         // Controlar posiciones fueras del arbol
@@ -121,12 +121,12 @@ public class MyHeapImpl<T extends Comparable<T>> implements MyHeap<T> {
 
     private int minPosition(int position1, int position2) {
         int valueToReturn = position1;
-        if (values[position1]!=null && values[position2]!=null){
-            if(values[position2].compareTo(values[position1])<0){
+        if (values[position1] != null && values[position2] != null) {
+            if (values[position2].compareTo(values[position1]) < 0) {
                 valueToReturn = position2;
             }
         }
-        if (values[position1]==null && values[position2]==null){
+        if (values[position1] == null && values[position2] == null) {
             valueToReturn = -1;
         }
         return valueToReturn;

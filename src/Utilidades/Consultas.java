@@ -1,3 +1,5 @@
+package Utilidades;
+
 public class Consultas {
 
     public static void Consulta1(){}

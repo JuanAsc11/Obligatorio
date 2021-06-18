@@ -1,7 +1,7 @@
-import Clases.CastMember;
-import Clases.Movie;
-import Clases.MovieCastMember;
-import Clases.MovieRating;
+import Entidades.CastMember;
+import Entidades.Movie;
+import Entidades.MovieCastMember;
+import Entidades.MovieRating;
 import TADs.Excepciones.EmptyHeapException;
 import TADs.Implementaciones.ListaEnlazada;
 import TADs.Implementaciones.MyHeapImpl;
@@ -12,7 +12,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 public class Menu{
 

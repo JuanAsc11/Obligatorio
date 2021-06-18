@@ -1,6 +1,6 @@
-package Clases;
+package Entidades;
 
-import static Conversores.Conversores.*;
+import static Utilidades.Conversores.*;
 
 public class Rating {
 

@@ -1,7 +1,7 @@
-package Clases;
+package Entidades;
 
 import TADs.Implementaciones.ListaEnlazada;
-import static Conversores.Conversores.*;
+import static Utilidades.Conversores.*;
 
 public class MovieRating {
 

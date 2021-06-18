@@ -1,4 +1,4 @@
-package Clases;
+package Entidades;
 
 public class CauseOfDeath {
 

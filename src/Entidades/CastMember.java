@@ -1,8 +1,8 @@
-package Clases;
+package Entidades;
 
 import java.util.Date;
 
-import static Conversores.Conversores.*;
+import static Utilidades.Conversores.*;
 
 public class CastMember {
 

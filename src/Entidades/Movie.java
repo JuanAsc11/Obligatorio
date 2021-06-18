@@ -1,14 +1,11 @@
-package Clases;
+package Entidades;
 
 import TADs.Implementaciones.ListaEnlazada;
-import TADs.Implementaciones.Nodo;
-import TADs.Interfaces.Lista;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 import java.util.Date;
 
-import static Conversores.Conversores.convertToDate;
-import static Conversores.Conversores.convertToVarios;
+import static Utilidades.Conversores.convertToDate;
+import static Utilidades.Conversores.convertToVarios;
 
 public class Movie {
 
