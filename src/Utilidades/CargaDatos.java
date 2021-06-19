@@ -25,7 +25,6 @@ public class CargaDatos {
             String line = reader.readLine();
             line = reader.readLine();
             while (line != null) {
-                sleep(550);
                 String[] atributos = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
 
                 MovieCastMember nuevoMovieCastMember = new MovieCastMember(atributos);
