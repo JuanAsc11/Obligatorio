@@ -3,54 +3,30 @@ package TADs.Implementaciones;
 import TADs.Excepciones.KeyNotFound;
 import TADs.Interfaces.HashTable;
 import TADs.Implementaciones.LinkedHashNode;
+import TADs.Interfaces.Lista;
 
 public class LinkedHashImpl<K extends Comparable<K>,V> implements HashTable<K,V> {
 
-    private LinkedHashNode<K,V>[] array;  //Hash Table
+    private ListaEnlazada<EntradaHash<K,V>>[] array;  //Hash Table
 
     private int capacity;  //cantidad maxima
 
-    private int size;  //cantidad de ocupados
-
-    private float loadFactor; // porcentaje lleno
-
     //GETTERS
-
-    public LinkedHashNode<K, V>[] getArray() {
-        return array;
-    }
     public int getCapacity() {
         return capacity;
-    }
-    public float getLoadFactor() {
-        return loadFactor;
-    }
-    public int getSize() {
-        return size;
     }
 
     //SETTERS
 
-    public void setArray(LinkedHashNode<K,V>[] array) {
-        this.array = array;
-    }
     public void setCapacity(int capacity) {
         this.capacity = capacity;
-    }
-    public void setSize(int size) {
-        this.size = size;
-    }
-    public void setLoadFactor(float loadFactor) {
-        this.loadFactor = loadFactor;
     }
 
     //CONTRUCTOR
 
-    public LinkedHashImpl(int capacity, float loadFactor) {
+    public LinkedHashImpl(int capacity) {
         this.capacity = capacity;
-        this.loadFactor = loadFactor;
-        this.array = new LinkedHashNode[capacity];
-        this.size = 0; // cantidad llenos
+        this.array = new ListaEnlazada[capacity];
     }
 
     //IMPL
@@ -59,80 +35,68 @@ public class LinkedHashImpl<K extends Comparable<K>,V> implements HashTable<K,V>
 
         int codigoHash = key.hashCode();
 
-        int index = codigoHash % capacity;
+        int index = codigoHash % array.length;
 
-        if(index < 0){
+        /*if(index < 0){
              return index * (-1);
         }
         else{
             return index;
-        }
-    }
+        }*/
 
-    public LinkedHashNode<K,V> findNode(K key){
-
-        int index = getHashIndex(key);
-
-        LinkedHashNode<K,V> actualNode = array[index];
-
-        while(actualNode != null){
-            if(actualNode.getKey().compareTo(key) == 0){
-                return actualNode;
-
-            }
-            actualNode = actualNode.getNextNode();
-        }
-        return null;
+        return index;
     }
 
     @Override
     public void put(K key, V value) {
         int index = getHashIndex(key);
 
-        LinkedHashNode<K,V> actualNode = array[index];
-
-        if(actualNode == null){
-            LinkedHashNode<K,V> newNode = new LinkedHashNode<>(key, value);
-            array[index] = newNode;
-            size ++;
+        ListaEnlazada<EntradaHash<K,V>> posicionLista = array[index];
+        //si no existe una lista en posicion
+        if(posicionLista == null){
+            ListaEnlazada<EntradaHash<K,V>> nuevaLista = new ListaEnlazada<>();
+            nuevaLista.add(new EntradaHash<>(key,value));
+            array[index] = nuevaLista;
         }
-        else{
-            while(actualNode.getNextNode() != null){
-                actualNode = actualNode.getNextNode();
-            }
-            LinkedHashNode<K,V> newNode = new LinkedHashNode<>(key, value);
-            actualNode.setNextNode(newNode);
+        else {
+            posicionLista.add(new EntradaHash<>(key, value));  //No tiene en cuenta objetos identicos
         }
-
-        if((1.0*size)/capacity >= loadFactor){ //si pasa la carga especificada como porcentaje lleno del array
-            LinkedHashNode<K,V>[] var = array;
-            array = new LinkedHashNode[2*capacity];
-            size = 0;
-
-            for(LinkedHashNode<K,V> node : var){
-                while(node != null){
-                    put(node.getKey(), node.getData());
-                    node = node.getNextNode();
-                }
-            }
-        }
-
     }
 
     @Override
     public boolean contains(K key) {
-        int index = getHashIndex(key);
+        int postion = getHashIndex(key);
+        boolean encontre = false;
 
-        LinkedHashNode<K,V> actualNode = array[index];
+        ListaEnlazada<EntradaHash<K,V>> listaActual = array[postion];
 
-        while(actualNode != null){
-            if(actualNode.getKey().compareTo(key) == 0){
-                return true;
-
+        if(listaActual != null){  //buscamos si existe la key
+            for(int i = 0; i < listaActual.getSize(); i++){
+                if(listaActual.get(i).getValue().equals(key)){
+                    encontre = true;
+                    break;
+                }
             }
-            actualNode = actualNode.getNextNode();
         }
-        return false;
+        return encontre;
+    }
+
+
+    public V get(K key){
+        int postion = getHashIndex(key);
+        V returnData = null;
+
+        ListaEnlazada<EntradaHash<K,V>> listaActual = array[postion];
+
+        if(listaActual != null){
+            for(int i = 0; i < listaActual.getSize(); i++){
+                if(listaActual.get(i).getValue().equals(key)){
+                        returnData = listaActual.get(i).getValue().getData();
+                        break;
+                }
+            }
+        }
+        return returnData;
     }
 
     @Override
@@ -140,29 +104,26 @@ public class LinkedHashImpl<K extends Comparable<K>,V> implements HashTable<K,V>
 
         int index = getHashIndex(clave);
 
-        LinkedHashNode<K,V> actualNode = array[index];
+        ListaEnlazada<EntradaHash<K,V>> listaActual = array[index];
 
-        LinkedHashNode<K,V> prevNode = null;
+        int lugar = 0;
+        boolean encontre =false;
 
-        while(actualNode != null){
-            if (actualNode.getKey().compareTo(clave) == 0){
-                break;
+        if(listaActual != null){
+            for(int i = 0; i < listaActual.getSize(); i++){
+                lugar++;
+                if(listaActual.get(i).getValue().equals(clave)){
+                    encontre = true;
+                    break;
+                }
             }
-            prevNode = actualNode;
-            actualNode = actualNode.getNextNode();
         }
 
-        if (actualNode == null){
+        if (!encontre){
             throw new KeyNotFound();
         }
-
-        if(prevNode != null){
-            prevNode.setNextNode(actualNode.getNextNode());
-            size--;
-        }
         else {
-            array[index] = actualNode.getNextNode();
-            size--;
+            listaActual.remove(lugar);
         }
     }
 }

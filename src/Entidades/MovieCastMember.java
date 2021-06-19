@@ -2,6 +2,7 @@ package Entidades;
 
 import TADs.Implementaciones.ListaEnlazada;
 import static Utilidades.Conversores.convertToVarios;
+import static Utilidades.Conversores.convertToVariosMCM;
 
 public class MovieCastMember implements Comparable<MovieCastMember> {
 
@@ -27,7 +28,7 @@ public class MovieCastMember implements Comparable<MovieCastMember> {
         this.imdb_name_id = atributos[2];
         this.category = atributos[3];
         this.job = atributos[4];
-        this.characters = convertToVarios(atributos[5]);
+        this.characters = convertToVariosMCM(atributos[5]);
     }
 
     //GETTERS

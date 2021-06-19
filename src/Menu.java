@@ -13,24 +13,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
+
+import static Utilidades.CargaDatos.CargaMovieCastMembers;
+
 public class Menu{
+        public static long start = 0, stop = 0;
 
-    public ListaEnlazada<Movie> pelis;
-
-    public MyHeapImpl<MovieCastMember> query1;
-
-    public ListaEnlazada<CastMember> personas;
-
-    public ListaEnlazada<MovieRating> ratings;
-
-    public Menu(){
-        this.pelis = new ListaEnlazada<>();
-        this.query1 = new MyHeapImpl<>(835493,1);
-        this.personas = new ListaEnlazada<>();
-        this.ratings = new ListaEnlazada<>();
-    }
-
-    public void cargarDatos(){
+    /*public void cargarDatos(){
         String filename3 = "src/IMDb ratings.csv";
         Path pathToFile3 = Paths.get(filename3);
         try(BufferedReader reader = Files.newBufferedReader(pathToFile3, StandardCharsets.UTF_8)) {
@@ -94,7 +83,7 @@ public class Menu{
             e.printStackTrace();
         }*/
 
-        //CARGAR PELICULAS PRUEBA
+        /*//CARGAR PELICULAS PRUEBA
         String fileName = "src/IMDb movies.csv";
         Path pathToFile = Paths.get(fileName);
         try(BufferedReader reader = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)){
@@ -115,7 +104,7 @@ public class Menu{
         catch (IOException e){
             e.printStackTrace();
         }
-    }
+    }*/
 
     public static void main(String[] args) throws EmptyHeapException {
         Menu menuPrincipal = new Menu();
@@ -125,10 +114,11 @@ public class Menu{
             System.out.println("1. Carga de Datos" + "\r\n" + "2. Ejecutar consultas" + "\r\n" + "3. Salir");
             int entrada = scanner.nextInt();
             if(entrada == 1){ //Opcion carga
-                menuPrincipal.cargarDatos();
-                //MovieCastMember top1 = menuPrincipal.query1.get();
-                //System.out.println("Nombre actor " + top1.getImdb_name_id() + "\r\n"+"Cantidad de Apariciones: " +  top1.getCharacters().getSize());
-                System.out.println("Proceso funciona");
+                start = System.currentTimeMillis();
+                CargaMovieCastMembers();
+                stop = System.currentTimeMillis();
+
+                System.out.println("Proceso funciona  " + (stop - start));
             }
             else if(entrada == 2){  // Menu 2
                 boolean control2 = true;

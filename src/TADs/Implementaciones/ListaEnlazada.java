@@ -4,28 +4,32 @@ import TADs.Interfaces.Lista;
 
 public class ListaEnlazada<T> implements Lista<T> {
 
-    public Nodo<T> primerNodo = null;
-    private int size = 0;
+    public Nodo<T> primerNodo;
+    public Nodo<T> finalNodo;
+    private int size;
 
-    @Override
-    public void add(T value){
-        if(primerNodo == null){
-            primerNodo = new Nodo<T>(value);
-            size++;
-        }
-        else {
-            Nodo<T> nodoPresente = primerNodo;
-            for(int i =1; i <= size-1; i++){
-                nodoPresente = nodoPresente.getNextValue();
-            }
-            Nodo<T> nuevoNodo = new Nodo<T>(value);
-            nodoPresente.setNextValue(nuevoNodo);
-            size++;
-        }
+    public ListaEnlazada(){
+        this.primerNodo = null;
+        this.finalNodo = null;
+        this.size = 0;
     }
 
     @Override
-    public void remove(int position) {
+    public void add(T value){
+        Nodo<T> nuevoNodo = new Nodo<T>(value);
+
+        if(primerNodo == null){
+            primerNodo = nuevoNodo;
+        }
+        else{
+            finalNodo.setNextValue(nuevoNodo);
+        }
+        finalNodo = nuevoNodo;
+        size++;
+    }
+
+    @Override
+    public void remove(int position){
         Nodo<T> nodoAnterior = primerNodo;
         Nodo<T> nodoSiguiente = primerNodo;
         for(int i =1; i<=position-2;i++){
@@ -76,6 +80,24 @@ public class ListaEnlazada<T> implements Lista<T> {
 
     public int getSize() {
         return size;
+    }
+
+    public Nodo<T> getPrimerNodo() {
+        return primerNodo;
+    }
+
+    public boolean contains(T value){
+        boolean encontre = false;
+        Nodo<T> nodoBuscado = primerNodo;
+
+        while(primerNodo != null){
+            if(nodoBuscado.getValue().equals(value)){
+                encontre = true;
+                break;
+            }
+            nodoBuscado = nodoBuscado.getNextValue();
+        }
+        return encontre;
     }
 }
 
