@@ -29,13 +29,13 @@ public class Menu{
 
                 start = System.currentTimeMillis();
 
-                CargaMovieCastMembers();
+                //CargaMovieCastMembers();
 
                 //CargaCastMember();
 
                 CargaMovies();
 
-                CargaRatings();
+                //CargaRatings();
 
                 stop = System.currentTimeMillis();
 

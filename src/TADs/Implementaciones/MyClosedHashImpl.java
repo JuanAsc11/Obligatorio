@@ -70,7 +70,6 @@ public class MyClosedHashImpl<K extends Comparable<K>, V> implements MyHash<K, V
 
     @Override
     public void put(K key, V value) throws UnavailableIndex {
-
         int intento = 0;
         int index = tryCollision(key,intento);
 

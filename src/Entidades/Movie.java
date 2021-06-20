@@ -4,8 +4,7 @@ import TADs.Implementaciones.ListaEnlazada;
 
 import java.util.Date;
 
-import static Utilidades.Conversores.convertToDate;
-import static Utilidades.Conversores.convertToVarios;
+import static Utilidades.Conversores.*;
 
 public class Movie {
 
@@ -61,10 +60,10 @@ public class Movie {
         this.imdbTitled = atributos[0];
         this.title = atributos[1];
         this.originalTitle = atributos[2];
-        this.year = Integer.parseInt(atributos[3]);
+        this.year = controlParse(atributos[3]);
         this.datePublished = convertToDate(atributos[4]);
         this.genre = convertToVarios(atributos[5]);             //Estos atributos no estaban en el diagrama
-        this.duration = Integer.parseInt(atributos[6]);
+        this.duration = controlParse(atributos[6]);
         this.country = convertToVarios(atributos[7]);
         this.language = atributos[8];          //Hay Movies con varios idiomas pero el type es String
         this.director = convertToVarios(atributos[9]);
@@ -72,8 +71,8 @@ public class Movie {
         this.productionCompany = atributos[11];
         this.actors = convertToVarios(atributos[12]);
         this.description = atributos[13];
-        this.avgVote = Float.parseFloat(atributos[14]);
-        this.votes = Integer.parseInt(atributos[15]);
+        this.avgVote = controlFloat(atributos[14]);
+        this.votes = controlParse(atributos[15]);
         this.budget = atributos[16];
         this.usaGrossIncome = atributos[17];
         this.worldwideGrossIncome = atributos[18];

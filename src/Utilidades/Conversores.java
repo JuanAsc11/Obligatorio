@@ -90,6 +90,9 @@ public class Conversores {
             if (date != null) {
                 break;
             }
+            if (date == null){
+                break;
+            }
         }
         return date;
     }
