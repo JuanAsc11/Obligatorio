@@ -37,14 +37,12 @@ public class LinkedHashImpl<K extends Comparable<K>,V> implements HashTable<K,V>
 
         int index = codigoHash % array.length;
 
-        /*if(index < 0){
+        if(index < 0){
              return index * (-1);
         }
         else{
             return index;
-        }*/
-
-        return index;
+        }
     }
 
     @Override
@@ -97,6 +95,11 @@ public class LinkedHashImpl<K extends Comparable<K>,V> implements HashTable<K,V>
             }
         }
         return returnData;
+    }
+
+    public ListaEnlazada<EntradaHash<K,V>> getList(K key){
+        int postion = getHashIndex(key);
+        return array[postion];
     }
 
     @Override

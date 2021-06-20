@@ -26,13 +26,13 @@ public class Conversores {
     public static ListaEnlazada<String> convertToVariosMCM(String elementos) {
         ListaEnlazada<String> List = new ListaEnlazada<>();
         //Dividir elementos por "," y add a List
-        if(elementos.length() > 0) {
+        if(elementos.length() > 1) {
             elementos = elementos.substring(2, elementos.length() - 2);
         }
         String[] varios = elementos.split(",");
         for(String elemento: varios){
-            if(elemento.length() > 0) {
-                elemento = elemento.substring(2, elementos.length() - 2);
+            if(elemento.length() > 4) {
+                elemento = elemento.substring(2, elemento.length() - 2);
             }
             List.add(elemento);
         }

@@ -2,8 +2,6 @@ package Utilidades;
 
 import Entidades.MovieCastMember;
 import TADs.Implementaciones.LinkedHashImpl;
-import TADs.Implementaciones.ListaEnlazada;
-import TADs.Implementaciones.MyClosedHashImpl;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,11 +10,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static java.lang.Thread.sleep;
 
 public class CargaDatos {
 
-    public static LinkedHashImpl<String,MovieCastMember> movieCastMemberLinkedHash = new LinkedHashImpl<>(900000);
+    public static LinkedHashImpl<String,MovieCastMember> movieCastMemberLinkedHash = new LinkedHashImpl<>(1090000);
 
     public static void CargaMovieCastMembers() {
         String filename1 = "src/IMDb title_principals.csv";
@@ -30,6 +27,8 @@ public class CargaDatos {
                 MovieCastMember nuevoMovieCastMember = new MovieCastMember(atributos);
 
                 movieCastMemberLinkedHash.put(nuevoMovieCastMember.getImdb_name_id(),nuevoMovieCastMember);
+
+                line = reader.readLine();
             }
         } catch (IOException e) {
             e.printStackTrace();

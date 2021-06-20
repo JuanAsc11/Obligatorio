@@ -3,6 +3,7 @@ import Entidades.Movie;
 import Entidades.MovieCastMember;
 import Entidades.MovieRating;
 import TADs.Excepciones.EmptyHeapException;
+import TADs.Implementaciones.EntradaHash;
 import TADs.Implementaciones.ListaEnlazada;
 import TADs.Implementaciones.MyHeapImpl;
 
@@ -15,6 +16,7 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 
 import static Utilidades.CargaDatos.CargaMovieCastMembers;
+import static Utilidades.CargaDatos.movieCastMemberLinkedHash;
 
 public class Menu{
         public static long start = 0, stop = 0;
@@ -119,6 +121,10 @@ public class Menu{
                 stop = System.currentTimeMillis();
 
                 System.out.println("Proceso funciona  " + (stop - start));
+
+                ListaEnlazada hola= movieCastMemberLinkedHash.getList("nm0063086");
+
+                System.out.println("");
             }
             else if(entrada == 2){  // Menu 2
                 boolean control2 = true;
