@@ -88,7 +88,6 @@ public class MyClosedHashImpl<K extends Comparable<K>, V> implements MyHash<K, V
 
         if(tableHash[index] == null || tableHash[index].isBorrado()){ //Si borraron un nodo o hay lugar insertamos
             tableHash[index] = nuevoNodo;
-            System.out.println("inserte");
         }
         else{ //Ya existe uno y se actualiza el valor
             tableHash[index].setData(value);
