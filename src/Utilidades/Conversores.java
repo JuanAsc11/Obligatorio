@@ -13,14 +13,29 @@ public class Conversores {
     public static ListaEnlazada<String> convertToVarios(String elementos) {
         ListaEnlazada<String> List = new ListaEnlazada<>();
         //Dividir elementos por "," y add a List
-        if(elementos.length() > 0) {
-            elementos = elementos.substring(1, elementos.length() - 1);
+        if(!hayComa(elementos)){
+            List.add(elementos);
         }
-        String[] varios = elementos.split(",");
-        for(String elemento: varios){
-            List.add(elemento);
-        }
+        else{
+            if(elementos.length() > 0) {
+                elementos = elementos.substring(1, elementos.length() - 1);
+            }
+            String[] varios = elementos.split(",");
+            for(String elemento: varios){
+                List.add(elemento);
+            }}
         return List;
+    }
+
+    public static boolean hayComa(String elementos){
+        if(elementos != null){
+            for(int i = 0; i<elementos.length(); i++){
+                if(elementos.charAt(i) == ','){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public static ListaEnlazada<String> convertToVariosMCM(String elementos) {
@@ -77,6 +92,12 @@ public class Conversores {
             }
         }
         return date;
+    }
+
+    public static int convertToBirthYear(String dates){
+        Date date = convertToDate(dates);
+        int year = date.getYear() + 1900;
+        return year;
     }
 
     public static String convertCountry(String places){

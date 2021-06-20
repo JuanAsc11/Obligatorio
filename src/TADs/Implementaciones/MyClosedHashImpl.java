@@ -16,7 +16,7 @@ public class MyClosedHashImpl<K extends Comparable<K>, V> implements MyHash<K, V
         tableHash = new ClosedHashNode[DEFAULT_INITIAL_TABLE_HASH_SIZE];
     }
 
-    public MyClosedHashImpl(int tableHashSize, float loadFactor) {
+    public MyClosedHashImpl(int tableHashSize) {
         tableHash = new ClosedHashNode[tableHashSize];
     }
 

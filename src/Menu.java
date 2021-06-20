@@ -22,93 +22,6 @@ public class Menu{
         public static long start = 0, stop = 0;
         public static ListaEnlazada<EntradaHash<String, MovieCastMember>> tempres = null;
 
-    /*public void cargarDatos(){
-        String filename3 = "src/IMDb ratings.csv";
-        Path pathToFile3 = Paths.get(filename3);
-        try(BufferedReader reader = Files.newBufferedReader(pathToFile3, StandardCharsets.UTF_8)) {
-            String line = reader.readLine();
-            line = reader.readLine();
-            while(line != null){
-
-                String[] atributos = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
-
-                MovieRating nuevoMovieRating = new MovieRating(atributos);
-
-                ratings.add(nuevoMovieRating);
-
-                line = reader.readLine();
-
-            }
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        /*String filename2 = "src/IMDb names.csv";
-        Path pathToFile2 = Paths.get(filename2);
-        try(BufferedReader reader = Files.newBufferedReader(pathToFile2, StandardCharsets.UTF_8)) {
-            String line = reader.readLine();
-            line = reader.readLine();
-            while(line != null){
-
-                String[] atributos = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
-
-                CastMember nuevoCastMember = new CastMember(atributos);
-
-                personas.add(nuevoCastMember);
-
-                line = reader.readLine();
-
-            }
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }*/
-
-        /*String filename1 = "src/IMDb title_principals.csv";
-        Path pathToFile1 = Paths.get(filename1);
-        try(BufferedReader reader = Files.newBufferedReader(pathToFile1, StandardCharsets.UTF_8)) {
-            String line = reader.readLine();
-            line = reader.readLine();
-            while(line != null){
-
-                String[] atributos = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
-
-                MovieCastMember nuevoMovieCastMember = new MovieCastMember(atributos);
-
-                query1.insert(nuevoMovieCastMember);
-
-                line = reader.readLine();
-
-            }
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }*/
-
-        /*//CARGAR PELICULAS PRUEBA
-        String fileName = "src/IMDb movies.csv";
-        Path pathToFile = Paths.get(fileName);
-        try(BufferedReader reader = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)){
-            String line = reader.readLine();
-            line = reader.readLine();
-            while(line != null){
-                String[] atributos = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
-
-                Movie peliculaNueva = new Movie(atributos);
-
-                if(peliculaNueva.getYear() >= 1930 && peliculaNueva.getYear() <= 1950){
-                    pelis.add(peliculaNueva);
-                }
-
-                line = reader.readLine();
-            }
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-    }*/
-
     public static void main(String[] args) throws EmptyHeapException {
         Menu menuPrincipal = new Menu();
 
@@ -126,7 +39,13 @@ public class Menu{
 
                 start = System.currentTimeMillis();
 
-                CargaMovieCastMembers();
+                //CargaMovieCastMembers();
+
+                //CargaCastMember();
+
+                //CargaMovies();
+
+                //CargaRatings();
 
                 stop = System.currentTimeMillis();
 

@@ -20,7 +20,7 @@ public class CastMember {
 
     private String birthDetails;            //No esta en el diagrama
 
-    private Date birthDate;
+    private int year;
 
     private String birthState;
 
@@ -37,6 +37,8 @@ public class CastMember {
     private String deathCountry;
 
     private String deathCity;
+
+    private CauseOfDeath causeOfDeath;
 
     private String spousesString;
 
@@ -58,9 +60,9 @@ public class CastMember {
         this.height = Integer.parseInt(atributosCastMember[3]);
         this.bio = atributosCastMember[4];
         this.birthDetails = atributosCastMember[5];                     //NO esta en Diagrama
-        this.birthDate = convertToDate(atributosCastMember[6]);
+        this.year = convertToBirthYear(atributosCastMember[6]);
         this.birthState = convertState(atributosCastMember[7]);                       //Segundo elemento es el state
-        this.birthCountry = convertCountry(atributosCastMember[7]);                     //Ultimo elemento es el pais
+        this.birthCountry = atributosCastMember[7];                     //CAMBIO POR ACLARACIONES MOODLE
         this.birthCity = convertCity(atributosCastMember[7]);                        //Primer elemento es la ciudad
         this.deathDetails = atributosCastMember[8];                    //NO esta en Diagrama
         this.deathDate = convertToDate(atributosCastMember[9]);
@@ -72,6 +74,10 @@ public class CastMember {
         this.divorces = Integer.parseInt(atributosCastMember[14]);
         this.spousesWithChildren = Integer.parseInt(atributosCastMember[15]);
         this.children = Integer.parseInt(atributosCastMember[16]);
+    }
+
+    public void setCauseOfDeath(CauseOfDeath causeOfDeath) {
+        this.causeOfDeath = causeOfDeath;
     }
 
     //GETTERS
@@ -96,8 +102,8 @@ public class CastMember {
         return bio;
     }
 
-    public Date getBirthDate() {
-        return birthDate;
+    public int getBirthYear() {
+        return year;
     }
 
     public String getBirthState() {
