@@ -2,6 +2,7 @@ package Utilidades;
 
 import Entidades.*;
 import Reader.CsvIterator;
+import TADs.Excepciones.UnavailableIndex;
 import TADs.Implementaciones.LinkedHashImpl;
 import TADs.Implementaciones.ListaEnlazada;
 import TADs.Implementaciones.MyClosedHashImpl;
@@ -20,11 +21,11 @@ public class CargaDatos {
 
     public static LinkedHashImpl<String,MovieCastMember> movieCastMemberLinkedHash = new LinkedHashImpl<>(1090000);
 
-    public static MyClosedHashImpl<String,CastMember> castMemberClosedHash = new MyClosedHashImpl<>(297705);
+    public static MyClosedHashImpl<String,CastMember> castMemberClosedHash = new MyClosedHashImpl<>(600000);
 
-    public static MyClosedHashImpl<String, Movie> movieClosedHash = new MyClosedHashImpl<>(85855);
+    public static MyClosedHashImpl<String, Movie> movieClosedHash = new MyClosedHashImpl<>(180000);
 
-    public static ListaEnlazada<MovieRating>    movieRatings = new ListaEnlazada<>();
+    public static ListaEnlazada<MovieRating> movieRatings = new ListaEnlazada<>();
 
     public static void CargaMovieCastMembers() {
         String filename1 = "src/IMDb title_principals.csv";
@@ -46,7 +47,7 @@ public class CargaDatos {
         }
     }
 
-    public static void CargaCastMember(){
+    public static void CargaCastMember() throws UnavailableIndex {
         String fileName2 = "src/IMDb names.csv";
         Path pathToFile2 = Paths.get(fileName2);
         File archivo = new File(String.valueOf(pathToFile2));
@@ -74,7 +75,7 @@ public class CargaDatos {
                 line = reader.readLine();
             }
         }
-        catch (IOException e){
+        catch (IOException | UnavailableIndex e){
             e.printStackTrace();
         }
     }

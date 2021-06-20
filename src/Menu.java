@@ -1,28 +1,18 @@
-import Entidades.CastMember;
-import Entidades.Movie;
 import Entidades.MovieCastMember;
-import Entidades.MovieRating;
 import TADs.Excepciones.EmptyHeapException;
-import TADs.Implementaciones.EntradaHash;
+import TADs.Excepciones.UnavailableIndex;
+import TADs.Implementaciones.NodoHash;
 import TADs.Implementaciones.ListaEnlazada;
-import TADs.Implementaciones.MyHeapImpl;
-import TADs.Implementaciones.Nodo;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Scanner;
 
 import static Utilidades.CargaDatos.*;
 
 public class Menu{
         public static long start = 0, stop = 0;
-        public static ListaEnlazada<EntradaHash<String, MovieCastMember>> tempres = null;
+        public static ListaEnlazada<NodoHash<String, MovieCastMember>> tempres = null;
 
-    public static void main(String[] args) throws EmptyHeapException {
+    public static void main(String[] args) throws EmptyHeapException, UnavailableIndex {
         Menu menuPrincipal = new Menu();
 
         boolean control = true;
@@ -39,17 +29,17 @@ public class Menu{
 
                 start = System.currentTimeMillis();
 
-                //CargaMovieCastMembers();
+                CargaMovieCastMembers();
 
                 //CargaCastMember();
 
-                //CargaMovies();
+                CargaMovies();
 
-                //CargaRatings();
+                CargaRatings();
 
                 stop = System.currentTimeMillis();
 
-                System.out.println("Proceso funciona  " + (stop - start));
+                System.out.println("Carga de datos finalizada en:  " + (stop - start) + "ms.");
             }
             else if(entrada == 2){  // Menu 2
 

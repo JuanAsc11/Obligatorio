@@ -1,12 +1,12 @@
 package TADs.Implementaciones;
 
-public class EntradaHash<K,V>{
+public class NodoHash<K,V>{
 
     private K key;
     private V data;
     private boolean borrado;
 
-    public EntradaHash(K key, V data) {
+    public NodoHash(K key, V data) {
         this.key = key;
         this.data = data;
         this.borrado = false;

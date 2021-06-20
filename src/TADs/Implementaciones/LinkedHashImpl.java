@@ -2,12 +2,10 @@ package TADs.Implementaciones;
 
 import TADs.Excepciones.KeyNotFound;
 import TADs.Interfaces.HashTable;
-import TADs.Implementaciones.LinkedHashNode;
-import TADs.Interfaces.Lista;
 
 public class LinkedHashImpl<K extends Comparable<K>,V> implements HashTable<K,V> {
 
-    private ListaEnlazada<EntradaHash<K,V>>[] array;  //Hash Table
+    private ListaEnlazada<NodoHash<K,V>>[] array;  //Hash Table
 
     private int capacity;  //cantidad maxima
 
@@ -49,15 +47,15 @@ public class LinkedHashImpl<K extends Comparable<K>,V> implements HashTable<K,V>
     public void put(K key, V value) {
         int index = getHashIndex(key);
 
-        ListaEnlazada<EntradaHash<K,V>> posicionLista = array[index];
+        ListaEnlazada<NodoHash<K,V>> posicionLista = array[index];
         //si no existe una lista en posicion
         if(posicionLista == null){
-            ListaEnlazada<EntradaHash<K,V>> nuevaLista = new ListaEnlazada<>();
-            nuevaLista.add(new EntradaHash<>(key,value));
+            ListaEnlazada<NodoHash<K,V>> nuevaLista = new ListaEnlazada<>();
+            nuevaLista.add(new NodoHash<>(key,value));
             array[index] = nuevaLista;
         }
         else {
-            posicionLista.add(new EntradaHash<>(key, value));  //No tiene en cuenta objetos identicos
+            posicionLista.add(new NodoHash<>(key, value));  //No tiene en cuenta objetos identicos
         }
     }
 
@@ -66,7 +64,7 @@ public class LinkedHashImpl<K extends Comparable<K>,V> implements HashTable<K,V>
         int postion = getHashIndex(key);
         boolean encontre = false;
 
-        ListaEnlazada<EntradaHash<K,V>> listaActual = array[postion];
+        ListaEnlazada<NodoHash<K,V>> listaActual = array[postion];
 
         if(listaActual != null){  //buscamos si existe la key
             for(int i = 0; i < listaActual.getSize(); i++){
@@ -84,7 +82,7 @@ public class LinkedHashImpl<K extends Comparable<K>,V> implements HashTable<K,V>
         int postion = getHashIndex(key);
         V returnData = null;
 
-        ListaEnlazada<EntradaHash<K,V>> listaActual = array[postion];
+        ListaEnlazada<NodoHash<K,V>> listaActual = array[postion];
 
         if(listaActual != null){
             for(int i = 0; i < listaActual.getSize(); i++){
@@ -97,12 +95,12 @@ public class LinkedHashImpl<K extends Comparable<K>,V> implements HashTable<K,V>
         return returnData;
     }
 
-    public ListaEnlazada<EntradaHash<K,V>> getList(K key){
+    public ListaEnlazada<NodoHash<K,V>> getList(K key){
         int postion = getHashIndex(key);
         return array[postion];
     }
 
-    public ListaEnlazada<EntradaHash<K,V>> getList(int i){
+    public ListaEnlazada<NodoHash<K,V>> getList(int i){
         return array[i];
     }
 
@@ -111,7 +109,7 @@ public class LinkedHashImpl<K extends Comparable<K>,V> implements HashTable<K,V>
 
         int index = getHashIndex(clave);
 
-        ListaEnlazada<EntradaHash<K,V>> listaActual = array[index];
+        ListaEnlazada<NodoHash<K,V>> listaActual = array[index];
 
         int lugar = 0;
         boolean encontre =false;
