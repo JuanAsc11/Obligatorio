@@ -157,4 +157,21 @@ public class Conversores {
         }
     }
 
+    public static ListaEnlazada<String> convertGenre(String elementos) {
+        ListaEnlazada<String> List = new ListaEnlazada<>();
+        //Dividir elementos por "," y add a List
+        if(!hayComa(elementos)){
+            List.add(elementos);
+        }
+        else{
+            if(elementos.length() > 0) {
+                elementos = elementos.substring(1, elementos.length() - 1);
+            }
+            String[] varios = elementos.split(", ");
+            for(String elemento: varios){
+                List.add(elemento);
+            }}
+        return List;
+    }
+
 }

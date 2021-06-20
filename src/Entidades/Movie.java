@@ -62,7 +62,7 @@ public class Movie {
         this.originalTitle = atributos[2];
         this.year = controlParse(atributos[3]);
         this.datePublished = convertToDate(atributos[4]);
-        this.genre = convertToVarios(atributos[5]);             //Estos atributos no estaban en el diagrama
+        this.genre = convertGenre(atributos[5]);             //Estos atributos no estaban en el diagrama
         this.duration = controlParse(atributos[6]);
         this.country = convertToVarios(atributos[7]);
         this.language = atributos[8];          //Hay Movies con varios idiomas pero el type es String

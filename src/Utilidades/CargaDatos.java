@@ -63,19 +63,15 @@ public class CargaDatos {
         }
 
     public static void CargaMovies() {
-        int cantidad = 0;
         String fileName = "src/IMDb movies.csv";
         Path pathToFile = Paths.get(fileName);
         try(BufferedReader reader = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)){
             String line = reader.readLine();
-            cantidad++;
             line = reader.readLine();
-            cantidad++;
             while(line != null){
                 String[] atributos = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
                 Movie nuevaMovie = new Movie(atributos);
                 movieClosedHash.put(nuevaMovie.getImdbTitled(),nuevaMovie);
-                System.out.println(cantidad++);
                 line = reader.readLine();
             }
         }
