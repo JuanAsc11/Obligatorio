@@ -1,9 +1,11 @@
 package Utilidades;
 
+import CsvReader.CsvReaderIterator;
 import Entidades.MovieCastMember;
 import TADs.Implementaciones.LinkedHashImpl;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -32,6 +34,17 @@ public class CargaDatos {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static void CargaCastMember(){
+        String fileName2 = "src/IMDb names.csv";
+        Path pathToFile2 = Paths.get(fileName2);
+        File archivo = new File(String.valueOf(pathToFile2));
+        CsvReaderIterator reader = new CsvReaderIterator(archivo);
+        boolean tengo = reader.hasNext();
+        if(tengo){
+            reader.next();
         }
     }
 }

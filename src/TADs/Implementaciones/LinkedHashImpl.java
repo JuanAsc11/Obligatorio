@@ -102,6 +102,10 @@ public class LinkedHashImpl<K extends Comparable<K>,V> implements HashTable<K,V>
         return array[postion];
     }
 
+    public ListaEnlazada<EntradaHash<K,V>> getList(int i){
+        return array[i];
+    }
+
     @Override
     public void remove(K clave) throws KeyNotFound {
 
