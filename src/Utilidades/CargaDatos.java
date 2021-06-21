@@ -55,15 +55,15 @@ public class CargaDatos {
         boolean tengo = reader.hasNext();
         String[] atributos = reader.next();
         tengo = reader.hasNext();
-        while(tengo){
-                atributos = reader.next();
-                CastMember nuevoCastMember = new CastMember(atributos);
-                CauseOfDeath nuevaCauseOfDeath = new CauseOfDeath(atributos[11]);
-                nuevoCastMember.setCauseOfDeath(nuevaCauseOfDeath);
-                castMemberClosedHash.put(nuevoCastMember.getImdbNameId(),nuevoCastMember);
-                tengo = reader.hasNext();
-            }
+        while (tengo) {
+            atributos = reader.next();
+            CastMember nuevoCastMember = new CastMember(atributos);
+            CauseOfDeath nuevaCauseOfDeath = new CauseOfDeath(atributos[11]);
+            nuevoCastMember.setCauseOfDeath(nuevaCauseOfDeath);
+            castMemberClosedHash.put(nuevoCastMember.getImdbNameId(), nuevoCastMember);
+            tengo = reader.hasNext();
         }
+    }
 
     public static void CargaMovies() {
         String fileName = "src/IMDb movies.csv";

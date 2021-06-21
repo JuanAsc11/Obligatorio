@@ -99,7 +99,12 @@ public class Conversores {
 
     public static int convertToBirthYear(String dates){
         Date date = convertToDate(dates);
-        int year = date.getYear() + 1900;
+        int year;
+        if (date == null){
+            year = 0;
+            return year;
+        }
+        year = date.getYear() + 1900;
         return year;
     }
 

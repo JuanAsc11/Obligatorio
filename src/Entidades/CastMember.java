@@ -57,7 +57,7 @@ public class CastMember {
         this.imdbNameId = convertIMDB(atributosCastMember[0]);
         this.Name = atributosCastMember[1];
         this.birthName = atributosCastMember[2];
-        this.height = Integer.parseInt(atributosCastMember[3]);
+        this.height = controlParse(atributosCastMember[3]);
         this.bio = atributosCastMember[4];
         this.birthDetails = atributosCastMember[5];                     //NO esta en Diagrama
         this.year = convertToBirthYear(atributosCastMember[6]);
