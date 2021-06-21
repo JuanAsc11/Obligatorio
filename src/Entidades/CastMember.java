@@ -72,8 +72,8 @@ public class CastMember {
         this.spousesString = atributosCastMember[12];
         this.spouses = Integer.parseInt(atributosCastMember[13]);
         this.divorces = Integer.parseInt(atributosCastMember[14]);
-        this.spousesWithChildren = Integer.parseInt(atributosCastMember[15]);
-        this.children = Integer.parseInt(atributosCastMember[16]);
+        this.spousesWithChildren = Integer.parseInt(atributosCastMember[15]);  //elemento 16 num children
+        this.children = convertChildern(atributosCastMember[16]);
     }
 
     public void setCauseOfDeath(CauseOfDeath causeOfDeath) {

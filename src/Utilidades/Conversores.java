@@ -174,4 +174,20 @@ public class Conversores {
         return List;
     }
 
+    public static boolean containsR(String element){
+        boolean encontre = false;
+        if(element.contains("\r")){
+            encontre = true;
+        }
+        return encontre;
+    }
+
+    public static int convertChildern(String element){
+        if(containsR(element)){
+            element = element.substring(0, element.length() - 2);
+        }
+        int num = controlParse(element);
+        return num;
+    }
+
 }

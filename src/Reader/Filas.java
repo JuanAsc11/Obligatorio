@@ -54,7 +54,12 @@ public class Filas
 
         if (c == '\n')
         {
+            record_buffer.add(value_buffer.toString());
             return true;
+        }
+
+        if (c == '\r') {
+            return false;
         }
 
         this.value_buffer.append(c);
