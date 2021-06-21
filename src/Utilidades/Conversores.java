@@ -190,4 +190,11 @@ public class Conversores {
         return num;
     }
 
+    public static String convertIMDB(String element){
+        while (element.length() > 9){
+            element = element.substring(1);
+        }
+        return element;
+    }
+
 }

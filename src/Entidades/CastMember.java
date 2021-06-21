@@ -54,7 +54,7 @@ public class CastMember {
 
     public CastMember(String[] atributosCastMember) {
 
-        this.imdbNameId = atributosCastMember[0];
+        this.imdbNameId = convertIMDB(atributosCastMember[0]);
         this.Name = atributosCastMember[1];
         this.birthName = atributosCastMember[2];
         this.height = Integer.parseInt(atributosCastMember[3]);

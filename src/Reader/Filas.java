@@ -59,6 +59,7 @@ public class Filas
         }
 
         if (c == '\r') {
+            //record_buffer.add(value_buffer.toString());
             return false;
         }
 
