@@ -152,13 +152,13 @@ public class HeapImpl<K extends Comparable<K>, T> {
         return valueToReturn;
     }
 
-    public T delete() throws EmptyHeapException {
-        T valueToReturn = null;
+    public HeapNode<K,T> delete() throws EmptyHeapException {
+        HeapNode<K,T> valueToReturn = null;
 
         if (size == 0) {
             throw new EmptyHeapException();
         }
-        valueToReturn = Heap[0].getData();
+        valueToReturn = Heap[0];
 
         if (size == 1) {
             Heap[0] = null;
@@ -166,11 +166,11 @@ public class HeapImpl<K extends Comparable<K>, T> {
             int position = 0;
             Heap[position] = Heap[size - 1];
 
-            int childMaxPosition = maxPosition(hijoIzq(position),
-                    hijoDer(position));
-            while (childMaxPosition == -1 && Heap[childMaxPosition].getKey().compareTo(Heap[position].getKey()) > 0) {
+            int childMaxPosition = maxPosition(hijoIzq(position), hijoDer(position));
+            while (childMaxPosition != -1 && Heap[childMaxPosition].getKey().compareTo(Heap[position].getKey()) > 0) {
+                HeapNode<K,T> temp = Heap[position];
                 Heap[position] = Heap[childMaxPosition];
-                Heap[childMaxPosition] = Heap[size - 1];
+                Heap[childMaxPosition] = temp;
                 position = childMaxPosition;
                 childMaxPosition = maxPosition(hijoIzq(position), hijoDer(position));
             }

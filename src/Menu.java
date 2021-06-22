@@ -60,7 +60,7 @@ public class Menu{
         }
     }
 
-    public static void menuConsultas() throws KeyNotFound, FullHeap {
+    public static void menuConsultas() throws KeyNotFound, FullHeap, EmptyHeapException {
         Scanner reader = new Scanner(System.in);
         boolean control2 = true;
         while(control2) {

@@ -4,6 +4,7 @@ import Entidades.CastMember;
 import Entidades.CauseOfDeath;
 import Entidades.Movie;
 import Entidades.MovieCastMember;
+import TADs.Excepciones.EmptyHeapException;
 import TADs.Excepciones.FullHeap;
 import TADs.Excepciones.KeyNotFound;
 import TADs.HeapImpl;
@@ -17,7 +18,7 @@ import static Utilidades.Conversores.promedioAltura;
 public class Consultas {
     private static long start = 0, stop = 0;
 
-    public static void Consulta1() throws KeyNotFound, FullHeap {
+    public static void Consulta1() throws KeyNotFound, FullHeap, EmptyHeapException {
         start = System.currentTimeMillis();
         ListaEnlazada<NodoHash<String,MovieCastMember>> temp = null;
         for (int i = 0; i < 1090000; i++){
@@ -44,17 +45,16 @@ public class Consultas {
         heapParticipaciones.vizualizar();
         System.out.println("pr2");
         for (int i =0; i < 5;i++) {
-            if (heapParticipaciones.getMax() != null) {
+            if (heapParticipaciones.delete().getData() != null) {
                 System.out.println("Nombre actor/actriz: " + heapParticipaciones.getMax().getData().getName() + "\n"
                         + "Cantidad de apariciones: " + heapParticipaciones.getMax().getData().getParticipaciones() + "\r\n");
-                heapParticipaciones.borrarMax();
             }
         }
         stop = System.currentTimeMillis();
         System.out.println("Tiempo de ejecución de la consulta: " + (stop - start));
     }
 
-    public static void Consulta2() throws KeyNotFound, FullHeap {
+    public static void Consulta2() throws KeyNotFound, FullHeap, EmptyHeapException {
         start = System.currentTimeMillis();
         ListaEnlazada<NodoHash<String,MovieCastMember>> temp;
         ListaEnlazada<NodoHash<String, CauseOfDeath>> temp2;
@@ -83,27 +83,23 @@ public class Consultas {
                 causesOrd.insertMaxHeap(temp2.getSize(),temp2.getPrimerNodo().getValue().getKey());
             }
         }
-        HeapNode causa1 = causesOrd.getMax();
-        causesOrd.borrarMax();
-        HeapNode causa2 = causesOrd.getMax();
-        causesOrd.borrarMax();
-        HeapNode causa3 = causesOrd.getMax();
-        causesOrd.borrarMax();
-        HeapNode causa4 = causesOrd.getMax();
-        causesOrd.borrarMax();
-        HeapNode causa5 = causesOrd.getMax();
+        HeapNode<Integer,String> causa1 = causesOrd.delete();
+        HeapNode<Integer,String> causa2 = causesOrd.delete();
+        HeapNode<Integer,String> causa3 = causesOrd.delete();
+        HeapNode<Integer,String> causa4 = causesOrd.delete();
+        HeapNode<Integer,String> causa5 = causesOrd.delete();
 
         stop = System.currentTimeMillis();
 
-        System.out.println("Causa de muerte:" + causa1.getData() + "\r\n" + "Cantidad de personas:" + causa1.getKey() + "\r\n");
-        System.out.println("Causa de muerte:" + causa2.getData() + "\r\n" + "Cantidad de personas:" + causa2.getKey() + "\r\n");
-        System.out.println("Causa de muerte:" + causa3.getData() + "\r\n" + "Cantidad de personas:" + causa3.getKey() + "\r\n");
-        System.out.println("Causa de muerte:" + causa4.getData() + "\r\n" + "Cantidad de personas:" + causa4.getKey() + "\r\n");
-        System.out.println("Causa de muerte:" + causa5.getData() + "\r\n" + "Cantidad de personas:" + causa5.getKey() + "\r\n");
+        System.out.println("Causa de muerte: " + causa1.getData() + "\r\n" + "Cantidad de personas: " + causa1.getKey() + "\r\n");
+        System.out.println("Causa de muerte: " + causa2.getData() + "\r\n" + "Cantidad de personas: " + causa2.getKey() + "\r\n");
+        System.out.println("Causa de muerte: " + causa3.getData() + "\r\n" + "Cantidad de personas: " + causa3.getKey() + "\r\n");
+        System.out.println("Causa de muerte: " + causa4.getData() + "\r\n" + "Cantidad de personas: " + causa4.getKey() + "\r\n");
+        System.out.println("Causa de muerte: " + causa5.getData() + "\r\n" + "Cantidad de personas: " + causa5.getKey() + "\r\n");
         System.out.println("Tiempo de ejecucion de la consulta:" + (stop - start) + "ms." + "\r\n");
     }
 
-    public static void Consulta3() throws KeyNotFound, FullHeap {
+    public static void Consulta3() throws KeyNotFound, FullHeap, EmptyHeapException {
         start = System.currentTimeMillis();
         Movie temp;
         HeapImpl<Float,Movie> peliculas = new HeapImpl<>(85855);
@@ -115,8 +111,7 @@ public class Consultas {
             }
         }
         for(int i = 0;i<14;i++){
-            Movie pelicula = peliculas.getMax().getData();
-            peliculas.borrarMax();
+            Movie pelicula = peliculas.delete().getData();
             int promedio = promedioAltura(pelicula.getActors());
             System.out.print("Id película: " + pelicula.getImdbTitled() + "\r\n"
                     + "Nombre: " + pelicula.getTitle() + "\r\n"
@@ -126,7 +121,7 @@ public class Consultas {
         System.out.println("Tiempo de ejecucion de la consulta:" + (stop - start) + "ms." + "\r\n");
     }
 
-    public static void Consulta4() throws KeyNotFound, FullHeap {
+    public static void Consulta4() throws KeyNotFound, FullHeap, EmptyHeapException {
         start = System.currentTimeMillis();
         ListaEnlazada<NodoHash<String,MovieCastMember>> temp;
         ListaEnlazada<NodoHash<Integer,CastMember>> temp2;
@@ -156,17 +151,17 @@ public class Consultas {
                     HeapActrices.insertMaxHeap(temp2.getSize(),temp2.getPrimerNodo().getValue().getKey());
                 }
         }
-        HeapNode añoActores = HeapActores.getMax();
-        HeapNode añoActrices = HeapActrices.getMax();
+        HeapNode<Integer,Integer> yearActores = HeapActores.delete();
+        HeapNode<Integer,Integer> yearActrices = HeapActrices.delete();
 
         stop = System.currentTimeMillis();
 
-        System.out.println("Actores:" + "\r\n" + "Año:" + añoActores.getData() + "Cantidad:" + añoActores.getKey() + "\r\n");
-        System.out.println("Actrices:" + "\r\n" + "Año:" + añoActrices.getData() + "Cantidad:" + añoActrices.getKey() + "\r\n");
+        System.out.println("Actores:" + "\r\n" + "Año:" + yearActores.getData() + "Cantidad:" + yearActores.getKey() + "\r\n");
+        System.out.println("Actrices:" + "\r\n" + "Año:" + yearActrices.getData() + "Cantidad:" + yearActrices.getKey() + "\r\n");
         System.out.println("Tiempo de ejecucion de la consulta:" + (stop - start) + "ms." + "\r\n");
     }
 
-    public static void Consulta5() throws KeyNotFound, FullHeap {
+    public static void Consulta5() throws KeyNotFound, FullHeap, EmptyHeapException {
         start = System.currentTimeMillis();
         ListaEnlazada<NodoHash<String, MovieCastMember>> temp;
         ListaEnlazada<NodoHash<String, Movie>> temp2;
@@ -204,9 +199,8 @@ public class Consultas {
 
         for (int i =0; i < 10;i++) {
             if (HeapGeneros.getMax() != null) {
-                System.out.println("Genero pelicula: " + HeapGeneros.getMax().getData() + "\n"
+                System.out.println("Genero pelicula: " + HeapGeneros.delete().getData() + "\n"
                         + "Cantidad: " + HeapGeneros.getMax().getKey() + "\r\n");
-                HeapGeneros.borrarMax();
             }
         }
         System.out.println("Tiempo de ejecucion de la consulta:" + (stop - start) + "ms." + "\r\n");
