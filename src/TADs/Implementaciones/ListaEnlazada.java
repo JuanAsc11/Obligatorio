@@ -90,7 +90,7 @@ public class ListaEnlazada<T> implements Lista<T> {
         boolean encontre = false;
         Nodo<T> nodoBuscado = primerNodo;
 
-        while(primerNodo != null){
+        while(nodoBuscado != null){
             if(nodoBuscado.getValue().equals(value)){
                 encontre = true;
                 break;
