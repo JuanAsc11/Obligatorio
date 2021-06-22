@@ -111,7 +111,7 @@ public class Consultas {
         for(int i = 0;i<14;i++){
             Movie pelicula = peliculas.delete().getData();
             int promedio = promedioAltura(pelicula.getActors());
-            System.out.print("Id película: " + pelicula.getImdbTitled() + "\r\n"
+            System.out.println("Id película: " + pelicula.getImdbTitled() + "\r\n"
                     + "Nombre: " + pelicula.getTitle() + "\r\n"
                     + "Altura promedio de actores:" + promedio + "\r\n");
         }
