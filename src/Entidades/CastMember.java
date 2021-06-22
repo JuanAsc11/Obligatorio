@@ -4,7 +4,7 @@ import java.util.Date;
 
 import static Utilidades.Conversores.*;
 
-public class CastMember {
+public class CastMember{
 
     //ATRIBUTOS
 
@@ -50,6 +50,8 @@ public class CastMember {
 
     private int children;
 
+    private int participaciones;
+
     //CONSTRUCTOR
 
     public CastMember(String[] atributosCastMember) {
@@ -74,6 +76,8 @@ public class CastMember {
         this.divorces = Integer.parseInt(atributosCastMember[14]);
         this.spousesWithChildren = Integer.parseInt(atributosCastMember[15]);  //elemento 16 num children
         this.children = convertChildern(atributosCastMember[16]);
+
+        this.participaciones = 0;
     }
 
     public void setCauseOfDeath(CauseOfDeath causeOfDeath) {
@@ -153,4 +157,31 @@ public class CastMember {
     public int getChildren() {
         return children;
     }
+
+    public String getBirthDetails() {
+        return birthDetails;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public String getDeathDetails() {
+        return deathDetails;
+    }
+
+    public CauseOfDeath getCauseOfDeath() {
+        return causeOfDeath;
+    }
+
+    public int getParticipaciones() {
+        return participaciones;
+    }
+
+
+    //Funcion consulta 1
+    public void addParticipacion(){
+        this.participaciones++;
+    }
+
 }

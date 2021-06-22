@@ -1,5 +1,6 @@
 import Entidades.MovieCastMember;
 import TADs.Excepciones.EmptyHeapException;
+import TADs.Excepciones.KeyNotFound;
 import TADs.Excepciones.UnavailableIndex;
 import TADs.Implementaciones.NodoHash;
 import TADs.Implementaciones.ListaEnlazada;
@@ -13,7 +14,7 @@ public class Menu{
         public static long start = 0, stop = 0;
         public static ListaEnlazada<NodoHash<String, MovieCastMember>> tempres = null;
 
-    public static void main(String[] args) throws EmptyHeapException, UnavailableIndex {
+    public static void main(String[] args) throws EmptyHeapException, UnavailableIndex, KeyNotFound {
         Menu menuPrincipal = new Menu();
 
         boolean control = true;
@@ -58,7 +59,7 @@ public class Menu{
         }
     }
 
-    public static void menuConsultas(){
+    public static void menuConsultas() throws KeyNotFound {
         Scanner reader = new Scanner(System.in);
         boolean control2 = true;
         while(control2) {
