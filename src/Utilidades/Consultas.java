@@ -107,7 +107,7 @@ public class Consultas {
         HeapImpl<Integer,Movie> peliculas = new HeapImpl<>(85855);
         for(int i = 0;i<85855;i++){
             temp = movieClosedHash.getPosition(i);
-            if(temp.getYear() <= 1950 && temp.getYear() >= 1960){
+            if(temp.getYear() >= 1950 && temp.getYear() <= 1960){
             }
         }
 
