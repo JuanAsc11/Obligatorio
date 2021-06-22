@@ -25,7 +25,7 @@ public class CargaDatos {
 
     public static MyClosedHashImpl<String, Movie> movieClosedHash = new MyClosedHashImpl<>(85855);
 
-    public static ListaEnlazada<MovieRating> movieRatings = new ListaEnlazada<>();
+    public static MyClosedHashImpl<String,MovieRating> movieRatings = new MyClosedHashImpl<>(85855);
 
     public static void CargaMovieCastMembers() {
         String filename1 = "src/IMDb title_principals.csv";
@@ -90,18 +90,13 @@ public class CargaDatos {
             String line = reader.readLine();
             line = reader.readLine();
             while(line != null){
-
                 String[] atributos = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
-
                 MovieRating nuevoMovieRating = new MovieRating(atributos);
-
-                movieRatings.add(nuevoMovieRating);
-
+                movieRatings.put(nuevoMovieRating.getImbd_title_id(),nuevoMovieRating);
                 line = reader.readLine();
-
             }
         }
-        catch (IOException e) {
+        catch (IOException | UnavailableIndex e) {
             e.printStackTrace();
         }
     }

@@ -1,5 +1,6 @@
 package Utilidades;
 
+import Entidades.CastMember;
 import TADs.Implementaciones.ListaEnlazada;
 
 import java.text.ParseException;
@@ -230,6 +231,13 @@ public class Conversores {
         } else {
             return false;
         }
+    }
+
+    public static int promedioAltura(ListaEnlazada<String> actors) {
+        for (int i = 0; i < actors.getSize(); i++) {
+            String nombre = actors.get(i).getValue();
+        }
+        return 0;
     }
 
 }

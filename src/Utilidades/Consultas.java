@@ -12,6 +12,7 @@ import TADs.Implementaciones.*;
 
 import static Utilidades.CargaDatos.*;
 import static Utilidades.Conversores.containsPalabra;
+import static Utilidades.Conversores.promedioAltura;
 
 public class Consultas {
     private static long start = 0, stop = 0;
@@ -101,16 +102,27 @@ public class Consultas {
         System.out.println("Tiempo de ejecucion de la consulta:" + (stop - start) + "ms." + "\r\n");
     }
 
-    public static void Consulta3(){
+    public static void Consulta3() throws KeyNotFound, FullHeap {
         start = System.currentTimeMillis();
         Movie temp;
-        HeapImpl<Integer,Movie> peliculas = new HeapImpl<>(85855);
+        HeapImpl<Float,Movie> peliculas = new HeapImpl<>(85855);
         for(int i = 0;i<85855;i++){
             temp = movieClosedHash.getPosition(i);
             if(temp.getYear() >= 1950 && temp.getYear() <= 1960){
+                float wA = movieRatings.get(temp.getImdbTitled()).getWeightedAverage();
+                peliculas.insertMaxHeap(wA,temp);
             }
         }
-
+        for(int i = 0;i<14;i++){
+            Movie pelicula = peliculas.getMax().getData();
+            peliculas.borrarMax();
+            int promedio = promedioAltura(pelicula.getActors());
+            System.out.print("Id película: " + pelicula.getImdbTitled() + "\r\n"
+                    + "Nombre: " + pelicula.getTitle() + "\r\n"
+                    + "Altura promedio de actores:" + promedio + "\r\n");
+        }
+        stop = System.currentTimeMillis();
+        System.out.println("Tiempo de ejecucion de la consulta:" + (stop - start) + "ms." + "\r\n");
     }
 
     public static void Consulta4() throws KeyNotFound, FullHeap {
