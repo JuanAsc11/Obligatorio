@@ -51,7 +51,7 @@ public class Menu{
                     control = false;
                     break;
                 default:
-                    System.out.println("\r\n" + "Opción inváida" + "\r\n");
+                    System.out.println("\r\n" + "Opción inválida" + "\r\n");
 
             }
 

@@ -202,4 +202,12 @@ public class Conversores {
         return element;
     }
 
+    public static boolean containsPalabra(String element,String palabra){
+        if (element.toLowerCase().indexOf(palabra.toLowerCase()) != -1 ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
