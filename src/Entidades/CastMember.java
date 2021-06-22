@@ -180,8 +180,8 @@ public class CastMember{
 
 
     //Funcion consulta 1
-    public void addParticipacion(){
-        this.participaciones += 1;
+    public void addParticipacion( int participaciones){
+        this.participaciones = participaciones;
     }
 
 }
