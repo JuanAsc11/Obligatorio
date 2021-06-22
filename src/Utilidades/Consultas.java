@@ -33,13 +33,14 @@ public class Consultas {
 
         System.out.println("pr1");
 
-        HeapImpl<Integer, CastMember> heapParticipaciones = new HeapImpl<>(297705);
+        HeapImpl<Integer, CastMember> heapParticipaciones = new HeapImpl<>(297707);
 
         for(int i = 0; i < 600000; i++) {
             if (castMemberClosedHash.getPosition(i) != null) {
                 heapParticipaciones.insertMaxHeap(castMemberClosedHash.getPosition(i).getParticipaciones(), castMemberClosedHash.getPosition(i));
             }
         }
+        heapParticipaciones.vizualizar();
         System.out.println("pr2");
         for (int i =0; i < 5;i++) {
             if (heapParticipaciones.getMax() != null) {

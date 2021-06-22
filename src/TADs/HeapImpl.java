@@ -1,42 +1,45 @@
 package TADs;
 
+import TADs.Excepciones.EmptyHeapException;
 import TADs.Excepciones.FullHeap;
 
-public class HeapImpl<K extends Comparable<K>, T>{
+public class HeapImpl<K extends Comparable<K>, T> {
 
-    private HeapNode<K,T>[] Heap;
+    private HeapNode<K, T>[] Heap;
     private int maxSize;
     private int size;
 
-    public HeapImpl(int maxSize){
+    public HeapImpl(int maxSize) {
         this.maxSize = maxSize;
         this.size = 0;
         Heap = new HeapNode[this.maxSize + 1];
 
     }
 
-    private int padre(int i){ //posicion padre
-        return (i-1)/2;
-    }
-    private int hijoIzq(int i){ // posicion hijo izq
-        return (2*i)+1;
-    }
-    private int hijoDer(int i){  // posicion hijo Der
-        return (2*i)+2;
+    private int padre(int i) { //posicion padre
+        return (i - 1) / 2;
     }
 
-    private boolean esHoja(int i){
+    private int hijoIzq(int i) { // posicion hijo izq
+        return (2 * i) + 1;
+    }
+
+    private int hijoDer(int i) {  // posicion hijo Der
+        return (2 * i) + 2;
+    }
+
+    private boolean esHoja(int i) {
         return i <= size && i >= size / 2;
     }
 
-    private void cambio(int posicion1, int posicion2){ // cambiar nodos
+    private void cambio(int posicion1, int posicion2) { // cambiar nodos
 
         HeapNode variable = Heap[posicion1];
         Heap[posicion1] = Heap[posicion2];
         Heap[posicion2] = variable;
     }
 
-    private void orderMinHeap(int i){ //ordena el subarbol  heap minimo del nodo
+    /*private void orderMinHeap(int i){ //ordena el subarbol  heap minimo del nodo
 
         if(!esHoja(i)){
 
@@ -53,9 +56,9 @@ public class HeapImpl<K extends Comparable<K>, T>{
                 }
             }
         }
-    }
+    }*/
 
-    private void orderMaxHeap(int index){ // ordenar el  subarbol heap max del nodo
+    /*private void orderMaxHeap(int index){ // ordenar el  subarbol heap max del nodo
 
         int i = index;
         int indexIzq = 2*i +1;
@@ -92,15 +95,15 @@ public class HeapImpl<K extends Comparable<K>, T>{
                 cambio(i, hijoDer(i));
                 orderMaxHeap(hijoDer(i));
             }
-        }*/
-    }
+        }
+    }*/
 
-    public void borrarMax(){
+    /*public void borrarMax(){
         Heap[0] = Heap[size-1];
         Heap[size -1] = null;
         size -= 1;
         orderMaxHeap(0);
-    }
+    }*/
 
     public void insertMaxHeap(K key, T data) throws FullHeap {  //insertar en heap max
 
@@ -120,46 +123,73 @@ public class HeapImpl<K extends Comparable<K>, T>{
 
             position = padre(position);
         }
-
-        /*if(size >= maxSize){
-            return;
-        }
-
-        HeapNode newNode = new HeapNode(key,data);
-
-        Heap[size] = newNode;
-        int actual = size;
-        size++;
-
-        //mientras q no metimos raiz
-        while ( actual != 0 && Heap[actual].getKey().compareTo(Heap[padre(actual)].getKey()) > 0) {
-            cambio(padre(actual), padre(actual));
-            actual = padre(actual);
-        }*/
     }
 
-    public void insertMinHeap(int key, String data){  //insertar en heap min
-        if (size >= maxSize){
-            return;
+    public int maxPosition(int position1, int position2) {
+        int valueToReturn = position1;
+        if (Heap[position1] != null && Heap[position2] != null) {
+            if (Heap[position2].getKey().compareTo(Heap[position1].getKey()) > 0) {
+                valueToReturn = position2;
+            }
         }
-
-        HeapNode newNode = new HeapNode(key, data);
-
-        Heap[++size] = newNode;
-        int actual = size;
-
-        while(Heap[actual].getKey().compareTo(Heap[padre(actual)].getKey()) < 0){
-            cambio(actual, padre(actual));
-            actual = padre(actual);
+        if (Heap[position1] == null && Heap[position2] == null) {
+            valueToReturn = -1;
         }
+        // Controlar posiciones fueras del arbol
+        return valueToReturn;
     }
 
-    public HeapNode popMin(){  //extraer minimo del heap
+    public int minPosition(int position1, int position2) {
+        int valueToReturn = position1;
+        if (Heap[position1] != null && Heap[position2] != null) {
+            if (Heap[position2].getKey().compareTo(Heap[position1].getKey()) < 0) {
+                valueToReturn = position2;
+            }
+        }
+        if (Heap[position1] == null && Heap[position2] == null) {
+            valueToReturn = -1;
+        }
+        return valueToReturn;
+    }
+
+    public T delete() throws EmptyHeapException {
+        T valueToReturn = null;
+
+        if (size == 0) {
+            throw new EmptyHeapException();
+        }
+        valueToReturn = Heap[0].getData();
+
+        if (size == 1) {
+            Heap[0] = null;
+        } else {
+            int position = 0;
+            Heap[position] = Heap[size - 1];
+
+            int childMaxPosition = maxPosition(hijoIzq(position),
+                    hijoDer(position));
+            while (childMaxPosition == -1 && Heap[childMaxPosition].getKey().compareTo(Heap[position].getKey()) > 0) {
+                Heap[position] = Heap[childMaxPosition];
+                Heap[childMaxPosition] = Heap[size - 1];
+                position = childMaxPosition;
+                childMaxPosition = maxPosition(hijoIzq(position), hijoDer(position));
+            }
+            Heap[size - 1] = null;
+        }
+
+        size--;
+
+        return valueToReturn;
+    }
+
+
+
+    /*public HeapNode popMin(){  //extraer minimo del heap
         HeapNode eliminado = Heap[0];
         Heap[0] = Heap[size--];
         orderMinHeap(0);
         return eliminado;
-    }
+    }*/
 
     public HeapNode<K,T> getMax(){  //extraer maximo del heap
         HeapNode eliminado = null;
@@ -171,7 +201,7 @@ public class HeapImpl<K extends Comparable<K>, T>{
         return eliminado;
     }
 
-    public void minHeap(){  //ordena el array entero min heap
+    /*public void minHeap(){  //ordena el array entero min heap
 
         for(int i = (size/2); i >= 1; i--){
             orderMinHeap(i);
@@ -183,7 +213,7 @@ public class HeapImpl<K extends Comparable<K>, T>{
         for(int i = (size/2); i >= 1; i--){
             orderMaxHeap(i);
         }
-    }
+    }*/
 
     public void vizualizar(){
         for(int i =1; i <= (size/2); i++){
