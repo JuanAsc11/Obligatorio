@@ -141,7 +141,7 @@ public class Consultas {
         System.out.println("Tiempo de ejecucion de la consulta:" + (stop - start) + "ms." + "\r\n");
     }
 
-    public static void Consulta5() throws KeyNotFound {
+    public static void Consulta5() throws KeyNotFound, FullHeap {
         start = System.currentTimeMillis();
         ListaEnlazada<NodoHash<String, MovieCastMember>> temp;
         ListaEnlazada<NodoHash<String, Movie>> temp2;
