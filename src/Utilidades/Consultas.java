@@ -68,7 +68,9 @@ public class Consultas {
                             ||containsPalabra(direcprod.getBirthCountry(),"UK")
                             ||containsPalabra(direcprod.getBirthCountry(),"France")
                             ||containsPalabra(direcprod.getBirthCountry(),"Italy")){
-                        causes.put(direcprod.getCauseOfDeath().getName(),direcprod.getCauseOfDeath());
+                        if(!(direcprod.getCauseOfDeath().equals(""))) {
+                            causes.put(direcprod.getCauseOfDeath().getName(), direcprod.getCauseOfDeath());
+                        }
                     }
                 }
             }
