@@ -196,10 +196,32 @@ public class Conversores {
     }
 
     public static String convertIMDB(String element){
-        while (element.length() > 9){
+        boolean stop = false;
+        int index = element.length() -1;
+        while(index >= 0 && !stop){
+            char ch = element.charAt(index);
+            if (ch == 'n'){
+                stop = true;
+                break;
+            }
+            index--;
+        }
+
+        if(index == 0){
+            return element;
+        }
+        else{
+            for(int i = 0; i < index; i++){
+                element = element.substring(1);
+            }
+            return element;
+        }
+
+
+        /*while (element.length() > 9){
             element = element.substring(1);
         }
-        return element;
+        return element;*/
     }
 
     public static boolean containsPalabra(String element,String palabra){
