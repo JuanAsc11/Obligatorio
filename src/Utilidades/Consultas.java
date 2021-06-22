@@ -70,7 +70,7 @@ public class Consultas {
                             ||containsPalabra(direcprod.getBirthCountry(),"UK")
                             ||containsPalabra(direcprod.getBirthCountry(),"France")
                             ||containsPalabra(direcprod.getBirthCountry(),"Italy")){
-                        if(!(direcprod.getCauseOfDeath().equals(""))) {
+                        if(!(direcprod.getCauseOfDeath().getName().equals(""))) {
                             causes.put(direcprod.getCauseOfDeath().getName(), direcprod.getCauseOfDeath());
                         }
                     }
@@ -130,14 +130,18 @@ public class Consultas {
         HeapImpl<Integer,Integer> HeapActores = new HeapImpl<>(600000);
         HeapImpl<Integer,Integer> HeapActrices = new HeapImpl<>(600000);
         for (int i = 0; i < 1090000; i++) {
-            temp = movieCastMemberLinkedHash.getList(i); //
+            temp = movieCastMemberLinkedHash.getList(i);
             if (temp != null) {
                 if (temp.getPrimerNodo().getValue().getData().getCategory().equals("actor")) {
                     CastMember actor = castMemberClosedHash.get(temp.getPrimerNodo().getValue().getKey());
-                    newHashActores.put(actor.getBirthYear(), actor);
+                    if(actor.getBirthYear() != 0) {
+                        newHashActores.put(actor.getBirthYear(), actor);
+                    }
                 } else if (temp.getPrimerNodo().getValue().getData().getCategory().equals("actress")) {
                     CastMember actriz = castMemberClosedHash.get(temp.getPrimerNodo().getValue().getKey());
-                    newHashActrices.put(actriz.getBirthYear(), actriz);
+                    if(actriz.getBirthYear() != 0) {
+                        newHashActrices.put(actriz.getBirthYear(), actriz);
+                    }
                 }
             }
         }
@@ -156,8 +160,8 @@ public class Consultas {
 
         stop = System.currentTimeMillis();
 
-        System.out.println("Actores:" + "\r\n" + "Año:" + yearActores.getData() + "Cantidad:" + yearActores.getKey() + "\r\n");
-        System.out.println("Actrices:" + "\r\n" + "Año:" + yearActrices.getData() + "Cantidad:" + yearActrices.getKey() + "\r\n");
+        System.out.println("Actores:" + "\r\n" + "Año: " + yearActores.getData() + "\r\n" + "Cantidad: " + yearActores.getKey() + "\r\n");
+        System.out.println("Actrices:" + "\r\n" + "Año: " + yearActrices.getData() + "\r\n" + "Cantidad: " + yearActrices.getKey() + "\r\n");
         System.out.println("Tiempo de ejecucion de la consulta:" + (stop - start) + "ms." + "\r\n");
     }
 
@@ -177,7 +181,7 @@ public class Consultas {
                     if (actor.getChildren()<2){
                         System.out.println("Error hijos");
                     }
-                    else if (actor.getChildren() > 2) {
+                    else if (actor.getChildren() >= 2) {
                         String nombrePelicula = movieCastMemberLinkedHash.get(actor.getImdbNameId()).getImdb_title_id();
                         Movie pelicula = movieClosedHash.get(nombrePelicula);
                         ListaEnlazada<String> generos = pelicula.getGenre();
@@ -195,14 +199,12 @@ public class Consultas {
             }
         }
 
-        stop = System.currentTimeMillis();
-
         for (int i =0; i < 10;i++) {
             if (HeapGeneros.getMax() != null) {
-                System.out.println("Genero pelicula: " + HeapGeneros.delete().getData() + "\n"
-                        + "Cantidad: " + HeapGeneros.getMax().getKey() + "\r\n");
+                System.out.println("Genero pelicula: " + HeapGeneros.delete().getData() + "\r\n" + "Cantidad: " + HeapGeneros.delete().getKey() + "\r\n");
             }
         }
-        System.out.println("Tiempo de ejecucion de la consulta:" + (stop - start) + "ms." + "\r\n");
+        stop = System.currentTimeMillis();
+        System.out.println("Tiempo de ejecucion de la consulta: " + (stop - start) + "ms." + "\r\n");
     }
 }
