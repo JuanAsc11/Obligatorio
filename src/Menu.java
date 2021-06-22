@@ -88,6 +88,7 @@ public class Menu{
                     break;
                 case 5:
                     Consulta5();
+                    break;
                 case 6:
                     control2 = false;
                     break;

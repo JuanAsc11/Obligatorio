@@ -104,13 +104,30 @@ public class Conversores {
     }
 
     public static int convertToBirthYear(String dates){
-        Date date = convertToDate(dates);
-        int year;
-        if (date == null){
-            year = 0;
+        int year = 0;
+        boolean digito = true;
+        String yearString;
+        if(dates.equals("")){
             return year;
         }
-        year = date.getYear() + 1900;
+        else{
+            if (dates.length() > 4)
+            {
+                yearString = dates.substring(0, 4);
+            }
+            else
+            {
+                yearString = dates;
+            }
+            for(int i=0; i < yearString.length(); i++) {
+                if (!Character.isDigit(yearString.charAt(i))){
+                    digito = false;
+                    break;
+                }
+            }
+            if(digito){
+                year = Integer.parseInt(yearString);
+            }}
         return year;
     }
 
