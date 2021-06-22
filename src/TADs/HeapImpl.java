@@ -1,5 +1,7 @@
 package TADs;
 
+import TADs.Excepciones.FullHeap;
+
 public class HeapImpl<K extends Comparable<K>, T>{
 
     private HeapNode<K,T>[] Heap;
@@ -100,8 +102,26 @@ public class HeapImpl<K extends Comparable<K>, T>{
         orderMaxHeap(0);
     }
 
-    public void insertMaxHeap(K key, T data){  //insertar en heap max
+    public void insertMaxHeap(K key, T data) throws FullHeap {  //insertar en heap max
+
+        HeapNode<K,T> nuevoNodo = new HeapNode<>(key,data);
+
         if(size >= maxSize){
+            throw new FullHeap();
+        }
+
+        int position = size;
+        size++;
+        Heap[position] = nuevoNodo;
+
+        while(position != 0 && Heap[position].getKey().compareTo(Heap[padre(position)].getKey()) > 0){
+            Heap[position] = Heap[padre(position)];
+            Heap[padre(position)] = nuevoNodo;
+
+            position = padre(position);
+        }
+
+        /*if(size >= maxSize){
             return;
         }
 
@@ -115,7 +135,7 @@ public class HeapImpl<K extends Comparable<K>, T>{
         while ( actual != 0 && Heap[actual].getKey().compareTo(Heap[padre(actual)].getKey()) > 0) {
             cambio(padre(actual), padre(actual));
             actual = padre(actual);
-        }
+        }*/
     }
 
     public void insertMinHeap(int key, String data){  //insertar en heap min
