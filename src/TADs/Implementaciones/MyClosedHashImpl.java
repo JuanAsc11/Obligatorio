@@ -242,4 +242,8 @@ public class MyClosedHashImpl<K extends Comparable<K>, V> implements MyHash<K, V
             }
         }*/
     }
+
+    public  NodoHash<K,V> getNodo(int i){
+        return tableHash[i];
+    }
 }
