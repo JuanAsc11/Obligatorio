@@ -53,8 +53,8 @@ public class Consultas {
 
     public static void Consulta2() throws KeyNotFound {
         start = System.currentTimeMillis();
-        ListaEnlazada<NodoHash<String,MovieCastMember>> temp = null;
-        ListaEnlazada<NodoHash<String, CauseOfDeath>> temp2 = null;
+        ListaEnlazada<NodoHash<String,MovieCastMember>> temp;
+        ListaEnlazada<NodoHash<String, CauseOfDeath>> temp2;
         LinkedHashImpl<String, CauseOfDeath> causes = new LinkedHashImpl<>(1090000);
         HeapImpl<Integer,String> causesOrd = new HeapImpl<>(1090000);
         for (int i = 0; i < 1090000; i++){
@@ -63,7 +63,10 @@ public class Consultas {
                 if(temp.getPrimerNodo().getValue().getData().getCategory().equals("producer") ||
                         temp.getPrimerNodo().getValue().getData().getCategory().equals("director")) {
                     CastMember direcprod = castMemberClosedHash.get(temp.getPrimerNodo().getValue().getKey());
-                    if(containsPalabra(direcprod.getBirthCountry(),"USA")
+                            if(direcprod == null){
+                                System.out.println("Error clave >9");
+                            }
+                    else if (containsPalabra(direcprod.getBirthCountry(),"USA")
                             ||containsPalabra(direcprod.getBirthCountry(),"UK")
                             ||containsPalabra(direcprod.getBirthCountry(),"France")
                             ||containsPalabra(direcprod.getBirthCountry(),"Italy")){
@@ -96,7 +99,45 @@ public class Consultas {
 
     public static void Consulta3(){}
 
-    public static void Consulta4(){}
+    public static void Consulta4() throws KeyNotFound {
+        start = System.currentTimeMillis();
+        ListaEnlazada<NodoHash<String,MovieCastMember>> temp;
+        ListaEnlazada<NodoHash<Integer,CastMember>> temp2;
+        LinkedHashImpl<Integer,CastMember> newHashActores = new LinkedHashImpl<>(600000);
+        LinkedHashImpl<Integer,CastMember> newHashActrices = new LinkedHashImpl<>(600000);
+        HeapImpl<Integer,Integer> HeapActores = new HeapImpl<>(600000);
+        HeapImpl<Integer,Integer> HeapActrices = new HeapImpl<>(600000);
+        for (int i = 0; i < 1090000; i++) {
+            temp = movieCastMemberLinkedHash.getList(i); //
+            if (temp != null) {
+                if (temp.getPrimerNodo().getValue().getData().getCategory().equals("actor")) {
+                    CastMember actor = castMemberClosedHash.get(temp.getPrimerNodo().getValue().getKey());
+                    newHashActores.put(actor.getBirthYear(), actor);
+                } else if (temp.getPrimerNodo().getValue().getData().getCategory().equals("actress")) {
+                    CastMember actriz = castMemberClosedHash.get(temp.getPrimerNodo().getValue().getKey());
+                    newHashActrices.put(actriz.getBirthYear(), actriz);
+                }
+            }
+        }
+        for (int i = 0; i < 600000; i++){
+                temp2 = newHashActores.getList(i);
+                if(temp2 != null){
+                    HeapActores.insertMaxHeap(temp2.getSize(),temp2.getPrimerNodo().getValue().getKey());
+                }
+                temp2 = newHashActrices.getList(i);
+                if(temp2 != null){
+                    HeapActrices.insertMaxHeap(temp2.getSize(),temp2.getPrimerNodo().getValue().getKey());
+                }
+        }
+        HeapNode añoActores = HeapActores.getMax();
+        HeapNode añoActrices = HeapActrices.getMax();
+
+        stop = System.currentTimeMillis();
+
+        System.out.println("Actores:" + "\r\n" + "Año:" + añoActores.getData() + "Cantidad:" + añoActores.getKey() + "\r\n");
+        System.out.println("Actrices:" + "\r\n" + "Año:" + añoActrices.getData() + "Cantidad:" + añoActrices.getKey() + "\r\n");
+        System.out.println("Tiempo de ejecucion de la consulta:" + (stop - start) + "ms." + "\r\n");
+    }
 
     public static void Consulta5(){}
 
