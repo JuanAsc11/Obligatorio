@@ -103,6 +103,7 @@ public class Consultas {
         start = System.currentTimeMillis();
         Movie temp;
         HeapImpl<Float,Movie> peliculas = new HeapImpl<>(85855);
+        int contador = 0;
         for(int i = 0;i<85855;i++){
             temp = movieClosedHash.getPosition(i);
             if(temp.getYear() >= 1950 && temp.getYear() <= 1960){
@@ -110,12 +111,15 @@ public class Consultas {
                 peliculas.insertMaxHeap(wA,temp);
             }
         }
-        for(int i = 0;i<14;i++){
+        while(contador < 14){
             Movie pelicula = peliculas.delete().getData();
             int promedio = promedioAltura(pelicula.getActors());
-            System.out.println("Id película: " + pelicula.getImdbTitled() + "\r\n"
-                    + "Nombre: " + pelicula.getTitle() + "\r\n"
-                    + "Altura promedio de actores:" + promedio + "\r\n");
+            if(promedio != 0) {
+                System.out.println("Id película: " + pelicula.getImdbTitled() + "\r\n"
+                        + "Nombre: " + pelicula.getTitle() + "\r\n"
+                        + "Altura promedio de actores:" + promedio + "\r\n");
+                contador++;
+            }
         }
         stop = System.currentTimeMillis();
         System.out.println("Tiempo de ejecucion de la consulta:" + (stop - start) + "ms." + "\r\n");

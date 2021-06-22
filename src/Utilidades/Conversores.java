@@ -1,11 +1,16 @@
 package Utilidades;
 
 import Entidades.CastMember;
+import Entidades.MovieCastMember;
 import TADs.Implementaciones.ListaEnlazada;
+import TADs.Implementaciones.NodoHash;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static Utilidades.CargaDatos.castMemberClosedHash;
+import static Utilidades.CargaDatos.movieCastMemberLinkedHash;
 
 public class Conversores {
 
@@ -234,10 +239,29 @@ public class Conversores {
     }
 
     public static int promedioAltura(ListaEnlazada<String> actors) {
+        CastMember temp;
+        int suma = 0;
+        int div = 0;
+        int promedio = 0;
         for (int i = 0; i < actors.getSize(); i++) {
             String nombre = actors.get(i).getValue();
+            for(int j = 0;j < 600000;j++){
+                temp = castMemberClosedHash.getPosition(j);
+                if(temp != null){
+                    if(temp.getName().equals(nombre)){
+                        if (temp.getHeight() != 0){
+                            suma = suma + temp.getHeight();
+                            div++;
+                            break;
+                        }
+                    }
+                }
+            }
         }
-        return 0;
+        if(div != 0){
+        promedio = suma/div;
+        }
+        return promedio;
     }
 
 }
