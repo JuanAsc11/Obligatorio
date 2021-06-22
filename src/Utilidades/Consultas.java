@@ -4,6 +4,7 @@ import Entidades.CastMember;
 import Entidades.CauseOfDeath;
 import Entidades.Movie;
 import Entidades.MovieCastMember;
+import TADs.Excepciones.FullHeap;
 import TADs.Excepciones.KeyNotFound;
 import TADs.HeapImpl;
 import TADs.HeapNode;
@@ -15,7 +16,7 @@ import static Utilidades.Conversores.containsPalabra;
 public class Consultas {
     private static long start = 0, stop = 0;
 
-    public static void Consulta1() throws KeyNotFound {
+    public static void Consulta1() throws KeyNotFound, FullHeap {
         start = System.currentTimeMillis();
         ListaEnlazada<NodoHash<String,MovieCastMember>> temp = null;
         for (int i = 0; i < 1090000; i++){
@@ -51,7 +52,7 @@ public class Consultas {
         System.out.println("Tiempo de ejecución de la consulta: " + (stop - start));
     }
 
-    public static void Consulta2() throws KeyNotFound {
+    public static void Consulta2() throws KeyNotFound, FullHeap {
         start = System.currentTimeMillis();
         ListaEnlazada<NodoHash<String,MovieCastMember>> temp;
         ListaEnlazada<NodoHash<String, CauseOfDeath>> temp2;
@@ -100,7 +101,7 @@ public class Consultas {
 
     public static void Consulta3(){}
 
-    public static void Consulta4() throws KeyNotFound {
+    public static void Consulta4() throws KeyNotFound, FullHeap {
         start = System.currentTimeMillis();
         ListaEnlazada<NodoHash<String,MovieCastMember>> temp;
         ListaEnlazada<NodoHash<Integer,CastMember>> temp2;
