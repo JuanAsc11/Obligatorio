@@ -24,11 +24,24 @@ public class Consultas {
         for (int i = 0; i < 1090000; i++){
             temp = movieCastMemberLinkedHash.getList(i); //
             if(temp != null){
-                if(temp.getPrimerNodo().getValue().getData().getCategory().equals("actor") || temp.getPrimerNodo().getValue().getData().getCategory().equals("actress")) {
+                //int participa = 0;
+                Nodo<NodoHash<String,MovieCastMember>> actual = temp.getPrimerNodo();
+                for(int z = 0; z < temp.getSize();z++){
+                    if(actual.getValue().getData().getCategory().equals("actor") || actual.getValue().getData().getCategory().equals("actress")){
+                        //participa++;
+                        castMemberClosedHash.get(actual.getValue().getData().getImdb_name_id()).addParticipacion();
+                    }
+                    actual = actual.getNextValue();
+                }
+
+                //CastMember actor = castMemberClosedHash.get(temp.getPrimerNodo().getValue().getKey());
+                //actor.addParticipacion(participa);
+
+                /*if(temp.getPrimerNodo().getValue().getData().getCategory().equals("actor") || temp.getPrimerNodo().getValue().getData().getCategory().equals("actress")) {
 
                     CastMember actor = castMemberClosedHash.get(temp.getPrimerNodo().getValue().getKey());
                     actor.addParticipacion(temp.getSize());
-                }
+                }*/
             }
         }
 
@@ -47,7 +60,7 @@ public class Consultas {
             }
         }
         stop = System.currentTimeMillis();
-        System.out.println("Tiempo de ejecución de la consulta: " + (stop - start));
+        System.out.println("Tiempo de ejecución de la consulta: " + (stop - start) + "ms");
     }
 
     public static void Consulta2() throws KeyNotFound, FullHeap, EmptyHeapException {
