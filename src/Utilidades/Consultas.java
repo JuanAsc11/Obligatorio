@@ -25,26 +25,22 @@ public class Consultas {
             temp = movieCastMemberLinkedHash.getList(i); //
             if(temp != null){
                 if(temp.getPrimerNodo().getValue().getData().getCategory().equals("actor") || temp.getPrimerNodo().getValue().getData().getCategory().equals("actress")) {
-                    System.out.println("OH");
-                    System.out.println(movieCastMemberLinkedHash.get(temp.getPrimerNodo().getValue().getKey()).getImdb_name_id());
+
                     CastMember actor = castMemberClosedHash.get(temp.getPrimerNodo().getValue().getKey());
-                    actor.addParticipacion();
+                    actor.addParticipacion(temp.getSize());
                 }
             }
         }
 
-        System.out.println("pr1");
-
-        HeapImpl<Integer, CastMember> heapParticipaciones = new HeapImpl<>(297707);
+        HeapImpl<Integer, CastMember> heapParticipaciones = new HeapImpl<>(600000);
 
         for(int i = 0; i < 600000; i++) {
             if (castMemberClosedHash.getPosition(i) != null) {
                 heapParticipaciones.insertMaxHeap(castMemberClosedHash.getPosition(i).getParticipaciones(), castMemberClosedHash.getPosition(i));
             }
         }
-        heapParticipaciones.vizualizar();
-        System.out.println("pr2");
-        for (int i =0; i < 5;i++) {
+
+        for (int z =0; z < 5;z++) {
             if (heapParticipaciones.delete().getData() != null) {
                 System.out.println("Nombre actor/actriz: " + heapParticipaciones.getMax().getData().getName() + "\n"
                         + "Cantidad de apariciones: " + heapParticipaciones.getMax().getData().getParticipaciones() + "\r\n");
