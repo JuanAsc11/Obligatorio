@@ -32,8 +32,6 @@ public class Consultas {
             }
         }
 
-        System.out.println("pr1");
-
         HeapImpl<Integer, CastMember> heapParticipaciones = new HeapImpl<>(600000);
 
         for(int i = 0; i < 600000; i++) {
@@ -41,8 +39,6 @@ public class Consultas {
                 heapParticipaciones.insertMaxHeap(castMemberClosedHash.getPosition(i).getParticipaciones(), castMemberClosedHash.getPosition(i));
             }
         }
-
-        System.out.println("pr2");
 
         for (int z =0; z < 5;z++) {
             if (heapParticipaciones.delete().getData() != null) {
