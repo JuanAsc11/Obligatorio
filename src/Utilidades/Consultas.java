@@ -16,11 +16,11 @@ public class Consultas {
         start = System.currentTimeMillis();
         ListaEnlazada<NodoHash<String,MovieCastMember>> temp = null;
         for (int i = 0; i < 1090000; i++){
-            temp = movieCastMemberLinkedHash.getList(i);
+            temp = movieCastMemberLinkedHash.getList(i); //
             if(temp != null){
-                if(temp.getPrimerNodo().getValue().getData().getJob().equals("actor") ||
-                        temp.getPrimerNodo().getValue().getData().getJob().equals("actress")) {
-
+                if(temp.getPrimerNodo().getValue().getData().getCategory().equals("actor") || temp.getPrimerNodo().getValue().getData().getCategory().equals("actress")) {
+                    System.out.println("OH");
+                    System.out.println(movieCastMemberLinkedHash.get(temp.getPrimerNodo().getValue().getKey()).getImdb_name_id());
                     CastMember actor = castMemberClosedHash.get(temp.getPrimerNodo().getValue().getKey());
                     actor.addParticipacion();
                 }

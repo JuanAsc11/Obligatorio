@@ -181,7 +181,7 @@ public class CastMember{
 
     //Funcion consulta 1
     public void addParticipacion(){
-        this.participaciones++;
+        this.participaciones += 1;
     }
 
 }

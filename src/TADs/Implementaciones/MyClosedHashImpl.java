@@ -31,9 +31,9 @@ public class MyClosedHashImpl<K extends Comparable<K>, V> implements MyHash<K, V
     private int colisionIndex(int index){ //Devuelve lugar a intentar insertar, de manera cuadratica
         int temp = 0;
 
-        if (index < 0){
+        /*if (index < 0){
             index = index*(-1);
-        }
+        }*/
 
         if(baseFunction == quadraticFunctionCollision){
             temp = index^2;
@@ -109,18 +109,20 @@ public class MyClosedHashImpl<K extends Comparable<K>, V> implements MyHash<K, V
     @Override
     public V get(K key) throws KeyNotFound {
 
-        V returnData = null;
         int intento = 0;
+
+        V returnData = null;
+
         int index = tryCollision(key,intento);
 
         //Minetras no encontremos, repetimos la busqueda cuadraticamente
-        while(!(intento > tableHash.length) && !tableHash[index].getKey().equals(key) && tableHash[index] != null){
-            intento++;
+        while(tableHash[index] != null && !tableHash[index].getKey().equals(key) && !(intento > tableHash.length)){
+            intento += 1;
             index = tryCollision(key,intento);
         }
 
         //Encontramos
-        if(tableHash[index].getKey().equals(key) && !tableHash[index].isBorrado() && !(intento > tableHash.length)){
+        if(tableHash[index] != null &&  !(intento > tableHash.length) && tableHash[index].getKey().equals(key) && !tableHash[index].isBorrado()){
             returnData = tableHash[index].getData();
         }
 
