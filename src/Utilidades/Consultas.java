@@ -34,9 +34,9 @@ public class Consultas {
     public static void Consulta2() throws KeyNotFound {
         start = System.currentTimeMillis();
         ListaEnlazada<NodoHash<String,MovieCastMember>> temp = null;
-        ListaEnlazada<NodoHash<String,CauseOfDeath>> temp2 = null;
+        ListaEnlazada<NodoHash<String, CauseOfDeath>> temp2 = null;
         LinkedHashImpl<String, CauseOfDeath> causes = new LinkedHashImpl<>(1090000);
-        HeapImpl<Integer,CauseOfDeath> causesOrd = new HeapImpl<>(1090000);
+        HeapImpl<Integer,String> causesOrd = new HeapImpl<>(1090000);
         for (int i = 0; i < 1090000; i++){
             temp = movieCastMemberLinkedHash.getList(i);
             if(temp != null){
@@ -58,11 +58,11 @@ public class Consultas {
                 causesOrd.insertMaxHeap(temp2.getSize(),temp2.getPrimerNodo().getValue().getKey());
             }
         }
-        HeapNode causa1 = causesOrd.popMax();
-        HeapNode causa2 = causesOrd.popMax();
-        HeapNode causa3 = causesOrd.popMax();
-        HeapNode causa4 = causesOrd.popMax();
-        HeapNode causa5 = causesOrd.popMax();
+        HeapNode causa1 = causesOrd.getMax();
+        HeapNode causa2 = causesOrd.getMax();
+        HeapNode causa3 = causesOrd.getMax();
+        HeapNode causa4 = causesOrd.getMax();
+        HeapNode causa5 = causesOrd.getMax();
 
         stop = System.currentTimeMillis();
 

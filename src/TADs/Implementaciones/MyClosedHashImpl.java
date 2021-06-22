@@ -153,6 +153,14 @@ public class MyClosedHashImpl<K extends Comparable<K>, V> implements MyHash<K, V
         return actualNode.getData();*/
     }
 
+    public V getPosition(int index){
+        V dataReturn = null;
+        if(tableHash[index] != null && !tableHash[index].isBorrado()){
+            dataReturn = tableHash[index].getData();
+        }
+        return dataReturn;
+    }
+
     @Override
     public void delete(K key) throws KeyNotFound {
         int intento = 0;

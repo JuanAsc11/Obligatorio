@@ -53,9 +53,29 @@ public class HeapImpl<K extends Comparable<K>, T>{
         }
     }
 
-    private void orderMaxHeap(int i){ // ordenar el  subarbol heap max del nodo
+    private void orderMaxHeap(int index){ // ordenar el  subarbol heap max del nodo
 
-        if(esHoja(i)){
+        int i = index;
+        int indexIzq = 2*i +1;
+        int indexDer = 2*i +2;
+        int mayorIndex = i;
+
+        if(indexDer < size && Heap[indexDer].getKey().compareTo(Heap[size].getKey()) > 0){ // busco derecha
+            mayorIndex = indexDer;
+        }
+
+        if (indexIzq < size && Heap[indexIzq].getKey().compareTo(Heap[size].getKey()) > 0){  // busco izq
+            mayorIndex = indexIzq;
+        }
+
+        if(mayorIndex != i){ // encontro uno mayor
+            cambio(i,mayorIndex);
+            orderMaxHeap(mayorIndex);
+        }
+
+
+
+        /*if(esHoja(i)){
             return;
         }
 
@@ -70,17 +90,29 @@ public class HeapImpl<K extends Comparable<K>, T>{
                 cambio(i, hijoDer(i));
                 orderMaxHeap(hijoDer(i));
             }
-        }
+        }*/
     }
 
-    public void insertMaxHeap(int key, String data){  //insertar en heap max
+    public void borrarMax(){
+        Heap[0] = Heap[size-1];
+        Heap[size -1] = null;
+        size -= 1;
+        orderMaxHeap(0);
+    }
+
+    public void insertMaxHeap(K key, T data){  //insertar en heap max
         if(size >= maxSize){
             return;
         }
 
         HeapNode newNode = new HeapNode(key,data);
 
-        Heap[++size] = newNode;
+        if (size == 0){
+            Heap[0] = newNode;
+        }
+        else {
+            Heap[++size] = newNode;
+        }
 
         int actual = size;
 
@@ -113,10 +145,13 @@ public class HeapImpl<K extends Comparable<K>, T>{
         return eliminado;
     }
 
-    public HeapNode popMax(){  //extraer maximo del heap
-        HeapNode eliminado = Heap[0];
-        Heap[0] = Heap[size--];
-        orderMaxHeap(0);
+    public HeapNode<K,T> getMax(){  //extraer maximo del heap
+        HeapNode eliminado = null;
+
+        if (size != 0){
+            eliminado = Heap[0];
+        }
+
         return eliminado;
     }
 
