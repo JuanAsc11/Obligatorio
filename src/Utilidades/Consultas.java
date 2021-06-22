@@ -2,14 +2,14 @@ package Utilidades;
 
 import Entidades.CastMember;
 import Entidades.CauseOfDeath;
+import Entidades.Movie;
 import Entidades.MovieCastMember;
 import TADs.Excepciones.KeyNotFound;
 import TADs.HeapImpl;
 import TADs.HeapNode;
 import TADs.Implementaciones.*;
 
-import static Utilidades.CargaDatos.castMemberClosedHash;
-import static Utilidades.CargaDatos.movieCastMemberLinkedHash;
+import static Utilidades.CargaDatos.*;
 import static Utilidades.Conversores.containsPalabra;
 
 public class Consultas {
@@ -63,10 +63,7 @@ public class Consultas {
                 if(temp.getPrimerNodo().getValue().getData().getCategory().equals("producer") ||
                         temp.getPrimerNodo().getValue().getData().getCategory().equals("director")) {
                     CastMember direcprod = castMemberClosedHash.get(temp.getPrimerNodo().getValue().getKey());
-                            if(direcprod == null){
-                                System.out.println("Error clave >9");
-                            }
-                    else if (containsPalabra(direcprod.getBirthCountry(),"USA")
+                    if (containsPalabra(direcprod.getBirthCountry(),"USA")
                             ||containsPalabra(direcprod.getBirthCountry(),"UK")
                             ||containsPalabra(direcprod.getBirthCountry(),"France")
                             ||containsPalabra(direcprod.getBirthCountry(),"Italy")){
@@ -82,9 +79,13 @@ public class Consultas {
             }
         }
         HeapNode causa1 = causesOrd.getMax();
+        causesOrd.borrarMax();
         HeapNode causa2 = causesOrd.getMax();
+        causesOrd.borrarMax();
         HeapNode causa3 = causesOrd.getMax();
+        causesOrd.borrarMax();
         HeapNode causa4 = causesOrd.getMax();
+        causesOrd.borrarMax();
         HeapNode causa5 = causesOrd.getMax();
 
         stop = System.currentTimeMillis();
@@ -139,6 +140,49 @@ public class Consultas {
         System.out.println("Tiempo de ejecucion de la consulta:" + (stop - start) + "ms." + "\r\n");
     }
 
-    public static void Consulta5(){}
+    public static void Consulta5() throws KeyNotFound {
+        start = System.currentTimeMillis();
+        ListaEnlazada<NodoHash<String, MovieCastMember>> temp;
+        ListaEnlazada<NodoHash<String, Movie>> temp2;
+        LinkedHashImpl<String, Movie> newHashGeneros = new LinkedHashImpl<>(600000);
+        HeapImpl<Integer, String> HeapGeneros = new HeapImpl<>(855000);
+        for (int i = 0; i < 1090000; i++) {
+            temp = movieCastMemberLinkedHash.getList(i); //
+            if (temp != null) {
+                if (temp.getPrimerNodo().getValue().getData().getCategory().equals("actor")
+                        || temp.getPrimerNodo().getValue().getData().getCategory().equals("actress")) {
+                    CastMember actor = castMemberClosedHash.get(temp.getPrimerNodo().getValue().getKey());
+                    int hijos = actor.getChildren();
+                    if (actor.getChildren()<2){
+                        System.out.println("Error hijos");
+                    }
+                    else if (actor.getChildren() > 2) {
+                        String nombrePelicula = movieCastMemberLinkedHash.get(actor.getImdbNameId()).getImdb_title_id();
+                        Movie pelicula = movieClosedHash.get(nombrePelicula);
+                        ListaEnlazada<String> generos = pelicula.getGenre();
+                        for (int j = 0; j < generos.getSize(); j++) {
+                            newHashGeneros.put(generos.get(i).getValue(), pelicula);
+                        }
+                    }
+                }
+            }
+        }
+        for (int i = 0; i < 600000; i++) {
+            temp2 = newHashGeneros.getList(i);
+            if (temp2 != null) {
+                HeapGeneros.insertMaxHeap(temp2.getSize(), temp2.getPrimerNodo().getValue().getKey());
+            }
+        }
 
+        stop = System.currentTimeMillis();
+
+        for (int i =0; i < 10;i++) {
+            if (HeapGeneros.getMax() != null) {
+                System.out.println("Genero pelicula: " + HeapGeneros.getMax().getData() + "\n"
+                        + "Cantidad: " + HeapGeneros.getMax().getKey() + "\r\n");
+                HeapGeneros.borrarMax();
+            }
+        }
+        System.out.println("Tiempo de ejecucion de la consulta:" + (stop - start) + "ms." + "\r\n");
+    }
 }
