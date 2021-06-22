@@ -107,17 +107,13 @@ public class HeapImpl<K extends Comparable<K>, T>{
 
         HeapNode newNode = new HeapNode(key,data);
 
-        if (size == 0){
-            Heap[0] = newNode;
-        }
-        else {
-            Heap[++size] = newNode;
-        }
-
+        Heap[size] = newNode;
         int actual = size;
+        size++;
 
-        while(Heap[actual].getKey().compareTo(Heap[padre(actual)].getKey()) > 0){
-            cambio(actual, padre(actual));
+        //mientras q no metimos raiz
+        while ( actual != 0 && Heap[actual].getKey().compareTo(Heap[padre(actual)].getKey()) > 0) {
+            cambio(padre(actual), padre(actual));
             actual = padre(actual);
         }
     }
