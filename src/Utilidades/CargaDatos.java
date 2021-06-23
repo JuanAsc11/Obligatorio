@@ -78,6 +78,8 @@ public class CargaDatos {
         while (readerIterator.hasNext()){
             atributos = readerIterator.next();
             CastMember nuevoCastMember = new CastMember(atributos);
+            CauseOfDeath nuevaCauseOfDeath = new CauseOfDeath(atributos[11]);
+            nuevoCastMember.setCauseOfDeath(nuevaCauseOfDeath);
             castMemberClosedHash.put(nuevoCastMember.getImdbNameId(),nuevoCastMember);
         }
 

@@ -37,11 +37,11 @@ public class Menu{
 
                         CargaMovieCastMembers();
 
-                        //CargaCastMember();
+                        CargaCastMember();
 
-                        //CargaMovies();
+                        CargaMovies();
 
-                        //CargaRatings();
+                        CargaRatings();
 
                         stop = System.currentTimeMillis();
 

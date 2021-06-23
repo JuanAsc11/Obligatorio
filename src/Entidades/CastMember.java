@@ -56,7 +56,7 @@ public class CastMember{
 
     public CastMember(String[] atributosCastMember) {
 
-        this.imdbNameId = atributosCastMember[0].substring(atributosCastMember[0].lastIndexOf('n'));
+        this.imdbNameId = atributosCastMember[0].substring(atributosCastMember[0].lastIndexOf("nm"));
         this.Name = atributosCastMember[1];
         this.birthName = atributosCastMember[2];
         this.height = controlParse(atributosCastMember[3]);
