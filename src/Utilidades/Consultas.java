@@ -111,14 +111,13 @@ public class Consultas {
                 peliculas.insertMaxHeap(wA,temp);
             }
         }
-        while(contador < 14){
+        for(int i=0; i<14; i++){
             Movie pelicula = peliculas.delete().getData();
             int promedio = promedioAltura(pelicula.getActors());
             if(promedio != 0) {
                 System.out.println("Id película: " + pelicula.getImdbTitled() + "\r\n"
                         + "Nombre: " + pelicula.getTitle() + "\r\n"
                         + "Altura promedio de actores:" + promedio + "\r\n");
-                contador++;
             }
         }
         stop = System.currentTimeMillis();
