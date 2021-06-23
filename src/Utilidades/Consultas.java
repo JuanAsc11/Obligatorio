@@ -209,9 +209,7 @@ public class Consultas {
         }
 
         for (int i =0; i < 10;i++) {
-            if (HeapGeneros.getMax() != null) {
-                System.out.println("Genero pelicula: " + HeapGeneros.delete().getData() + "\r\n" + "Cantidad: " + HeapGeneros.delete().getKey() + "\r\n");
-            }
+            System.out.println("Genero pelicula: " + HeapGeneros.delete().getData() + "\r\n" + "Cantidad: " + HeapGeneros.delete().getKey() + "\r\n");
         }
         stop = System.currentTimeMillis();
         System.out.println("Tiempo de ejecucion de la consulta: " + (stop - start) + "ms." + "\r\n");
