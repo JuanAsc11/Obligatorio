@@ -18,41 +18,54 @@ public class Menu{
     public static void main(String[] args) throws EmptyHeapException, UnavailableIndex, KeyNotFound, FullHeap {
         Menu menuPrincipal = new Menu();
 
+        boolean carga = false;
+
         boolean control = true;
 
         Scanner scanner = new Scanner(System.in);
 
         while(control){  // Menu 1
-
-            System.out.println("1. Carga de Datos" + "\r\n" + "2. Ejecutar consultas" + "\r\n" + "3. Salir");
+            System.out.println("Menu Principal:" + "\r\n" + "Seleccione la opción que desee:" + "\r\n" + "1. Carga de Datos" + "\r\n" + "2. Ejecutar consultas" + "\r\n" + "3. Salir");
 
             int entrada = scanner.nextInt();
 
             switch (entrada){
 
                 case 1:
-                    start = System.currentTimeMillis();
+                    if(!carga) {
+                        start = System.currentTimeMillis();
 
-                    CargaMovieCastMembers();
+                        CargaMovieCastMembers();
 
-                    CargaCastMember();
+                        CargaCastMember();
 
-                    CargaMovies();
+                        CargaMovies();
 
-                    CargaRatings();
+                        CargaRatings();
 
-                    stop = System.currentTimeMillis();
+                        stop = System.currentTimeMillis();
 
-                    System.out.println("Carga de datos exitosa, tiempo de ejecución de la carga: " + (stop - start) + "ms." + "\r\n");
+                        carga = true;
+
+                        System.out.println("Carga de datos exitosa, tiempo de ejecución de la carga: " + (stop - start) + "ms." + "\r\n");
+                    }
+                    else{
+                        System.out.println("Los datos ya fueron cargados");
+                    }
                     break;
                 case 2:
-                    menuConsultas();
+                    if(carga){
+                        menuConsultas();
+                    }
+                    else{
+                        System.out.println("Error: Se deben cargar los datos antes de realizar consultas." + "\r\n");
+                    }
                     break;
                 case 3:
                     control = false;
                     break;
                 default:
-                    System.out.println("\r\n" + "Opción inválida" + "\r\n");
+                    System.out.println("Opción inválida" + "\r\n");
 
             }
 
@@ -93,7 +106,7 @@ public class Menu{
                     control2 = false;
                     break;
                 default:
-                    System.out.println("\r\n" + "Opción inváida" + "\r\n");
+                    System.out.println("\r\n" + "Opción inválida" + "\r\n");
             }
         }
     }
