@@ -35,7 +35,7 @@ public class MovieRating {
 
     //CONSTRUCTOR
     public MovieRating(String[] atributos){
-        this.imbd_title_id = atributos[0];
+        this.imbd_title_id = atributos[0].substring(atributos[0].lastIndexOf("tt"));
         this.weightedAverage = Float.parseFloat(atributos[1]);
         this.totalVotes = Integer.parseInt(atributos[2]);
         this.meanVote = Float.parseFloat(atributos[3]);

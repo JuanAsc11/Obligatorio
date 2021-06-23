@@ -23,7 +23,7 @@ public class MovieCastMember implements Comparable<MovieCastMember> {
     //CONSTRUCTOR
 
     public MovieCastMember(String[] atributos){
-        this.imdb_title_id = atributos[0];
+        this.imdb_title_id = atributos[0].substring(atributos[0].lastIndexOf("tt"));
         this.ordering = Integer.parseInt(atributos[1]);
         this.imdb_name_id = atributos[2];
         this.category = atributos[3];

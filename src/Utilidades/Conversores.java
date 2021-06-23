@@ -23,9 +23,9 @@ public class Conversores {
             List.add(elementos);
         }
         else{
-            if(elementos.length() > 0) {
+            /*if(elementos.length() > 0) {
                 elementos = elementos.substring(1, elementos.length() - 1);
-            }
+            }*/
             String[] varios = elementos.split(",");
             for(String elemento: varios){
                 List.add(elemento);
@@ -48,13 +48,13 @@ public class Conversores {
         ListaEnlazada<String> List = new ListaEnlazada<>();
         //Dividir elementos por "," y add a List
         if(elementos.length() > 1) {
-            elementos = elementos.substring(2, elementos.length() - 2);
+            elementos = elementos.substring(1, elementos.length() - 1);
         }
         String[] varios = elementos.split(",");
         for(String elemento: varios){
-            if(elemento.length() > 4) {
+            /*if(elemento.length() > 4) {
                 elemento = elemento.substring(2, elemento.length() - 2);
-            }
+            }*/
             List.add(elemento);
         }
         return List;
@@ -218,34 +218,6 @@ public class Conversores {
         return num;
     }
 
-    public static String convertIMDB(String element){
-        boolean stop = false;
-        int index = element.length() -1;
-        while(index >= 0 && !stop){
-            char ch = element.charAt(index);
-            if (ch == 'n'){
-                stop = true;
-                break;
-            }
-            index--;
-        }
-
-        if(index == 0){
-            return element;
-        }
-        else{
-            for(int i = 0; i < index; i++){
-                element = element.substring(1);
-            }
-            return element;
-        }
-
-
-        /*while (element.length() > 9){
-            element = element.substring(1);
-        }
-        return element;*/
-    }
 
     public static boolean containsPalabra(String element,String palabra){
         if (element.toLowerCase().indexOf(palabra.toLowerCase()) != -1 ) {

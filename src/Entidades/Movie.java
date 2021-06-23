@@ -57,7 +57,7 @@ public class Movie {
     //CONSTRUCTOR
 
     public Movie(String[] atributos){
-        this.imdbTitled = atributos[0];
+        this.imdbTitled = atributos[0].substring(atributos[0].lastIndexOf("tt"));
         this.title = atributos[1];
         this.originalTitle = atributos[2];
         this.year = controlParse(atributos[3]);
