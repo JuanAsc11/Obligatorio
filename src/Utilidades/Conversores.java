@@ -48,13 +48,13 @@ public class Conversores {
         ListaEnlazada<String> List = new ListaEnlazada<>();
         //Dividir elementos por "," y add a List
         if(elementos.length() > 1) {
-            elementos = elementos.substring(1, elementos.length() - 1);
+            elementos = elementos.substring(2, elementos.length() - 2);
         }
         String[] varios = elementos.split(",");
         for(String elemento: varios){
-            /*if(elemento.length() > 4) {
+            if(elemento.length() > 4) {
                 elemento = elemento.substring(2, elemento.length() - 2);
-            }*/
+            }
             List.add(elemento);
         }
         return List;
@@ -192,9 +192,9 @@ public class Conversores {
             List.add(elementos);
         }
         else{
-            if(elementos.length() > 0) {
+            /*if(elementos.length() > 0) {
                 elementos = elementos.substring(1, elementos.length() - 1);
-            }
+            }*/
             String[] varios = elementos.split(", ");
             for(String elemento: varios){
                 List.add(elemento);
@@ -234,7 +234,7 @@ public class Conversores {
         int promedio = 0;
         for (int i = 0; i < actors.getSize(); i++) {
             String nombre = actors.get(i).getValue();
-            for(int j = 0;j < 600000;j++){
+            for(int j = 0;j < 396947;j++){
                 temp = castMemberClosedHash.getPosition(j);
                 if(temp != null){
                     if(temp.getName().equals(nombre)){

@@ -30,7 +30,7 @@ public class CargaDatos {
     public static MyClosedHashImpl<String,MovieRating> movieRatings = new MyClosedHashImpl<>(114473);
 
     public static void CargaMovieCastMembers() {
-        String fileName1 = "src/IMDb title_principals.csv";
+        /*String fileName1 = "src/IMDb title_principals.csv";
         File principals = new File(fileName1);
         Reader reader = new Reader(principals);
         Iterator<String[]> readerIterator =reader.iterator();
@@ -43,10 +43,10 @@ public class CargaDatos {
             atributos = readerIterator.next();
             MovieCastMember nuevoMovieCastMember = new MovieCastMember(atributos);
             movieCastMemberLinkedHash.put(nuevoMovieCastMember.getImdb_name_id(),nuevoMovieCastMember);
-        }
+        }*/
 
 
-        /*String filename1 = "src/IMDb title_principals.csv";
+        String filename1 = "src/IMDb title_principals.csv";
         Path pathToFile1 = Paths.get(filename1);
         try (BufferedReader reader = Files.newBufferedReader(pathToFile1, StandardCharsets.UTF_8)) {
             String line = reader.readLine();
@@ -62,7 +62,7 @@ public class CargaDatos {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
     public static void CargaCastMember() throws UnavailableIndex {

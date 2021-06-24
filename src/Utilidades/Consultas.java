@@ -21,7 +21,7 @@ public class Consultas {
     public static void Consulta1() throws KeyNotFound, FullHeap, EmptyHeapException {
         start = System.currentTimeMillis();
         ListaEnlazada<NodoHash<String, MovieCastMember>> temp = null;
-        for (int i = 0; i < 1090000; i++) {
+        for (int i = 0; i < 1113991; i++) {
             temp = movieCastMemberLinkedHash.getList(i); //
             if(temp != null) {
                 Nodo<NodoHash<String, MovieCastMember>> actual = temp.getPrimerNodo();
@@ -36,18 +36,24 @@ public class Consultas {
 
         HeapImpl<Integer, CastMember> heapParticipaciones = new HeapImpl<>(600000);
 
-        for (int i = 0; i < 600000; i++) {
+        for (int i = 0; i < 396947; i++) {
             if (castMemberClosedHash.getPosition(i) != null) {
                 heapParticipaciones.insertMaxHeap(castMemberClosedHash.getPosition(i).getParticipaciones(), castMemberClosedHash.getPosition(i));
             }
         }
+        for (int z = 0; z < 5; z++) {
+            System.out.println("Nombre actor/actriz: " + heapParticipaciones.getMax().getData().getName() + "\n"
+                    + "Cantidad de apariciones: " + heapParticipaciones.delete().getData().getParticipaciones() + "\r\n");
+        }
 
+
+        /*System.out.println();
         for (int z = 0; z < 5; z++) {
             if (heapParticipaciones.delete().getData() != null) {
                 System.out.println("Nombre actor/actriz: " + heapParticipaciones.getMax().getData().getName() + "\n"
                         + "Cantidad de apariciones: " + heapParticipaciones.getMax().getData().getParticipaciones() + "\r\n");
             }
-        }
+        }*/
         stop = System.currentTimeMillis();
         System.out.println("Tiempo de ejecución de la consulta: " + (stop - start) + "ms");
     }
@@ -56,12 +62,12 @@ public class Consultas {
         start = System.currentTimeMillis();
         ListaEnlazada<NodoHash<String, MovieCastMember>> temp;
         ListaEnlazada<NodoHash<String, CauseOfDeath>> temp2;
-        LinkedHashImpl<String, CauseOfDeath> causes = new LinkedHashImpl<>(1090000);
-        HeapImpl<Integer, String> causesOrd = new HeapImpl<>(1090000);
-        for (int i = 0; i < 1090000; i++) {
+        LinkedHashImpl<String, CauseOfDeath> causes = new LinkedHashImpl<>(1113991);
+        HeapImpl<Integer, String> causesOrd = new HeapImpl<>(1113991);
+        for (int i = 0; i < 1113991; i++) {
             temp = movieCastMemberLinkedHash.getList(i);
             if (temp != null) {
-                for (int k = 0; k < temp.getSize(); k++) {
+                for (int k = 0; k <= temp.getSize(); k++) {
                     if (temp.get(k).getValue().getData().getCategory().equals("producer") || temp.get(k).getValue().getData().getCategory().equals("director")) {
                         CastMember direcprod = castMemberClosedHash.get(temp.getPrimerNodo().getValue().getKey());
                         if (containsPalabra(direcprod.getBirthCountry(),"USA")
@@ -77,7 +83,7 @@ public class Consultas {
                 }
             }
         }
-        for(int i = 0; i < 1090000; i++){
+        for(int i = 0; i < 1113991; i++){
             temp2 = causes.getList(i);
             if(temp2 != null){
                 causesOrd.insertMaxHeap(temp2.getSize(),temp2.getPrimerNodo().getValue().getKey());
@@ -102,13 +108,14 @@ public class Consultas {
     public static void Consulta3() throws KeyNotFound, FullHeap, EmptyHeapException {
         start = System.currentTimeMillis();
         Movie temp;
-        HeapImpl<Float,Movie> peliculas = new HeapImpl<>(85855);
-        int contador = 0;
-        for(int i = 0;i<85855;i++){
+        HeapImpl<Float,Movie> peliculas = new HeapImpl<>(114473);
+        for(int i = 0;i<114473;i++){
             temp = movieClosedHash.getPosition(i);
-            if(temp.getYear() >= 1950 && temp.getYear() <= 1960){
-                float wA = movieRatings.get(temp.getImdbTitled()).getWeightedAverage();
-                peliculas.insertMaxHeap(wA,temp);
+            if(temp != null) {
+                if (temp.getYear() >= 1950 && temp.getYear() <= 1960) {
+                    float wA = movieRatings.get(temp.getImdbTitled()).getWeightedAverage();
+                    peliculas.insertMaxHeap(wA, temp);
+                }
             }
         }
         for(int i=0; i<14; i++){
@@ -128,14 +135,14 @@ public class Consultas {
         start = System.currentTimeMillis();
         ListaEnlazada<NodoHash<String,MovieCastMember>> temp;
         ListaEnlazada<NodoHash<Integer,CastMember>> temp2;
-        LinkedHashImpl<Integer,CastMember> newHashActores = new LinkedHashImpl<>(600000);
-        LinkedHashImpl<Integer,CastMember> newHashActrices = new LinkedHashImpl<>(600000);
-        HeapImpl<Integer,Integer> HeapActores = new HeapImpl<>(600000);
-        HeapImpl<Integer,Integer> HeapActrices = new HeapImpl<>(600000);
-        for (int i = 0; i < 1090000; i++) {
+        LinkedHashImpl<Integer,CastMember> newHashActores = new LinkedHashImpl<>(396947);
+        LinkedHashImpl<Integer,CastMember> newHashActrices = new LinkedHashImpl<>(396947);
+        HeapImpl<Integer,Integer> HeapActores = new HeapImpl<>(396947);
+        HeapImpl<Integer,Integer> HeapActrices = new HeapImpl<>(396947);
+        for (int i = 0; i <= 1113991; i++) {
             temp = movieCastMemberLinkedHash.getList(i);
             if (temp != null) {
-                for(int k = 0; k < temp.getSize();k++){
+                for(int k = 0; k <= temp.getSize();k++){
                     if (temp.get(k).getValue().getData().getCategory().equals("actor")) {
                         CastMember actor = castMemberClosedHash.get(temp.getPrimerNodo().getValue().getKey());
                         if(actor.getBirthYear() != 0) {
@@ -152,7 +159,7 @@ public class Consultas {
                 }
             }
         }
-        for (int i = 0; i < 600000; i++){
+        for (int i = 0; i <= 396947; i++){
                 temp2 = newHashActores.getList(i);
                 if(temp2 != null){
                     HeapActores.insertMaxHeap(temp2.getSize(),temp2.getPrimerNodo().getValue().getKey());
