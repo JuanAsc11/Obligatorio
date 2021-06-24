@@ -232,7 +232,7 @@ public class Conversores {
         int suma = 0;
         int div = 0;
         float promedio = 0;
-        for (int i = 0; i < actors.getSize(); i++) {
+        for (int i = 1; i <= actors.getSize(); i++) {
             String nombre = actors.get(i).getValue();
             for(int j = 0;j < 396947;j++){
                 temp = castMemberClosedHash.getPosition(j);
@@ -261,7 +261,7 @@ public class Conversores {
         for (int i = 0; i < 1113991; i++) {
             temp = movieCastMemberLinkedHash.getList(i);
             if(temp != null){
-                for(int k = 0; k<temp.getSize();k++){
+                for(int k = 1; k<=temp.getSize();k++){
                     if(temp.get(k).getValue().getData().getImdb_title_id().equals(idPelicula)){
                         if(temp.get(k).getValue().getData().getCategory().equals("actor") || temp.get(k).getValue().getData().getCategory().equals("actress")) {
                             CastMember actor = castMemberClosedHash.get(temp.get(k).getValue().getData().getImdb_name_id());

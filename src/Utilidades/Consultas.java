@@ -66,7 +66,7 @@ public class Consultas {
         for (int i = 0; i < 1113991; i++) {
             temp = movieCastMemberLinkedHash.getList(i);
             if (temp != null) {
-                for (int k = 0; k <= temp.getSize(); k++) {
+                for (int k = 1; k <= temp.getSize(); k++) {
                     if (temp.get(k).getValue().getData().getCategory().equals("producer") || temp.get(k).getValue().getData().getCategory().equals("director")) {
                         CastMember direcprod = castMemberClosedHash.get(temp.getPrimerNodo().getValue().getKey());
                         if (containsPalabra(direcprod.getBirthCountry(),"USA")
@@ -141,7 +141,7 @@ public class Consultas {
         for (int i = 0; i < 1113991; i++) {
             temp = movieCastMemberLinkedHash.getList(i);
             if (temp != null) {
-                for(int k = 0; k <= temp.getSize();k++){
+                for(int k = 1; k <= temp.getSize();k++){
                     if (temp.get(k).getValue().getData().getCategory().equals("actor")) {
                         CastMember actor = castMemberClosedHash.get(temp.getPrimerNodo().getValue().getKey());
                         if(actor.getBirthYear() != 0) {
@@ -188,7 +188,7 @@ public class Consultas {
         for (int i = 0; i < 1113991; i++) {
             temp = movieCastMemberLinkedHash.getList(i);
             if (temp != null) {
-                for(int k = 0; k < temp.getSize();k++){
+                for(int k = 1; k <= temp.getSize();k++){
                     if (temp.get(k).getValue().getData().getCategory().equals("actor") || temp.get(k).getValue().getData().getCategory().equals("actress")) {
                         CastMember actor = castMemberClosedHash.get(temp.getPrimerNodo().getValue().getKey());
                         if (actor.getChildren() >= 2) {
@@ -197,7 +197,7 @@ public class Consultas {
                                 peliculasEnCuenta.add(idPelicula);
                                 Movie pelicula = movieClosedHash.get(idPelicula);
                                 ListaEnlazada<String> generos = pelicula.getGenre();
-                                for (int j = 0; j < generos.getSize(); j++) {
+                                for (int j = 1; j <= generos.getSize(); j++) {
                                     newHashGeneros.put(generos.get(j).getValue(), pelicula);
                                 }
                             }
@@ -231,14 +231,14 @@ public class Consultas {
             if (tempv1 != null) {
                 if(tempv1.getChildren() >= 2){
                     tempv2 = movieCastMemberLinkedHash.getList(tempv1.getImdbNameId());
-                    for(int k = 0; k < tempv2.getSize();k++){
+                    for(int k = 1; k <= tempv2.getSize();k++){
                         if (tempv2.get(k).getValue().getData().getCategory().equals("actor") || tempv2.get(k).getValue().getData().getCategory().equals("actress")) {
                             String idPelicula = tempv2.get(k).getValue().getData().getImdb_title_id();
                             if(!peliculasEnCuentav1.contains(idPelicula)){
                                 peliculasEnCuentav1.add(idPelicula);
                                 Movie pelicula = movieClosedHash.get(idPelicula);
                                 ListaEnlazada<String> generos = pelicula.getGenre();
-                                for (int j = 0; j < generos.getSize(); j++) {
+                                for (int j = 1; j <= generos.getSize(); j++) {
                                     newHashGenerosv1.put(generos.get(j).getValue(), pelicula);
                                 }
                             }
