@@ -12,8 +12,7 @@ import TADs.HeapNode;
 import TADs.Implementaciones.*;
 
 import static Utilidades.CargaDatos.*;
-import static Utilidades.Conversores.containsPalabra;
-import static Utilidades.Conversores.promedioAltura;
+import static Utilidades.Conversores.*;
 
 public class Consultas {
     private static long start = 0, stop = 0;
@@ -120,7 +119,7 @@ public class Consultas {
         }
         for(int i=0; i<14; i++){
             Movie pelicula = peliculas.delete().getData();
-            int promedio = promedioAltura(pelicula.getActors());
+            float promedio = promedioAltura2(pelicula.getImdbTitled());
             if(promedio != 0) {
                 System.out.println("Id película: " + pelicula.getImdbTitled() + "\r\n"
                         + "Nombre: " + pelicula.getTitle() + "\r\n"
@@ -139,7 +138,7 @@ public class Consultas {
         LinkedHashImpl<Integer,CastMember> newHashActrices = new LinkedHashImpl<>(396947);
         HeapImpl<Integer,Integer> HeapActores = new HeapImpl<>(396947);
         HeapImpl<Integer,Integer> HeapActrices = new HeapImpl<>(396947);
-        for (int i = 0; i <= 1113991; i++) {
+        for (int i = 0; i < 1113991; i++) {
             temp = movieCastMemberLinkedHash.getList(i);
             if (temp != null) {
                 for(int k = 0; k <= temp.getSize();k++){
@@ -159,7 +158,7 @@ public class Consultas {
                 }
             }
         }
-        for (int i = 0; i <= 396947; i++){
+        for (int i = 0; i < 396947; i++){
                 temp2 = newHashActores.getList(i);
                 if(temp2 != null){
                     HeapActores.insertMaxHeap(temp2.getSize(),temp2.getPrimerNodo().getValue().getKey());
@@ -184,9 +183,9 @@ public class Consultas {
         ListaEnlazada<NodoHash<String, MovieCastMember>> temp;
         ListaEnlazada<NodoHash<String, Movie>> temp2;
         ListaEnlazada<String> peliculasEnCuenta = new ListaEnlazada<>();
-        LinkedHashImpl<String, Movie> newHashGeneros = new LinkedHashImpl<>(600000);
-        HeapImpl<Integer, String> HeapGeneros = new HeapImpl<>(855000);
-        for (int i = 0; i < 1090000; i++) {
+        LinkedHashImpl<String, Movie> newHashGeneros = new LinkedHashImpl<>(114473);
+        HeapImpl<Integer, String> HeapGeneros = new HeapImpl<>(114473);
+        for (int i = 0; i < 1113991; i++) {
             temp = movieCastMemberLinkedHash.getList(i);
             if (temp != null) {
                 for(int k = 0; k < temp.getSize();k++){
@@ -207,7 +206,7 @@ public class Consultas {
                 }
             }
         }
-        for (int i = 0; i < 600000; i++) {
+        for (int i = 0; i < 114473; i++) {
             temp2 = newHashGeneros.getList(i);
             if (temp2 != null) {
                 HeapGeneros.insertMaxHeap(temp2.getSize(), temp2.getPrimerNodo().getValue().getKey());
@@ -215,7 +214,48 @@ public class Consultas {
         }
 
         for (int i =0; i < 10;i++) {
-            System.out.println("Genero pelicula: " + HeapGeneros.delete().getData() + "\r\n" + "Cantidad: " + HeapGeneros.delete().getKey() + "\r\n");
+            System.out.println("Genero pelicula: " + HeapGeneros.getMax().getData() + "\r\n" + "Cantidad: " + HeapGeneros.delete().getKey() + "\r\n");
+        }
+        stop = System.currentTimeMillis();
+        System.out.println("Tiempo de ejecucion de la consulta: " + (stop - start) + "ms." + "\r\n");
+
+        start = System.currentTimeMillis();
+        CastMember tempv1;
+        ListaEnlazada<NodoHash<String, MovieCastMember>> tempv2;
+        ListaEnlazada<NodoHash<String, Movie>> tempv3;
+        ListaEnlazada<String> peliculasEnCuentav1 = new ListaEnlazada<>();
+        LinkedHashImpl<String, Movie> newHashGenerosv1 = new LinkedHashImpl<>(114473);
+        HeapImpl<Integer, String> HeapGenerosv1 = new HeapImpl<>(114473);
+        for (int i = 0; i < 396947; i++) {
+            tempv1 = castMemberClosedHash.getPosition(i);
+            if (tempv1 != null) {
+                if(tempv1.getChildren() >= 2){
+                    tempv2 = movieCastMemberLinkedHash.getList(tempv1.getImdbNameId());
+                    for(int k = 0; k < tempv2.getSize();k++){
+                        if (tempv2.get(k).getValue().getData().getCategory().equals("actor") || tempv2.get(k).getValue().getData().getCategory().equals("actress")) {
+                            String idPelicula = tempv2.get(k).getValue().getData().getImdb_title_id();
+                            if(!peliculasEnCuentav1.contains(idPelicula)){
+                                peliculasEnCuentav1.add(idPelicula);
+                                Movie pelicula = movieClosedHash.get(idPelicula);
+                                ListaEnlazada<String> generos = pelicula.getGenre();
+                                for (int j = 0; j < generos.getSize(); j++) {
+                                    newHashGenerosv1.put(generos.get(j).getValue(), pelicula);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        for (int i = 0; i < 114473; i++) {
+            tempv3 = newHashGenerosv1.getList(i);
+            if (tempv3 != null) {
+                HeapGenerosv1.insertMaxHeap(tempv3.getSize(), tempv3.getPrimerNodo().getValue().getKey());
+            }
+        }
+
+        for (int i =0; i < 10;i++) {
+            System.out.println("Genero pelicula: " + HeapGenerosv1.getMax().getData() + "\r\n" + "Cantidad: " + HeapGenerosv1.delete().getKey() + "\r\n");
         }
         stop = System.currentTimeMillis();
         System.out.println("Tiempo de ejecucion de la consulta: " + (stop - start) + "ms." + "\r\n");

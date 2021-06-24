@@ -2,6 +2,7 @@ package Utilidades;
 
 import Entidades.CastMember;
 import Entidades.MovieCastMember;
+import TADs.Excepciones.KeyNotFound;
 import TADs.Implementaciones.ListaEnlazada;
 import TADs.Implementaciones.NodoHash;
 
@@ -218,7 +219,6 @@ public class Conversores {
         return num;
     }
 
-
     public static boolean containsPalabra(String element,String palabra){
         if (element.toLowerCase().indexOf(palabra.toLowerCase()) != -1 ) {
             return true;
@@ -227,11 +227,11 @@ public class Conversores {
         }
     }
 
-    public static int promedioAltura(ListaEnlazada<String> actors) {
+    public static float promedioAltura(ListaEnlazada<String> actors) {
         CastMember temp;
         int suma = 0;
         int div = 0;
-        int promedio = 0;
+        float promedio = 0;
         for (int i = 0; i < actors.getSize(); i++) {
             String nombre = actors.get(i).getValue();
             for(int j = 0;j < 396947;j++){
@@ -251,6 +251,36 @@ public class Conversores {
         promedio = suma/div;
         }
         return promedio;
+    }
+
+    public static float promedioAltura2(String idPelicula) throws KeyNotFound {
+        float promedio = 0;
+        float suma = 0;
+        int div = 0;
+        ListaEnlazada<NodoHash<String, MovieCastMember>> temp = null;
+        for (int i = 0; i < 1113991; i++) {
+            temp = movieCastMemberLinkedHash.getList(i);
+            if(temp != null){
+                for(int k = 0; k<temp.getSize();k++){
+                    if(temp.get(k).getValue().getData().getImdb_title_id().equals(idPelicula)){
+                        if(temp.get(k).getValue().getData().getCategory().equals("actor") || temp.get(k).getValue().getData().getCategory().equals("actress")) {
+                            CastMember actor = castMemberClosedHash.get(temp.get(k).getValue().getData().getImdb_name_id());
+                            if (actor.getHeight() != 0) {
+                                suma = suma + actor.getHeight();
+                                div++;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+        if(div != 0){
+            promedio = suma/div;
+        }
+        return promedio;
+
     }
 
 }
