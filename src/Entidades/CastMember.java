@@ -52,6 +52,10 @@ public class CastMember{
 
     private int participaciones;
 
+    private boolean enCuenta = false;
+
+    private boolean muerteEnCuenta = false;
+
     //CONSTRUCTOR
 
     public CastMember(String[] atributosCastMember) {
@@ -178,10 +182,23 @@ public class CastMember{
         return participaciones;
     }
 
+    public boolean isEnCuenta() {
+        return enCuenta;
+    }
 
     //Funcion consulta 1
     public void addParticipacion(){
         this.participaciones++;
     }
 
+    public void setEnCuenta(boolean enCuenta) {
+        this.enCuenta = enCuenta;
+    }
+
+    public boolean isMuerteEnCuenta() {
+        return muerteEnCuenta;
+    }
+    public void setMuerteEnCuenta(boolean muerteEnCuenta) {
+        this.muerteEnCuenta = muerteEnCuenta;
+    }
 }

@@ -1,9 +1,12 @@
 package Utilidades;
 
 import Entidades.CastMember;
+import Entidades.CauseOfDeath;
 import Entidades.MovieCastMember;
+import Entidades.Year;
 import TADs.Excepciones.KeyNotFound;
 import TADs.Implementaciones.ListaEnlazada;
+import TADs.Implementaciones.Nodo;
 import TADs.Implementaciones.NodoHash;
 
 import java.text.ParseException;
@@ -258,7 +261,7 @@ public class Conversores {
         float suma = 0;
         int div = 0;
         ListaEnlazada<NodoHash<String, MovieCastMember>> temp = null;
-        for (int i = 0; i < 1113991; i++) {
+        for (int i = 0; i < 1113991; i++){
             temp = movieCastMemberLinkedHash.getList(i);
             if(temp != null){
                 for(int k = 1; k<=temp.getSize();k++){
@@ -283,4 +286,71 @@ public class Conversores {
 
     }
 
+    public static boolean containsAno(ListaEnlazada<Year> listaAnos, Year ano){
+        boolean encontre = false;
+
+        if (listaAnos.getPrimerNodo() == null){
+            return false;
+        }
+        Nodo<Year> nodoBuscado = listaAnos.getPrimerNodo();
+        while(nodoBuscado != null){
+            if(nodoBuscado.getValue().getYear() == (ano.getYear())){
+                encontre = true;
+                break;
+            }
+
+            nodoBuscado = nodoBuscado.getNextValue();
+        }
+        return encontre;
+    }
+
+    public static Year getAno(ListaEnlazada<Year> listaYear, Year y){
+
+        boolean encontre = false;
+        Nodo<Year> nodoBuscado = listaYear.getPrimerNodo();
+
+        while(nodoBuscado != null){
+            if(nodoBuscado.getValue().getYear() == (y.getYear())){
+                encontre = true;
+                break;
+            }
+
+            nodoBuscado = nodoBuscado.getNextValue();
+        }
+        return nodoBuscado.getValue();
+    }
+
+    public static boolean containsMuerte(ListaEnlazada<CauseOfDeath> listaMuerte, CauseOfDeath muerte){
+        boolean encontre = false;
+
+        if (listaMuerte.getPrimerNodo() == null){
+            return false;
+        }
+        Nodo<CauseOfDeath> nodoBuscado = listaMuerte.getPrimerNodo();
+        while(nodoBuscado != null){
+            if(nodoBuscado.getValue().getName().equals(muerte.getName())){
+                encontre = true;
+                break;
+            }
+
+            nodoBuscado = nodoBuscado.getNextValue();
+        }
+        return encontre;
+    }
+
+    public static CauseOfDeath getMuerte(ListaEnlazada<CauseOfDeath> listaMuerte, CauseOfDeath muerte){
+
+        boolean encontre = false;
+        Nodo<CauseOfDeath> nodoBuscado = listaMuerte.getPrimerNodo();
+
+        while(nodoBuscado != null){
+            if(nodoBuscado.getValue().getName().equals(muerte.getName())){
+                encontre = true;
+                break;
+            }
+
+            nodoBuscado = nodoBuscado.getNextValue();
+        }
+        return nodoBuscado.getValue();
+    }
 }

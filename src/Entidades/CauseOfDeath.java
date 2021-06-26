@@ -6,6 +6,8 @@ public class CauseOfDeath {
 
     private String name;
 
+    private int cantidad = 1;
+
     //CONSTRUCTOR
 
     public CauseOfDeath(String name) {
@@ -16,5 +18,13 @@ public class CauseOfDeath {
 
     public String getName() {
         return name;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void addCantidad() {
+        this.cantidad++;
     }
 }

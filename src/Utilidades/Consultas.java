@@ -1,9 +1,6 @@
 package Utilidades;
 
-import Entidades.CastMember;
-import Entidades.CauseOfDeath;
-import Entidades.Movie;
-import Entidades.MovieCastMember;
+import Entidades.*;
 import TADs.Excepciones.EmptyHeapException;
 import TADs.Excepciones.FullHeap;
 import TADs.Excepciones.KeyNotFound;
@@ -59,8 +56,48 @@ public class Consultas {
 
     public static void Consulta2() throws KeyNotFound, FullHeap, EmptyHeapException {
         start = System.currentTimeMillis();
-        ListaEnlazada<NodoHash<String, MovieCastMember>> temp;
-        ListaEnlazada<NodoHash<String, CauseOfDeath>> temp2;
+
+        ListaEnlazada<NodoHash<String,MovieCastMember>> temp;
+        ListaEnlazada<CauseOfDeath> causeOfDeathListaEnlazada = new ListaEnlazada<>();
+        HeapImpl<Integer,String> causesOrd = new HeapImpl<>(1113991);
+
+        for (int i = 0; i < 1113991; i++) {
+            temp = movieCastMemberLinkedHash.getList(i); //
+            if (temp != null) {
+                Nodo<NodoHash<String, MovieCastMember>> actual = temp.getPrimerNodo();
+                for (int z = 0; z < temp.getSize(); z++) {
+                    if (actual.getValue().getData().getCategory().equals("producer") || actual.getValue().getData().getCategory().equals("director")) {
+                        CastMember persona = castMemberClosedHash.get(actual.getValue().getData().getImdb_name_id());
+                        if(!persona.isMuerteEnCuenta() && persona.getBirthCountry() != null) {
+                            persona.setMuerteEnCuenta(true);
+                            if (persona.getBirthCountry().contains("UK")
+                                    || persona.getBirthCountry().contains("France")
+                                    || persona.getBirthCountry().contains("Italy")) {
+                                if (!persona.getCauseOfDeath().getName().equals("")){
+                                    CauseOfDeath muerte = persona.getCauseOfDeath();
+                                    if(containsMuerte(causeOfDeathListaEnlazada,muerte)){
+                                        getMuerte(causeOfDeathListaEnlazada,muerte).addCantidad();
+                                    }
+                                    else {
+                                        causeOfDeathListaEnlazada.add(muerte);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    actual = actual.getNextValue();
+                }
+            }
+        }
+        Nodo<CauseOfDeath> actual = causeOfDeathListaEnlazada.getPrimerNodo();
+        for (int z = 0; z < causeOfDeathListaEnlazada.getSize(); z++) {
+            causesOrd.insertMaxHeap(actual.getValue().getCantidad(),actual.getValue().getName());
+            actual = actual.getNextValue();
+        }
+
+
+        /*ListaEnlazada<NodoHash<String, MovieCastMember>> temp;
+        ListaEnlazada<CauseOfDeath> temp2 = new ListaEnlazada<>();
         LinkedHashImpl<String, CauseOfDeath> causes = new LinkedHashImpl<>(1113991);
         HeapImpl<Integer, String> causesOrd = new HeapImpl<>(1113991);
         for (int i = 0; i < 1113991; i++) {
@@ -69,25 +106,39 @@ public class Consultas {
                 for (int k = 1; k <= temp.getSize(); k++) {
                     if (temp.get(k).getValue().getData().getCategory().equals("producer") || temp.get(k).getValue().getData().getCategory().equals("director")) {
                         CastMember direcprod = castMemberClosedHash.get(temp.getPrimerNodo().getValue().getKey());
-                        if (containsPalabra(direcprod.getBirthCountry(),"USA")
-                                ||containsPalabra(direcprod.getBirthCountry(),"UK")
-                                ||containsPalabra(direcprod.getBirthCountry(),"France")
-                                ||containsPalabra(direcprod.getBirthCountry(),"Italy")) {
-                            if(!(direcprod.getCauseOfDeath().getName().equals(""))) {
-                                causes.put(direcprod.getCauseOfDeath().getName(), direcprod.getCauseOfDeath());
-                                break;
+                        if(!direcprod.isMuerteEnCuenta()) {
+                            direcprod.setMuerteEnCuenta(true);
+                            if (direcprod.getBirthCountry().contains("USA")
+                                    || direcprod.getBirthCountry().contains("UK")
+                                    || direcprod.getBirthCountry().contains("France")
+                                    || direcprod.getBirthCountry().contains("Italy")) {
+                                if (!(direcprod.getCauseOfDeath().getName().equals(""))) {
+                                    //causes.put(direcprod.getCauseOfDeath().getName(), direcprod.getCauseOfDeath());
+                                    //break;
+                                    if (containsMuerte(temp2, direcprod.getCauseOfDeath())){
+                                        getMuerte(temp2, direcprod.getCauseOfDeath()).addCantidad();
+                                    }
+                                    else {
+                                        temp2.add(direcprod.getCauseOfDeath());
+                                    }
+                                }
                             }
                         }
                     }
                 }
             }
         }
-        for(int i = 0; i < 1113991; i++){
+        Nodo<CauseOfDeath> actual = temp2.getPrimerNodo();
+        for (int z = 0; z < temp2.getSize(); z++) {
+            causesOrd.insertMaxHeap(actual.getValue().getCantidad(), actual.getValue().getName());
+            actual = actual.getNextValue();
+        }*/
+        /*for(int i = 0; i < 1113991; i++){
             temp2 = causes.getList(i);
             if(temp2 != null){
                 causesOrd.insertMaxHeap(temp2.getSize(),temp2.getPrimerNodo().getValue().getKey());
             }
-        }
+        }*/
         HeapNode<Integer,String> causa1 = causesOrd.delete();
         HeapNode<Integer,String> causa2 = causesOrd.delete();
         HeapNode<Integer,String> causa3 = causesOrd.delete();
@@ -132,7 +183,69 @@ public class Consultas {
 
     public static void Consulta4() throws KeyNotFound, FullHeap, EmptyHeapException {
         start = System.currentTimeMillis();
-        ListaEnlazada<NodoHash<String,MovieCastMember>> temp;
+        ListaEnlazada<Year> yearHombre = new ListaEnlazada<>();
+        ListaEnlazada<Year> yearMujer = new ListaEnlazada<>();
+
+        ListaEnlazada<NodoHash<String, MovieCastMember>> temp = null;
+        for (int i = 0; i < 1113991; i++) {
+            temp = movieCastMemberLinkedHash.getList(i);
+            if (temp != null) {
+                Nodo<NodoHash<String, MovieCastMember>> actual = temp.getPrimerNodo();
+                for (int z = 0; z < temp.getSize(); z++) {
+                    if (actual.getValue().getData().getCategory().equals("actor")){
+                       CastMember actor =  castMemberClosedHash.get(actual.getValue().getData().getImdb_name_id());
+                       if (!actor.isEnCuenta() && actor.getBirthYear() != 0){
+                           actor.setEnCuenta(true);
+                           Year nuevoYear = new Year(actor.getBirthYear());
+                           if (containsAno(yearHombre,nuevoYear)){
+                               getAno(yearHombre,nuevoYear).addCantidad();
+                           }
+                           else {
+                               yearHombre.add(nuevoYear);
+                           }
+                       }
+                    }
+
+                    if (actual.getValue().getData().getCategory().equals("actress")){
+                        CastMember actor =  castMemberClosedHash.get(actual.getValue().getData().getImdb_name_id());
+                        if (!actor.isEnCuenta() && actor.getBirthYear() != 0){
+                            actor.setEnCuenta(true);
+                            Year nuevoYear = new Year(actor.getBirthYear());
+                            if (containsAno(yearMujer,nuevoYear)){
+                                getAno(yearMujer,nuevoYear).addCantidad();
+                            }
+                            else {
+                                yearMujer.add(nuevoYear);
+                            }
+                        }
+                    }
+                    actual = actual.getNextValue();
+                }
+            }
+        }
+        HeapImpl<Integer,Integer> HeapActores = new HeapImpl<>(396947);
+        HeapImpl<Integer,Integer> HeapActrices = new HeapImpl<>(396947);
+        Nodo<Year> actual = yearHombre.getPrimerNodo();
+        Nodo<Year> actual2 = yearMujer.getPrimerNodo();
+        for (int z = 0; z < yearHombre.getSize(); z++) {
+            HeapActores.insertMaxHeap(actual.getValue().getCantidad(),actual.getValue().getYear());
+            actual = actual.getNextValue();
+        }
+        for (int z = 0; z < yearMujer.getSize(); z++) {
+            HeapActrices.insertMaxHeap(actual2.getValue().getCantidad(),actual2.getValue().getYear());
+            actual2 = actual2.getNextValue();
+        }
+
+        System.out.println("Actores:" + "\r\n" + "Año: " + HeapActores.getMax().getData() + "\r\n" + "Cantidad: " + HeapActores.getMax().getKey() + "\r\n");
+        System.out.println("Actrices:" + "\r\n" + "Año: " + HeapActrices.getMax().getData() + "\r\n" + "Cantidad: " + HeapActrices.getMax().getKey() + "\r\n");
+        stop = System.currentTimeMillis();
+        System.out.println("Tiempo de ejecucion de la consulta:" + (stop - start) + "ms." + "\r\n");
+
+
+
+
+
+        /*ListaEnlazada<NodoHash<String,MovieCastMember>> temp;
         ListaEnlazada<NodoHash<Integer,CastMember>> temp2;
         LinkedHashImpl<Integer,CastMember> newHashActores = new LinkedHashImpl<>(396947);
         LinkedHashImpl<Integer,CastMember> newHashActrices = new LinkedHashImpl<>(396947);
@@ -176,6 +289,8 @@ public class Consultas {
         System.out.println("Actores:" + "\r\n" + "Año: " + yearActores.getData() + "\r\n" + "Cantidad: " + yearActores.getKey() + "\r\n");
         System.out.println("Actrices:" + "\r\n" + "Año: " + yearActrices.getData() + "\r\n" + "Cantidad: " + yearActrices.getKey() + "\r\n");
         System.out.println("Tiempo de ejecucion de la consulta:" + (stop - start) + "ms." + "\r\n");
+        stop = System.currentTimeMillis();
+        System.out.println("Tiempo de ejecucion de la consulta:" + (stop - start) + "ms." + "\r\n");*/
     }
 
     public static void Consulta5() throws KeyNotFound, FullHeap, EmptyHeapException {
