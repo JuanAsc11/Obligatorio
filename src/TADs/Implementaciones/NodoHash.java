@@ -36,12 +36,10 @@ public class NodoHash<K,V>{
         this.borrado = borrado;
     }
 
-    public boolean equals(Object obj) {
+    public boolean equals(Object o) {
         boolean equalsToReturn = false;
 
-        // no es posible hacer un instanceof con generics, esta es otra manera
-
-        equalsToReturn = ((K) obj).equals(this.key);
+        equalsToReturn = ((K) o).equals(this.key);
 
         return equalsToReturn;
     }

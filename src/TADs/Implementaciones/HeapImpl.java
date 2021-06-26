@@ -1,4 +1,4 @@
-package TADs;
+package TADs.Implementaciones;
 
 import TADs.Excepciones.EmptyHeapException;
 import TADs.Excepciones.FullHeap;
@@ -39,71 +39,7 @@ public class HeapImpl<K extends Comparable<K>, T> {
         Heap[posicion2] = variable;
     }
 
-    /*private void orderMinHeap(int i){ //ordena el subarbol  heap minimo del nodo
 
-        if(!esHoja(i)){
-
-            if(Heap[i].getKey().compareTo(Heap[hijoIzq(i)].getKey()) > 0|| Heap[i].getKey().compareTo(Heap[hijoDer(i)].getKey()) > 0){
-
-                if(Heap[hijoIzq(i)].getKey().compareTo(Heap[hijoDer(i)].getKey()) < 0){
-                    cambio(i,hijoIzq(i));
-                    orderMinHeap(hijoIzq(i));
-                }
-
-                else{
-                    cambio(i, hijoDer(i));
-                    orderMinHeap(hijoDer(i));
-                }
-            }
-        }
-    }*/
-
-    /*private void orderMaxHeap(int index){ // ordenar el  subarbol heap max del nodo
-
-        int i = index;
-        int indexIzq = 2*i +1;
-        int indexDer = 2*i +2;
-        int mayorIndex = i;
-
-        if(indexDer < size && Heap[indexDer].getKey().compareTo(Heap[size].getKey()) > 0){ // busco derecha
-            mayorIndex = indexDer;
-        }
-
-        if (indexIzq < size && Heap[indexIzq].getKey().compareTo(Heap[size].getKey()) > 0){  // busco izq
-            mayorIndex = indexIzq;
-        }
-
-        if(mayorIndex != i){ // encontro uno mayor
-            cambio(i,mayorIndex);
-            orderMaxHeap(mayorIndex);
-        }
-
-
-
-        /*if(esHoja(i)){
-            return;
-        }
-
-        if (Heap[i].getKey().compareTo(Heap[hijoIzq(i)].getKey()) < 0 || Heap[i].getKey().compareTo(Heap[hijoDer(i)].getKey()) < 0){
-
-            if(Heap[hijoIzq(i)].getKey().compareTo(Heap[hijoDer(i)].getKey()) > 0){
-                cambio(i, hijoIzq(i));
-                orderMaxHeap(hijoIzq(i));
-            }
-
-            else {
-                cambio(i, hijoDer(i));
-                orderMaxHeap(hijoDer(i));
-            }
-        }
-    }*/
-
-    /*public void borrarMax(){
-        Heap[0] = Heap[size-1];
-        Heap[size -1] = null;
-        size -= 1;
-        orderMaxHeap(0);
-    }*/
 
     public void insertMaxHeap(K key, T data) throws FullHeap {  //insertar en heap max
 
@@ -182,15 +118,6 @@ public class HeapImpl<K extends Comparable<K>, T> {
         return valueToReturn;
     }
 
-
-
-    /*public HeapNode popMin(){  //extraer minimo del heap
-        HeapNode eliminado = Heap[0];
-        Heap[0] = Heap[size--];
-        orderMinHeap(0);
-        return eliminado;
-    }*/
-
     public HeapNode<K,T> getMax(){  //extraer maximo del heap
         HeapNode eliminado = null;
 
@@ -201,19 +128,6 @@ public class HeapImpl<K extends Comparable<K>, T> {
         return eliminado;
     }
 
-    /*public void minHeap(){  //ordena el array entero min heap
-
-        for(int i = (size/2); i >= 1; i--){
-            orderMinHeap(i);
-        }
-    }
-
-    public void maxHeap(){  //ordena el array entero max heap
-
-        for(int i = (size/2); i >= 1; i--){
-            orderMaxHeap(i);
-        }
-    }*/
 
     public void vizualizar(){
         for(int i =1; i <= (size/2); i++){

@@ -4,8 +4,8 @@ import Entidades.*;
 import TADs.Excepciones.EmptyHeapException;
 import TADs.Excepciones.FullHeap;
 import TADs.Excepciones.KeyNotFound;
-import TADs.HeapImpl;
-import TADs.HeapNode;
+import TADs.Implementaciones.HeapImpl;
+import TADs.Implementaciones.HeapNode;
 import TADs.Implementaciones.*;
 
 import static Utilidades.CargaDatos.*;

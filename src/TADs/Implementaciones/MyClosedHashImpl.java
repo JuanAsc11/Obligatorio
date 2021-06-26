@@ -8,9 +8,6 @@ public class MyClosedHashImpl<K extends Comparable<K>, V> implements MyHash<K, V
 
     private static final int DEFAULT_INITIAL_TABLE_HASH_SIZE = 10;
 
-    private static final int quadraticFunctionCollision = 1;
-
-    private int baseFunction = MyClosedHashImpl.quadraticFunctionCollision;
 
     private NodoHash<K,V>[] tableHash;
 
@@ -31,13 +28,9 @@ public class MyClosedHashImpl<K extends Comparable<K>, V> implements MyHash<K, V
     private int colisionIndex(int index){ //Devuelve lugar a intentar insertar, de manera cuadratica
         int temp = 0;
 
-        /*if (index < 0){
-            index = index*(-1);
-        }*/
 
-        if(baseFunction == quadraticFunctionCollision){
-            temp = index^2;
-        }
+        temp = index^2;
+
 
         return temp;
     }
@@ -50,23 +43,6 @@ public class MyClosedHashImpl<K extends Comparable<K>, V> implements MyHash<K, V
         return index;
     }
 
-    /*private int getHashIndex(K key){  //Genera un index a partir del hash code para insertar
-
-        int codigoHash = key.hashCode();
-
-        int index = codigoHash % tableHash.length;
-
-        if(index < 0){
-            return index * (-1);
-        }
-        else{
-            return index;
-        }
-    }*/
-
-    private int getNewHashIndex(int index){     //  A COMPLETAR: Nuevo Indice cuando hay colision
-        return 0;
-    }
 
     @Override
     public void put(K key, V value) throws UnavailableIndex {
@@ -94,16 +70,6 @@ public class MyClosedHashImpl<K extends Comparable<K>, V> implements MyHash<K, V
 
         size++;
 
-        /*NodoHash<K, V> actualNode = tableHash[index];
-
-        while (actualNode != null) {
-            index = getNewHashIndex(index);
-            actualNode = tableHash[index];
-        }
-
-        NodoHash<K, V> newNode = new NodoHash<>(key, value);
-        tableHash[index] = newNode;
-        size ++;*/
     }
 
     @Override
@@ -133,26 +99,6 @@ public class MyClosedHashImpl<K extends Comparable<K>, V> implements MyHash<K, V
 
         return returnData;
 
-        /*int index = getHashIndex(key);
-        NodoHash<K, V> actualNode = tableHash[index];
-
-        if (actualNode==null) {
-            throw new KeyNotFound();
-        }
-
-        while(true) {
-            if (actualNode.getKey().compareTo(key)==0){
-                break;
-            }
-            else {
-                index = getNewHashIndex(index);
-                actualNode = tableHash[index];
-                if (actualNode==null) {
-                    throw new KeyNotFound();
-                }
-            }
-        }
-        return actualNode.getData();*/
     }
 
     public V getPosition(int index){
@@ -183,28 +129,6 @@ public class MyClosedHashImpl<K extends Comparable<K>, V> implements MyHash<K, V
         if(intento >= tableHash.length){
             throw new KeyNotFound();
         }
-
-
-        /*int index = getHashIndex(key);
-        NodoHash<K, V> actualNode = tableHash[index];
-
-        if (actualNode==null) {
-            throw new KeyNotFound();
-        }
-
-        while(actualNode!=null) {
-            if (actualNode.getKey().compareTo(key)==0){
-                actualNode = null;
-                size --;
-            }
-            else {
-            index = getNewHashIndex(index);
-            actualNode = tableHash[index];
-            if (actualNode==null) {
-                throw new KeyNotFound();
-            }
-            }
-        }*/
     }
 
     @Override
@@ -232,25 +156,6 @@ public class MyClosedHashImpl<K extends Comparable<K>, V> implements MyHash<K, V
 
         return encontre;
 
-        /*int index = getHashIndex(key);
-        NodoHash<K, V> actualNode = tableHash[index];
-
-        if (actualNode==null) {
-            return false;
-        }
-
-        while(true) {
-            if (actualNode.getKey().compareTo(key)==0){
-                return true;
-            }
-            else {
-                index = getNewHashIndex(index);
-                actualNode = tableHash[index];
-                if (actualNode==null) {
-                    return false;
-                }
-            }
-        }*/
     }
 
     public  NodoHash<K,V> getNodo(int i){
