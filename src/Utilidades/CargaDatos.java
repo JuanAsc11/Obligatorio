@@ -30,7 +30,7 @@ public class CargaDatos {
     public static MyClosedHashImpl<String,MovieRating> movieRatings = new MyClosedHashImpl<>(114473);
 
     public static void CargaMovieCastMembers() {
-        String filename1 = "src/IMDb title_principals.csv";
+        String filename1 = "IMDb title_principals.csv";
         Path pathToFile1 = Paths.get(filename1);
         try (BufferedReader reader = Files.newBufferedReader(pathToFile1, StandardCharsets.UTF_8)) {
             String line = reader.readLine();
@@ -50,7 +50,7 @@ public class CargaDatos {
     }
 
     public static void CargaCastMember() throws UnavailableIndex {
-        String fileName2 = "src/IMDb names.csv";
+        String fileName2 = "IMDb names.csv";
         File names = new File(fileName2);
         Reader reader = new Reader(names);
         Iterator<String[]> readerIterator =reader.iterator();
@@ -69,7 +69,7 @@ public class CargaDatos {
     }
 
     public static void CargaMovies() throws UnavailableIndex {
-        String fileName3 = "src/IMDb movies.csv";
+        String fileName3 = "IMDb movies.csv";
         File movies = new File(fileName3);
         Reader reader = new Reader(movies);
         Iterator<String[]> readerIterator =reader.iterator();
@@ -87,7 +87,7 @@ public class CargaDatos {
     }
 
     public static void CargaRatings() throws UnavailableIndex {
-        String fileName4 = "src/IMDb ratings.csv";
+        String fileName4 = "IMDb ratings.csv";
         File ratings = new File(fileName4);
         Reader reader = new Reader(ratings);
         Iterator<String[]> readerIterator =reader.iterator();
