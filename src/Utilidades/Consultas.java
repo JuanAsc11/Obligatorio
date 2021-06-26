@@ -72,8 +72,6 @@ public class Consultas {
                                     || direcprod.getBirthCountry().contains("France")
                                     || direcprod.getBirthCountry().contains("Italy")) {
                                 if (!(direcprod.getCauseOfDeath().getName().equals(""))) {
-                                    //causes.put(direcprod.getCauseOfDeath().getName(), direcprod.getCauseOfDeath());
-                                    //break;
                                     if (containsMuerte(temp2, direcprod.getCauseOfDeath())){
                                         getMuerte(temp2, direcprod.getCauseOfDeath()).addCantidad();
                                     }
