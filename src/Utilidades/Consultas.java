@@ -44,6 +44,12 @@ public class Consultas {
 
         stop = System.currentTimeMillis();
         System.out.println("Tiempo de ejecución de la consulta: " + (stop - start) + "ms");
+
+        for(int i = 0; i < 396947; i++){
+            if (castMemberClosedHash.getPosition(i) != null) {
+                castMemberClosedHash.getPosition(i).clearParticipaciones();
+            }
+        }
     }
 
     public static void Consulta2() throws KeyNotFound, FullHeap, EmptyHeapException {
@@ -100,6 +106,13 @@ public class Consultas {
         System.out.println("Causa de muerte: " + causa4.getData() + "\r\n" + "Cantidad de personas: " + causa4.getKey() + "\r\n");
         System.out.println("Causa de muerte: " + causa5.getData() + "\r\n" + "Cantidad de personas: " + causa5.getKey() + "\r\n");
         System.out.println("Tiempo de ejecucion de la consulta:" + (stop - start) + "ms." + "\r\n");
+
+        for(int i = 0; i < 396947; i++){
+            if (castMemberClosedHash.getPosition(i) != null) {
+                castMemberClosedHash.getPosition(i).setMuerteEnCuenta(false);
+                castMemberClosedHash.getPosition(i).getCauseOfDeath().clearCantidad();
+            }
+        }
     }
 
     public static void Consulta3() throws KeyNotFound, FullHeap, EmptyHeapException {
@@ -188,6 +201,12 @@ public class Consultas {
         stop = System.currentTimeMillis();
         System.out.println("Tiempo de ejecucion de la consulta:" + (stop - start) + "ms." + "\r\n");
 
+        for(int i = 0; i < 396947; i++){
+            if (castMemberClosedHash.getPosition(i) != null) {
+                castMemberClosedHash.getPosition(i).setEnCuenta(false);
+            }
+        }
+
     }
 
     public static void Consulta5() throws KeyNotFound, FullHeap, EmptyHeapException {
@@ -237,5 +256,16 @@ public class Consultas {
         }
         stop = System.currentTimeMillis();
         System.out.println("Tiempo de ejecucion de la consulta: " + (stop - start) + "ms." + "\r\n");
+
+        for(int i = 0; i < 114473; i++){
+            if (movieClosedHash.getPosition(i) != null) {
+                movieClosedHash.getPosition(i).setEnCuenta5(false);
+                ListaEnlazada<Genre> generos = movieClosedHash.getPosition(i).getGenre();
+                for (int w = 1; w <= generos.getSize();w++){
+                    generos.get(w).getValue().clearCantidad();
+                }
+            }
+        }
+
     }
 }

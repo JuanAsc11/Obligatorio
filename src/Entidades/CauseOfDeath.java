@@ -27,4 +27,6 @@ public class CauseOfDeath {
     public void addCantidad() {
         this.cantidad++;
     }
+
+    public void clearCantidad(){this.cantidad = 1;}
 }

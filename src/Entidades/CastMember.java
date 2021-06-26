@@ -201,4 +201,8 @@ public class CastMember{
     public void setMuerteEnCuenta(boolean muerteEnCuenta) {
         this.muerteEnCuenta = muerteEnCuenta;
     }
+
+    public void clearParticipaciones(){
+        this.participaciones = 0;
+    }
 }

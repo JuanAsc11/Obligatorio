@@ -25,4 +25,6 @@ public class Genre {
     public void addCantidad() {
         this.cantidad++;
     }
+
+    public void clearCantidad(){this.cantidad = 1;}
 }
