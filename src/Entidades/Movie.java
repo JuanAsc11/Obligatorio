@@ -52,7 +52,9 @@ public class Movie {
 
     private int duration;
 
-    private ListaEnlazada<String> genre;
+    private ListaEnlazada<Genre> genre;
+
+    private boolean enCuenta5 = false;
 
     //CONSTRUCTOR
 
@@ -183,5 +185,13 @@ public class Movie {
 
     public int getDuration() { return duration; }
 
-    public ListaEnlazada<String> getGenre() { return genre; }
+    public ListaEnlazada<Genre> getGenre() { return genre; }
+
+    public boolean isEnCuenta5() {
+        return enCuenta5;
+    }
+
+    public void setEnCuenta5(boolean enCuenta5) {
+        this.enCuenta5 = enCuenta5;
+    }
 }

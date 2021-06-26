@@ -1,9 +1,6 @@
 package Utilidades;
 
-import Entidades.CastMember;
-import Entidades.CauseOfDeath;
-import Entidades.MovieCastMember;
-import Entidades.Year;
+import Entidades.*;
 import TADs.Excepciones.KeyNotFound;
 import TADs.Implementaciones.ListaEnlazada;
 import TADs.Implementaciones.Nodo;
@@ -189,11 +186,12 @@ public class Conversores {
         }
     }
 
-    public static ListaEnlazada<String> convertGenre(String elementos) {
-        ListaEnlazada<String> List = new ListaEnlazada<>();
+    public static ListaEnlazada<Genre> convertGenre(String elementos) {
+        ListaEnlazada<Genre> List = new ListaEnlazada<>();
         //Dividir elementos por "," y add a List
         if(!hayComa(elementos)){
-            List.add(elementos);
+            Genre nuevoGe = new Genre(elementos);
+            List.add(nuevoGe);
         }
         else{
             /*if(elementos.length() > 0) {
@@ -201,7 +199,8 @@ public class Conversores {
             }*/
             String[] varios = elementos.split(", ");
             for(String elemento: varios){
-                List.add(elemento);
+                Genre nuevoG = new Genre(elemento);
+                List.add(nuevoG);
             }}
         return List;
     }
@@ -345,6 +344,40 @@ public class Conversores {
 
         while(nodoBuscado != null){
             if(nodoBuscado.getValue().getName().equals(muerte.getName())){
+                encontre = true;
+                break;
+            }
+
+            nodoBuscado = nodoBuscado.getNextValue();
+        }
+        return nodoBuscado.getValue();
+    }
+
+    public static boolean containsGenre(ListaEnlazada<Genre> listaGenre, Genre genero){
+        boolean encontre = false;
+
+        if (listaGenre.getPrimerNodo() == null){
+            return false;
+        }
+        Nodo<Genre> nodoBuscado = listaGenre.getPrimerNodo();
+        while(nodoBuscado != null){
+            if(nodoBuscado.getValue().getNombre().equals(genero.getNombre())){
+                encontre = true;
+                break;
+            }
+
+            nodoBuscado = nodoBuscado.getNextValue();
+        }
+        return encontre;
+    }
+
+    public static Genre getGenero(ListaEnlazada<Genre> listaGenre, Genre genero){
+
+        boolean encontre = false;
+        Nodo<Genre> nodoBuscado = listaGenre.getPrimerNodo();
+
+        while(nodoBuscado != null){
+            if(nodoBuscado.getValue().getNombre().equals(genero.getNombre())){
                 encontre = true;
                 break;
             }

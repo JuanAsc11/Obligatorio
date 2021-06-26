@@ -42,14 +42,6 @@ public class Consultas {
                     + "Cantidad de apariciones: " + heapParticipaciones.delete().getData().getParticipaciones() + "\r\n");
         }
 
-
-        /*System.out.println();
-        for (int z = 0; z < 5; z++) {
-            if (heapParticipaciones.delete().getData() != null) {
-                System.out.println("Nombre actor/actriz: " + heapParticipaciones.getMax().getData().getName() + "\n"
-                        + "Cantidad de apariciones: " + heapParticipaciones.getMax().getData().getParticipaciones() + "\r\n");
-            }
-        }*/
         stop = System.currentTimeMillis();
         System.out.println("Tiempo de ejecución de la consulta: " + (stop - start) + "ms");
     }
@@ -57,46 +49,7 @@ public class Consultas {
     public static void Consulta2() throws KeyNotFound, FullHeap, EmptyHeapException {
         start = System.currentTimeMillis();
 
-        ListaEnlazada<NodoHash<String,MovieCastMember>> temp;
-        ListaEnlazada<CauseOfDeath> causeOfDeathListaEnlazada = new ListaEnlazada<>();
-        HeapImpl<Integer,String> causesOrd = new HeapImpl<>(1113991);
-
-        for (int i = 0; i < 1113991; i++) {
-            temp = movieCastMemberLinkedHash.getList(i); //
-            if (temp != null) {
-                Nodo<NodoHash<String, MovieCastMember>> actual = temp.getPrimerNodo();
-                for (int z = 0; z < temp.getSize(); z++) {
-                    if (actual.getValue().getData().getCategory().equals("producer") || actual.getValue().getData().getCategory().equals("director")) {
-                        CastMember persona = castMemberClosedHash.get(actual.getValue().getData().getImdb_name_id());
-                        if(!persona.isMuerteEnCuenta() && persona.getBirthCountry() != null) {
-                            persona.setMuerteEnCuenta(true);
-                            if (persona.getBirthCountry().contains("UK")
-                                    || persona.getBirthCountry().contains("France")
-                                    || persona.getBirthCountry().contains("Italy")) {
-                                if (!persona.getCauseOfDeath().getName().equals("")){
-                                    CauseOfDeath muerte = persona.getCauseOfDeath();
-                                    if(containsMuerte(causeOfDeathListaEnlazada,muerte)){
-                                        getMuerte(causeOfDeathListaEnlazada,muerte).addCantidad();
-                                    }
-                                    else {
-                                        causeOfDeathListaEnlazada.add(muerte);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    actual = actual.getNextValue();
-                }
-            }
-        }
-        Nodo<CauseOfDeath> actual = causeOfDeathListaEnlazada.getPrimerNodo();
-        for (int z = 0; z < causeOfDeathListaEnlazada.getSize(); z++) {
-            causesOrd.insertMaxHeap(actual.getValue().getCantidad(),actual.getValue().getName());
-            actual = actual.getNextValue();
-        }
-
-
-        /*ListaEnlazada<NodoHash<String, MovieCastMember>> temp;
+        ListaEnlazada<NodoHash<String, MovieCastMember>> temp;
         ListaEnlazada<CauseOfDeath> temp2 = new ListaEnlazada<>();
         LinkedHashImpl<String, CauseOfDeath> causes = new LinkedHashImpl<>(1113991);
         HeapImpl<Integer, String> causesOrd = new HeapImpl<>(1113991);
@@ -105,8 +58,8 @@ public class Consultas {
             if (temp != null) {
                 for (int k = 1; k <= temp.getSize(); k++) {
                     if (temp.get(k).getValue().getData().getCategory().equals("producer") || temp.get(k).getValue().getData().getCategory().equals("director")) {
-                        CastMember direcprod = castMemberClosedHash.get(temp.getPrimerNodo().getValue().getKey());
-                        if(!direcprod.isMuerteEnCuenta()) {
+                        CastMember direcprod = castMemberClosedHash.get(temp.get(k).getValue().getKey());
+                        if(!direcprod.isMuerteEnCuenta() && direcprod.getBirthCountry() != null && !direcprod.getBirthCountry().equals("")) {
                             direcprod.setMuerteEnCuenta(true);
                             if (direcprod.getBirthCountry().contains("USA")
                                     || direcprod.getBirthCountry().contains("UK")
@@ -132,13 +85,7 @@ public class Consultas {
         for (int z = 0; z < temp2.getSize(); z++) {
             causesOrd.insertMaxHeap(actual.getValue().getCantidad(), actual.getValue().getName());
             actual = actual.getNextValue();
-        }*/
-        /*for(int i = 0; i < 1113991; i++){
-            temp2 = causes.getList(i);
-            if(temp2 != null){
-                causesOrd.insertMaxHeap(temp2.getSize(),temp2.getPrimerNodo().getValue().getKey());
-            }
-        }*/
+        }
         HeapNode<Integer,String> causa1 = causesOrd.delete();
         HeapNode<Integer,String> causa2 = causesOrd.delete();
         HeapNode<Integer,String> causa3 = causesOrd.delete();
@@ -241,136 +188,52 @@ public class Consultas {
         stop = System.currentTimeMillis();
         System.out.println("Tiempo de ejecucion de la consulta:" + (stop - start) + "ms." + "\r\n");
 
-
-
-
-
-        /*ListaEnlazada<NodoHash<String,MovieCastMember>> temp;
-        ListaEnlazada<NodoHash<Integer,CastMember>> temp2;
-        LinkedHashImpl<Integer,CastMember> newHashActores = new LinkedHashImpl<>(396947);
-        LinkedHashImpl<Integer,CastMember> newHashActrices = new LinkedHashImpl<>(396947);
-        HeapImpl<Integer,Integer> HeapActores = new HeapImpl<>(396947);
-        HeapImpl<Integer,Integer> HeapActrices = new HeapImpl<>(396947);
-        for (int i = 0; i < 1113991; i++) {
-            temp = movieCastMemberLinkedHash.getList(i);
-            if (temp != null) {
-                for(int k = 1; k <= temp.getSize();k++){
-                    if (temp.get(k).getValue().getData().getCategory().equals("actor")) {
-                        CastMember actor = castMemberClosedHash.get(temp.getPrimerNodo().getValue().getKey());
-                        if(actor.getBirthYear() != 0) {
-                            newHashActores.put(actor.getBirthYear(), actor);
-                            break;
-                        }
-                    } else if (temp.get(k).getValue().getData().getCategory().equals("actress")) {
-                        CastMember actriz = castMemberClosedHash.get(temp.getPrimerNodo().getValue().getKey());
-                        if(actriz.getBirthYear() != 0) {
-                            newHashActrices.put(actriz.getBirthYear(), actriz);
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-        for (int i = 0; i < 396947; i++){
-                temp2 = newHashActores.getList(i);
-                if(temp2 != null){
-                    HeapActores.insertMaxHeap(temp2.getSize(),temp2.getPrimerNodo().getValue().getKey());
-                }
-                temp2 = newHashActrices.getList(i);
-                if(temp2 != null){
-                    HeapActrices.insertMaxHeap(temp2.getSize(),temp2.getPrimerNodo().getValue().getKey());
-                }
-        }
-        HeapNode<Integer,Integer> yearActores = HeapActores.delete();
-        HeapNode<Integer,Integer> yearActrices = HeapActrices.delete();
-
-        stop = System.currentTimeMillis();
-
-        System.out.println("Actores:" + "\r\n" + "Año: " + yearActores.getData() + "\r\n" + "Cantidad: " + yearActores.getKey() + "\r\n");
-        System.out.println("Actrices:" + "\r\n" + "Año: " + yearActrices.getData() + "\r\n" + "Cantidad: " + yearActrices.getKey() + "\r\n");
-        System.out.println("Tiempo de ejecucion de la consulta:" + (stop - start) + "ms." + "\r\n");
-        stop = System.currentTimeMillis();
-        System.out.println("Tiempo de ejecucion de la consulta:" + (stop - start) + "ms." + "\r\n");*/
     }
 
     public static void Consulta5() throws KeyNotFound, FullHeap, EmptyHeapException {
         start = System.currentTimeMillis();
         ListaEnlazada<NodoHash<String, MovieCastMember>> temp;
         ListaEnlazada<NodoHash<String, Movie>> temp2;
-        ListaEnlazada<String> peliculasEnCuenta = new ListaEnlazada<>();
-        LinkedHashImpl<String, Movie> newHashGeneros = new LinkedHashImpl<>(114473);
-        HeapImpl<Integer, String> HeapGeneros = new HeapImpl<>(114473);
+        ListaEnlazada<Genre> generosLista = new ListaEnlazada<>();
+        HeapImpl<Integer, Genre> HeapGeneros = new HeapImpl<>(114473);
         for (int i = 0; i < 1113991; i++) {
             temp = movieCastMemberLinkedHash.getList(i);
             if (temp != null) {
                 for(int k = 1; k <= temp.getSize();k++){
                     if (temp.get(k).getValue().getData().getCategory().equals("actor") || temp.get(k).getValue().getData().getCategory().equals("actress")) {
-                        CastMember actor = castMemberClosedHash.get(temp.getPrimerNodo().getValue().getKey());
+                        CastMember actor = castMemberClosedHash.get(temp.get(k).getValue().getKey());
                         if (actor.getChildren() >= 2) {
                             String idPelicula = temp.get(k).getValue().getData().getImdb_title_id();
-                            if(!peliculasEnCuenta.contains(idPelicula)){
-                                peliculasEnCuenta.add(idPelicula);
-                                Movie pelicula = movieClosedHash.get(idPelicula);
-                                ListaEnlazada<String> generos = pelicula.getGenre();
-                                for (int j = 1; j <= generos.getSize(); j++) {
-                                    newHashGeneros.put(generos.get(j).getValue(), pelicula);
+                            Movie pelicula = movieClosedHash.get(idPelicula);
+                            if (!pelicula.isEnCuenta5() && pelicula.getGenre().getSize() > 0){
+                                pelicula.setEnCuenta5(true);
+                                ListaEnlazada<Genre> genPeli = pelicula.getGenre(); //Esperar Jimena
+                                for(int z = 1; z<= genPeli.getSize();z++){
+                                    Genre gen = genPeli.get(z).getValue();
+                                    if(!containsGenre(generosLista,gen) && !gen.getNombre().equals("")){
+                                        generosLista.add(gen);
+                                    }
+                                    else {
+                                        getGenero(generosLista,gen).addCantidad();
+                                    }
+
                                 }
+
                             }
                         }
                     }
                 }
             }
         }
-        for (int i = 0; i < 114473; i++) {
-            temp2 = newHashGeneros.getList(i);
-            if (temp2 != null) {
-                HeapGeneros.insertMaxHeap(temp2.getSize(), temp2.getPrimerNodo().getValue().getKey());
-            }
+
+        Nodo<Genre> actual = generosLista.getPrimerNodo();
+        for (int z = 0; z < generosLista.getSize(); z++) {
+            HeapGeneros.insertMaxHeap(actual.getValue().getCantidad(),actual.getValue());
+            actual = actual.getNextValue();
         }
 
         for (int i =0; i < 10;i++) {
-            System.out.println("Genero pelicula: " + HeapGeneros.getMax().getData() + "\r\n" + "Cantidad: " + HeapGeneros.delete().getKey() + "\r\n");
-        }
-        stop = System.currentTimeMillis();
-        System.out.println("Tiempo de ejecucion de la consulta: " + (stop - start) + "ms." + "\r\n");
-
-        start = System.currentTimeMillis();
-        CastMember tempv1;
-        ListaEnlazada<NodoHash<String, MovieCastMember>> tempv2;
-        ListaEnlazada<NodoHash<String, Movie>> tempv3;
-        ListaEnlazada<String> peliculasEnCuentav1 = new ListaEnlazada<>();
-        LinkedHashImpl<String, Movie> newHashGenerosv1 = new LinkedHashImpl<>(114473);
-        HeapImpl<Integer, String> HeapGenerosv1 = new HeapImpl<>(114473);
-        for (int i = 0; i < 396947; i++) {
-            tempv1 = castMemberClosedHash.getPosition(i);
-            if (tempv1 != null) {
-                if(tempv1.getChildren() >= 2){
-                    tempv2 = movieCastMemberLinkedHash.getList(tempv1.getImdbNameId());
-                    for(int k = 1; k <= tempv2.getSize();k++){
-                        if (tempv2.get(k).getValue().getData().getCategory().equals("actor") || tempv2.get(k).getValue().getData().getCategory().equals("actress")) {
-                            String idPelicula = tempv2.get(k).getValue().getData().getImdb_title_id();
-                            if(!peliculasEnCuentav1.contains(idPelicula)){
-                                peliculasEnCuentav1.add(idPelicula);
-                                Movie pelicula = movieClosedHash.get(idPelicula);
-                                ListaEnlazada<String> generos = pelicula.getGenre();
-                                for (int j = 1; j <= generos.getSize(); j++) {
-                                    newHashGenerosv1.put(generos.get(j).getValue(), pelicula);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        for (int i = 0; i < 114473; i++) {
-            tempv3 = newHashGenerosv1.getList(i);
-            if (tempv3 != null) {
-                HeapGenerosv1.insertMaxHeap(tempv3.getSize(), tempv3.getPrimerNodo().getValue().getKey());
-            }
-        }
-
-        for (int i =0; i < 10;i++) {
-            System.out.println("Genero pelicula: " + HeapGenerosv1.getMax().getData() + "\r\n" + "Cantidad: " + HeapGenerosv1.delete().getKey() + "\r\n");
+            System.out.println("Genero pelicula: " + HeapGeneros.getMax().getData().getNombre() + "\r\n" + "Cantidad: " + HeapGeneros.delete().getKey() + "\r\n");
         }
         stop = System.currentTimeMillis();
         System.out.println("Tiempo de ejecucion de la consulta: " + (stop - start) + "ms." + "\r\n");
